@@ -10,7 +10,7 @@
 const mongoose = require('mongoose');
 const { options } = require('../app');
 require("dotenv").config();
-const Database_URL = process.env.DATABASE;
+const Database_URL = process.env.DATABASE || "mongodb+srv://abdullah:schoolmanagementsystem@cluster0.yn2eyhr.mongodb.net/sms";
 
 const connectionDB = async (options = {}) => {
     try {
