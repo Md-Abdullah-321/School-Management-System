@@ -6,11 +6,10 @@
  */
 
 //Dependencies:
-const { errorResponse } = require("../controllers/responseController");
 const HomeInfo = require("../models/homeSchema");
 
 
-const getHomeInfo = () => HomeInfo.find({});
+const getHomeInfo = async() => await HomeInfo.find({});
 
 
 module.exports = {
