@@ -10,15 +10,10 @@ const express = require("express");
 const teachersRouter = require("./routers/teachersRouter");
 
 
-
 const app = express();
-
 
 //Routers:
 app.use("/api/teacher", teachersRouter);
-
-
-
 
 
 
