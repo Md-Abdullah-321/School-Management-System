@@ -13,12 +13,12 @@ const { successResponse, errorResponse } = require("./responseController");
 
 const handleGetSiteHomeInfo = async (req, res) => {
     try {
-        const homeInfo = await getHomeInfo();
+        const homeInformation = await getHomeInfo();
     
         successResponse(res, {
             statusCode: 200,
             message: "Home info returned successfully.",
-            payload: { ...homeInfo[0]._doc },
+            payload: { ...homeInformation[0]._doc },
         });
     } catch (error) {
         errorResponse(res, {
