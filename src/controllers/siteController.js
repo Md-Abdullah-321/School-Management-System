@@ -5,28 +5,28 @@
  * Date: 12/01/24
  */
 
+const HomeInfo = require("../models/homeSchema");
 const { getHomeInfo } = require("../services/siteServices");
 const { successResponse, errorResponse } = require("./responseController");
 
 //Dependencies:
 
 
-const handleGetSiteHomeInfo = async (req, res, next) => {
+const handleGetSiteHomeInfo = async (req, res) => {
     try {
         const homeInfo = await getHomeInfo();
- 
-        return successResponse(res, {
+        successResponse(res, {
             statusCode: 200,
             message: "Home info returned successfully.",
-            payload: {...homeInfo["0"]._doc},
-        })
+            payload: { ...homeInfo[0]._doc },
+        });
     } catch (error) {
-        return errorResponse(res, {
+        errorResponse(res, {
             statusCode: 404,
-            message: "Could not get home info."
-        })
+            message: "Could not get home info.",
+        });
     }
-}
+};
 
 
 module.exports = {

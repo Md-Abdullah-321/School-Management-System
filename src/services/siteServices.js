@@ -10,10 +10,7 @@ const { errorResponse } = require("../controllers/responseController");
 const HomeInfo = require("../models/homeSchema");
 
 
-const getHomeInfo = async () => {
-    const homeInfo = await HomeInfo.find({});
-    return homeInfo;
-}
+const getHomeInfo = () => HomeInfo.find({});
 
 
 module.exports = {
