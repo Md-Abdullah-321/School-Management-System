@@ -25,5 +25,14 @@ app.use("/api/teacher", teachersRouter);
 app.use("/api/site", siteRouter);
 
 
+//Global error handling:
+app.use((err,req, res, next) => {
+    return errorResponse(res, {
+        statusCode: err.status || 500,
+        message: err.message || "There is an error on the server."
+    })
+})
+
+
 
 module.exports = app;

@@ -15,13 +15,13 @@ const handleGetSiteHomeInfo = async (req, res, next) => {
     try {
         const homeInfo = await getHomeInfo();
  
-        successResponse(res, {
+        return successResponse(res, {
             statusCode: 200,
             message: "Home info returned successfully.",
             payload: {...homeInfo["0"]._doc},
         })
     } catch (error) {
-        errorResponse(res, {
+        return errorResponse(res, {
             statusCode: 404,
             message: "Could not get home info."
         })
