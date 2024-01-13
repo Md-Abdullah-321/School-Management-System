@@ -20,7 +20,11 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 //2. Add Cors: 
-app.use(cors());
+app.use(cors({
+    origin: ["https://school-management-system-eosin.vercel.app/"],
+    methods: ["POST", "GET", "PUT", "DELETE"],
+    credentials: true
+}));
 
 //Routers:
 app.use("/api/teacher", teachersRouter);
