@@ -9,9 +9,16 @@
 const HomeInfo = require("../models/homeSchema");
 
 
-const getHomeInfo = async() => await HomeInfo.find({});
+const getHomeInfo = async () => await HomeInfo.find({});
+
+const updateHomeInfo = async (id, updates) => {
+    const options = { new: true };
+    return await HomeInfo.findByIdAndUpdate(id, { ...updates }, options);
+};
+
 
 
 module.exports = {
     getHomeInfo,
+    updateHomeInfo,
 }

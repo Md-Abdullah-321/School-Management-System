@@ -7,11 +7,14 @@
 
 //dependencies:
 const express = require("express");
-const { handleGetSiteHomeInfo} = require("../controllers/siteController");
+const {handleGetHomeInfo, handleUpdateHomeInfo} = require("../controllers/siteController");
 const siteRouter = express.Router();
 
 
 //GET -> get home info
-siteRouter.get("/", handleGetSiteHomeInfo);
+siteRouter.get("/", handleGetHomeInfo);
+
+//PUT -> update home info
+siteRouter.put("/update", handleUpdateHomeInfo);
 
 module.exports = siteRouter;

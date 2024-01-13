@@ -28,7 +28,7 @@ app.use(cors({
 
 //Routers:
 app.use("/api/teacher", teachersRouter);
-app.use("/api/site", siteRouter);
+app.use("/api/home", siteRouter);
 
 
 //Global error handling:
