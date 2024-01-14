@@ -23,8 +23,8 @@ const teacherSchema = new mongoose.Schema(
       trim: true,
     },
     phoneNumber: {
-        type: String,
-        unique: true
+      type: String,
+      unique: true,
     },
     subjects: [String],
     role: {
@@ -39,6 +39,27 @@ const teacherSchema = new mongoose.Schema(
       zip: String,
     },
     picture: String,
+    username: {
+      type: String,
+      unique: true,
+      required: true,
+    },
+    password: {
+      type: String,
+      required: true,
+    },
+    dailyAttendance: [
+      {
+        date: {
+          type: Date,
+          default: Date.now,
+        },
+        present: {
+          type: Boolean,
+          default: false,
+        },
+      },
+    ],
   },
   { timestamps: true }
 );
@@ -46,4 +67,3 @@ const teacherSchema = new mongoose.Schema(
 const Teacher = mongoose.model('Teacher', teacherSchema);
 
 module.exports = Teacher;
-
