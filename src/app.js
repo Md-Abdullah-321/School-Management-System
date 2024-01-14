@@ -8,9 +8,10 @@
 //dependencies:
 const express = require("express");
 const teachersRouter = require("./routers/teachersRouter");
-const siteRouter = require("./routers/siteRouter");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const homeRouter = require("./routers/homeRouter");
+const { errorResponse } = require("./controllers/responseController");
 
 const app = express();
 
@@ -27,8 +28,8 @@ app.use(cors({
 }));
 
 //Routers:
+app.use("/api/home", homeRouter);
 app.use("/api/teacher", teachersRouter);
-app.use("/api/home", siteRouter);
 
 
 //Global error handling:
