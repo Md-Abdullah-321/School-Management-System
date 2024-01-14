@@ -12,11 +12,6 @@ const mongoose = require("mongoose");
 const checkExistanceWithEmail = async (Model, email, options = {}) => {
     try {
         const item = await Model.findOne({ email }, options);
-
-        if (!item) {
-            throw createError(404, `${Model.modelName} not found with this email`);
-        }
-
         return item;
     } catch (error) {
         if (error instanceof mongoose.Error) {

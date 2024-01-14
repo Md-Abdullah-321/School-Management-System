@@ -7,7 +7,7 @@
 
 //dependencies:
 const express = require("express");
-const {handleCreateTeacher, handleGetTeacher } = require("../controllers/teacherController");
+const {handleCreateTeacher, handleGetTeacher, handleGetTeacherById } = require("../controllers/teacherController");
 const teachersRouter = express.Router();
 
 //PUT -> Create teacher
@@ -15,6 +15,9 @@ teachersRouter.post("/", handleCreateTeacher);
 
 //GET -> get all teachers
 teachersRouter.get("/", handleGetTeacher);
+
+//GET -> get teacher by id
+teachersRouter.get("/:id", handleGetTeacherById);
 
 
 
