@@ -7,17 +7,25 @@
 
 //dependencies:
 const express = require("express");
-const {handleCreateTeacher, handleGetTeacher, handleGetTeacherById } = require("../controllers/teacherController");
+const {handleCreateTeacher, handleGetTeacher, handleGetTeacherById, handleLoginTeacher, handleTeacherLogout } = require("../controllers/teacherController");
+const { validateTeacherLogin, validateCreateTeacher } = require("../validators/auth");
+const runValidation = require("../validators");
 const teachersRouter = express.Router();
 
-//PUT -> Create teacher
-teachersRouter.post("/", handleCreateTeacher);
+//POST -> Create teacher
+teachersRouter.post("/",validateCreateTeacher, runValidation,handleCreateTeacher);
 
-//GET -> get all teachers
-teachersRouter.get("/", handleGetTeacher);
+//POST -> Log as a  teacher
+teachersRouter.post("/sign-in", validateTeacherLogin, runValidation, handleLoginTeacher);
+
+//GET -> Log out teacher
+teachersRouter.get("/sign-out", handleTeacherLogout);
 
 //GET -> get teacher by id
 teachersRouter.get("/:id", handleGetTeacherById);
+
+//GET -> get all teachers
+teachersRouter.get("/", handleGetTeacher);
 
 
 

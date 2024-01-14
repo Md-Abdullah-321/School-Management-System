@@ -7,7 +7,7 @@
 
 
 //Dependencies:
-const { body, check } = require("express-validator");
+const { body } = require("express-validator");
 
 //validate create teacher:
 const validateCreateTeacher = [
@@ -40,14 +40,10 @@ const validateCreateTeacher = [
         .trim()
         .notEmpty()
         .withMessage("Teacher image is required"),
-    body("username")
-        .trim()
-        .notEmpty()
-        .withMessage("Username is required"),
     body("password")
         .trim()
         .notEmpty()
-        .withMessage("Username is required")
+        .withMessage("Password is required")
         .isLength({ min: 6 })
         .withMessage("Password must be minimum 6 character long")
 ]
@@ -55,14 +51,14 @@ const validateCreateTeacher = [
 
 //validate login for teacher:
 const validateTeacherLogin = [
-        body("username")
+        body("email")
         .trim()
         .notEmpty()
-        .withMessage("Username is required"),
+        .withMessage("Email is required"),
     body("password")
         .trim()
         .notEmpty()
-        .withMessage("Username is required")
+        .withMessage("Password is required")
         .isLength({ min: 6 })
         .withMessage("Password must be minimum 6 character long")
 ]

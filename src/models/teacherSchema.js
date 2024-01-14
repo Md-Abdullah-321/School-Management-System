@@ -39,11 +39,6 @@ const teacherSchema = new mongoose.Schema(
       zip: String,
     },
     picture: String,
-    username: {
-      type: String,
-      unique: true,
-      required: true,
-    },
     password: {
       type: String,
       required: true,
