@@ -8,6 +8,7 @@
 //dependencies:
 const express = require("express");
 const { handleGetHomeInfo, handleUpdateHomeInfo } = require("../controllers/homeController");
+const { isLoggedIn, isAdmin } = require("../middleware/auth");
 const homeRouter = express.Router();
 
 
@@ -15,6 +16,6 @@ const homeRouter = express.Router();
 homeRouter.get("/", handleGetHomeInfo);
 
 //PUT -> update home info
-homeRouter.put("/update", handleUpdateHomeInfo);
+homeRouter.put("/update", isLoggedIn, isAdmin,handleUpdateHomeInfo);
 
 module.exports = homeRouter;

@@ -12,6 +12,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const homeRouter = require("./routers/homeRouter");
 const { errorResponse } = require("./controllers/responseController");
+const cookieParser = require("cookie-parser");
 
 const app = express();
 
@@ -26,6 +27,8 @@ app.use(cors({
     methods: ["POST", "GET", "PUT", "DELETE"],
     credentials: true
 }));
+//3. use cookie parser:
+app.use(cookieParser());
 
 //Routers:
 app.use("/api/home", homeRouter);

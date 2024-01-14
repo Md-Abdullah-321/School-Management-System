@@ -33,8 +33,8 @@ const handleLoginTeacher = async (req, res, next) => {
         }
 
         //create and set access Token
-        const acceessToken = createJSONWebToken({ user }, process.env.ACCESS_KEY, "7d");
-        setAccessTokenCookie(res, acceessToken);
+        const accessToken = createJSONWebToken({ user }, process.env.ACCESS_KEY, "7d");
+        setAccessTokenCookie(res, accessToken);
 
         return successResponse(res, {
             statusCode: 200,
@@ -121,7 +121,7 @@ const handleGetTeacherById = async (req, res, next) => {
 
 const handleTeacherLogout = async(req, res, next) => {
     try {
-        res.clearCookie('acceessToken');
+        res.clearCookie('accessToken');
         //success response
         return successResponse(res, {
             statusCode: 200,
