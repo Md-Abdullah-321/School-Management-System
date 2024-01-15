@@ -19,12 +19,10 @@ const validateCreateTeacher = [
         .trim()
         .notEmpty()
         .withMessage("Name is required"),
-    body("email")
+    body('email')
         .trim()
-        .notEmpty()
-        .withMessage("Email is required")
-        .isEmail()
-        .withMessage("Invalid email address"),
+        .notEmpty().withMessage('Email is required.')
+        .isEmail().withMessage('Invalid email address.'),
     body("phoneNumber")
         .trim()
         .notEmpty()
@@ -51,10 +49,10 @@ const validateCreateTeacher = [
 
 //validate login for teacher:
 const validateTeacherLogin = [
-        body("email")
+    body('email')
         .trim()
-        .notEmpty()
-        .withMessage("Email is required"),
+        .notEmpty().withMessage('Email is required.')
+        .isEmail().withMessage('Invalid email address.'),
     body("password")
         .trim()
         .notEmpty()
@@ -93,8 +91,26 @@ const validateCreateStudent = [
     body('image').optional(), 
 ];
 
+
+const validatePostMessage = [
+    body("name")
+        .notEmpty()
+        .withMessage("Name is required"),
+    body('email')
+        .trim()
+        .notEmpty().withMessage('Email is required.')
+        .isEmail().withMessage('Invalid email address.'),
+    body('phoneNumber')
+        .matches(/^(?:\+88|88)?(01[3-9]\d{8})$/)
+        .withMessage('Please enter a valid Bangladeshi phone number.'),
+    body("message")
+        .notEmpty()
+        .withMessage("Message is required"),
+]
+
 module.exports = {
     validateCreateTeacher,
     validateTeacherLogin,
     validateCreateStudent,
+    validatePostMessage,
 }

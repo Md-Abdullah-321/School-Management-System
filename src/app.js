@@ -14,6 +14,7 @@ const homeRouter = require("./routers/homeRouter");
 const { errorResponse } = require("./controllers/responseController");
 const cookieParser = require("cookie-parser");
 const studentRouter = require("./routers/studentRouter");
+const messageRouter = require("./routers/messageRouter");
 
 const app = express();
 
@@ -35,6 +36,7 @@ app.use(cookieParser());
 app.use("/api/home", homeRouter);
 app.use("/api/teacher", teachersRouter);
 app.use("/api/student", studentRouter);
+app.use("/api/message", messageRouter);
 
 
 //Global error handling:
