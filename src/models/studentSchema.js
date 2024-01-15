@@ -25,7 +25,6 @@ const studentSchema = new mongoose.Schema(
     },
     phoneNumber: {
       type: String,
-      unique: true,
       validate: {
         validator: function(value) {
           // Regular expression for validating Bangladeshi phone numbers
@@ -34,13 +33,20 @@ const studentSchema = new mongoose.Schema(
         },
         message: 'Please enter a valid Bangladeshi phone number.',
       },
+        },
+    address: {
+      street: String,
+      city: String,
+      state: String,
+      zip: String,
     },
     dateOfBirth: {
       type: Date,
       required: true,
     },
-    image: {
-        type: String,
+    className: {
+      type: String,
+      required: true,
     },
     attendance: [
       {
@@ -54,7 +60,13 @@ const studentSchema = new mongoose.Schema(
         },
       },
     ],
-    tutionFees: [
+    admissionDate: {
+        type: Number,
+        required: true,
+      
+    },
+    image: {type: String},
+    feesHistory: [
       {
         month: {
           type: String,
@@ -77,4 +89,3 @@ const studentSchema = new mongoose.Schema(
 const Student = mongoose.model('Student', studentSchema);
 
 module.exports = Student;
-

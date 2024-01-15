@@ -63,7 +63,38 @@ const validateTeacherLogin = [
         .withMessage("Password must be minimum 6 character long")
 ]
 
+const validateCreateStudent = [
+    body('studentName')
+        .notEmpty()
+        .withMessage('Student name is required.'),
+    body('fathersName')
+        .notEmpty()
+        .withMessage('Father\'s name is required.'),
+    body('mothersName')
+        .notEmpty()
+        .withMessage('Mother\'s name is required.'),
+    body('phoneNumber')
+        .matches(/^(?:\+88|88)?(01[3-9]\d{8})$/)
+        .withMessage('Please enter a valid Bangladeshi phone number.'),
+    body('address')
+        .notEmpty()
+        .withMessage("Address is required"),
+    body('dateOfBirth')
+        .isISO8601()
+        .withMessage('Invalid date of birth.'),
+    body('className')
+        .notEmpty()
+        .withMessage('Class name is required.'),
+    body('admissionDate')
+        .notEmpty()
+        .withMessage("Admission year is required")
+        .isInt()
+        .withMessage('Invalid admission year.'),
+    body('image').optional(), 
+];
+
 module.exports = {
     validateCreateTeacher,
     validateTeacherLogin,
+    validateCreateStudent,
 }
