@@ -1,4 +1,4 @@
-const app = require("./src/app");
+const {app, express} = require("./src/app");
 const path = require('path');
 const connectionDB = require("./src/config/db");
 
