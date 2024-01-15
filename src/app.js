@@ -15,6 +15,7 @@ const { errorResponse } = require("./controllers/responseController");
 const cookieParser = require("cookie-parser");
 const studentRouter = require("./routers/studentRouter");
 const messageRouter = require("./routers/messageRouter");
+const path = require('path');
 
 const app = express();
 
@@ -48,5 +49,16 @@ app.use((err,req, res, next) => {
 })
 
 
+//serve Client:
+app.use(express.static(path.join(__dirname,"./client/dist")));
+
+app.get("*", (req, res) => {
+    res.sendFile(
+        path.join(__dirname, './client/dist/index.html'),
+        function(err) {
+            res.status(500).send(err)
+        }
+    )
+})
 
 module.exports = app;
