@@ -1,7 +1,10 @@
 import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
+import { setHomeInfo } from "../features/homeSlice";
 
 function Navbar() {
+  const dispatch = useDispatch();
   const fetchData = async () => {
     try {
       const response = await fetch(
@@ -11,9 +14,8 @@ function Navbar() {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
       const data = await response.json();
-      console.log("Data:", data);
-
-      // Handle the fetched data as needed
+      const { name, logo, backgroundImage } = data.payload["0"];
+      dispatch(setHomeInfo({ name, logo, backgroundImage }));
     } catch (error) {
       console.error("Error fetching data:", error.message);
     }
@@ -22,16 +24,36 @@ function Navbar() {
   useEffect(() => {
     fetchData();
   }, []);
+  const Logo = useSelector((state) => state.home.logo);
   return (
-    <div className="w-full h-16 bg-slate-300 flex justify-around items-center">
-      <div></div>
+    <div className="w-full md:h-20 flex justify-around items-center">
       <div>
-        <nav className="flex gap-4">
-          <NavLink to="/">HOME</NavLink>
-          <NavLink to="/about">ABOUT</NavLink>
-          <NavLink to="department">DEPARTMENT</NavLink>
-          <NavLink to="gallery">GALLERY</NavLink>
-          <NavLink to="contact">CONTACT US</NavLink>
+        <img
+          className="w-16 h-16 shadow-md rounded-full"
+          src={Logo}
+          alt="Logo"
+        />
+      </div>
+      <div>
+        <nav className="flex flex-col md:flex-row gap-4">
+          <NavLink className="font-semibold hover:text-yellow-500" to="/">
+            HOME
+          </NavLink>
+          <NavLink className="font-semibold hover:text-yellow-500" to="/about">
+            ABOUT
+          </NavLink>
+          <NavLink
+            className="font-semibold hover:text-yellow-500"
+            to="department"
+          >
+            DEPARTMENT
+          </NavLink>
+          <NavLink className="font-semibold hover:text-yellow-500" to="gallery">
+            GALLERY
+          </NavLink>
+          <NavLink className="font-semibold hover:text-yellow-500" to="contact">
+            CONTACT US
+          </NavLink>
         </nav>
       </div>
       <div></div>
