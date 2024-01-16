@@ -25,11 +25,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 //2. Add Cors: 
-app.use(cors({
-    origin: ["https://school-management-system-eosin.vercel.app/"],
-    methods: ["POST", "GET", "PUT", "DELETE"],
-    credentials: true
-}));
+app.use(cors());
 //3. use cookie parser:
 app.use(cookieParser());
 
