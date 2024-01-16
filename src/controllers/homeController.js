@@ -20,7 +20,7 @@ const handleGetHomeInfo = async (req, res) => {
         return successResponse(res, {
             statusCode: 200,
             message: "Home info returned successfully.",
-            payload: { ...homeInformation[0]._doc },
+            payload: homeInformation,
         });
     } catch (error) {
         return errorResponse(res, {
