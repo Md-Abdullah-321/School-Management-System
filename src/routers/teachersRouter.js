@@ -14,7 +14,7 @@ const { isLoggedIn, isAdmin, isLoggedOut } = require("../middleware/auth");
 const teachersRouter = express.Router();
 
 //POST -> Create teacher
-teachersRouter.post("/",validateCreateTeacher, runValidation, isLoggedIn, isAdmin,handleCreateTeacher);
+teachersRouter.post("/",validateCreateTeacher, runValidation, isLoggedIn, isAdmin, handleCreateTeacher);
 
 //POST -> Log as a  teacher
 teachersRouter.post("/sign-in", validateTeacherLogin, runValidation, isLoggedOut,handleLoginTeacher);
