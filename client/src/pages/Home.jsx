@@ -13,20 +13,28 @@ function Home() {
   return (
     <div className="w-full">
       {/* Hero section  */}
-      <div style={backgroundStyle} className="w-full h-screen">
-        <div className="w-full h-full bg-slate-900 opacity-80 flex items-center">
+      <div style={backgroundStyle} className="w-full bg-cover sm:h-screen">
+        <div className="w-full h-full bg-slate-900 opacity-80 flex items-center ">
           <div className="w-full p-10">
-            <h5 className="text-yellow-500 text-5xl font-semibold">
+            <h5
+              className="text-yellow-500
+            text-3xl sm:text-5xl font-semibold"
+            >
               Welcome To
             </h5>
-            <h1 className="text-white text-7xl font-bold">{name}</h1>
+            <h1
+              className="text-white
+            text-4xl sm:text-7xl font-bold"
+            >
+              {name}
+            </h1>
           </div>
         </div>
       </div>
 
       {/* messages and notice  */}
-      <div className="h-screen w-full flex justify-around items-center bg-slate-100">
-        <div className="w-2/5 h-5/6 shadow-lg p-5 border-b-4 border-yellow-500 rounded-md flex flex-col items-center justify-center bg-white">
+      <div className="h-screen w-full flex flex-col md:flex-row justify-around items-center bg-slate-100">
+        <div className="md:w-2/5 mt-20 md:mt-0 md:h-5/6 shadow-lg p-5 border-b-4 border-yellow-500 rounded-md flex flex-col items-center justify-center bg-white">
           {/* image */}
           <div className="flex justify-center items-center">
             <img
@@ -49,12 +57,6 @@ function Home() {
               producing the quality graduates who will dedicate themselves to
               make the country great by braving the challenges of the century.
               DUET is also known worldwide for its stellar learning performance.
-              However, we have to aim to be not only the leading institution for
-              knowledge-dispersion, but also world class leader in
-              knowledge-creation. We have always had students and faculty
-              members who are capable of doing world class research, as is
-              evident by the placement of our alumni in various positions in
-              renowned universities and industries of the world.
             </p>
             <h3 className="text-center mt-5 font-semibold text-xl">
               -Md Abdullah-
@@ -64,7 +66,7 @@ function Home() {
             </p>
           </div>
         </div>
-        <div className="w-2/5 shadow-lg p-5 border-t-4 border-yellow-500 rounded-md h-5/6 bg-white">
+        <div className="w-full md:w-2/5 mt-5 md:mt-0 shadow-lg p-5 border-t-4 border-yellow-500 rounded-md h-5/6 bg-white">
           <h2 className="text-center text-xl font-semibold mb-5">Notice</h2>
 
           <div className="flex gap-5">
@@ -85,10 +87,10 @@ function Home() {
       </div>
 
       {/* about section  */}
-      <div className="w-full h-screen">
-        <div className="flex w-full h-full justify-around items-center">
+      <div className="w-full md:h-screen mt-32">
+        <div className="flex w-full flex-col md:flex-row h-full justify-around items-center">
           {/* about text  */}
-          <div className="w-2/5 h-5/6 flex flex-col justify-center">
+          <div className="md:w-2/5 md:h-5/6 flex flex-col justify-center p-5 md:p-0">
             <h1 className="text-3xl font-semibold">About Us</h1>
             <p className="">{name}</p>
             <p className="text-sm text-gray-800 mt-5">
@@ -112,7 +114,7 @@ function Home() {
             </NavLink>
           </div>
           {/* images  */}
-          <div className="w-2/5 h-5/6 flex flex-col justify-center items-center overflow-auto">
+          <div className="md:w-2/5 md:h-5/6 flex flex-col justify-center items-center p-5 md:p-5">
             <div className="w-40 h-40 bg-yellow-500 ml-40"></div>
             <div className="w-40 h-40 bg-red-500 mr-20"></div>
             <div className="w-40 h-40 bg-blue-500 ml-40"></div>
@@ -121,10 +123,10 @@ function Home() {
       </div>
 
       {/* location  */}
-      <div className="flex justify-evenly items-center gap-4 h-80 bg-slate-100">
+      <div className="flex flex-col md:flex-row justify-around items-center gap-4 md:h-80 bg-slate-100">
         {/* left side  */}
-        <div className="w-2/5">
-          <div>
+        <div className="w-full md:w-2/5 p-5 md:p-0">
+          <div className="w-full">
             <h1 className="text-3xl font-semibold">Contact</h1>
             <ul>
               <li>
@@ -157,7 +159,7 @@ function Home() {
         {/* right side  */}
         {/* <div className="w-2/5"> */}
         <iframe
-          className="w-2/5 h-40 rounded-md"
+          className="md:w-2/5 h-40 rounded-md m-5"
           src="https://www.google.com/maps/embed?pb=!4v1705479286115!6m8!1m7!1sOQjHQQsKxUVBfSopYrb3sA!2m2!1d24.24195897481565!2d89.9169039670362!3f105.55959168835903!4f0!5f0.7820865974627469"
           width="600"
           height="450"
