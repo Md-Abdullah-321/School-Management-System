@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
 
 function Home() {
   // Use the useSelector hook to get data from the Redux store
@@ -24,8 +25,8 @@ function Home() {
       </div>
 
       {/* messages and notice  */}
-      <div className="h-screen w-full flex justify-around items-center">
-        <div className="w-2/5 h-5/6 shadow-lg p-5 border-b-4 border-yellow-500 rounded-md flex flex-col items-center justify-center">
+      <div className="h-screen w-full flex justify-around items-center bg-slate-100">
+        <div className="w-2/5 h-5/6 shadow-lg p-5 border-b-4 border-yellow-500 rounded-md flex flex-col items-center justify-center bg-white">
           {/* image */}
           <div className="flex justify-center items-center">
             <img
@@ -34,7 +35,7 @@ function Home() {
               alt="Image Loading..."
             />
           </div>
-          {/* message */}
+          {/* message*/}
           <div className="mt-4">
             <p className="text-xs p-2">
               Dhaka University of Engineering &amp; Technology (DUET), Gazipur,
@@ -63,7 +64,7 @@ function Home() {
             </p>
           </div>
         </div>
-        <div className="w-2/5 shadow-lg p-5 border-t-4 border-yellow-500 rounded-md h-5/6">
+        <div className="w-2/5 shadow-lg p-5 border-t-4 border-yellow-500 rounded-md h-5/6 bg-white">
           <h2 className="text-center text-xl font-semibold mb-5">Notice</h2>
 
           <div className="flex gap-5">
@@ -81,6 +82,91 @@ function Home() {
             </div>
           </div>
         </div>
+      </div>
+
+      {/* about section  */}
+      <div className="w-full h-screen">
+        <div className="flex w-full h-full justify-around items-center">
+          {/* about text  */}
+          <div className="w-2/5 h-5/6 flex flex-col justify-center">
+            <h1 className="text-3xl font-semibold">About Us</h1>
+            <p className="">{name}</p>
+            <p className="text-sm text-gray-800 mt-5">
+              Dhaka University of Engineering & Technology (DUET), Gazipur was
+              founded as the College of Engineering, Dhaka with the motto
+              “Technology is the Advancement” at its temporary campus at
+              Tejgaon, Dhaka, Bangladesh in 1980. It was then renamed as Dhaka
+              Engineering College (DEC) under the University of Dhaka in 1981,
+              and used to offer Bachelor of Engineering programs in Civil,
+              Electrical, and Mechanical disciplines. With the passage of time,
+              Dhaka Engineering College was empowered autonomy under the
+              Bangladesh Institute of Technology ordinance no. XXI of 1986,
+              under the name Bangladesh Institute of Technology, Dhaka
+              (Abbreviated as BITD) to award undergraduate and postgraduate
+              degrees. Hence September 1, 2003 became a historic{" "}
+            </p>
+            <NavLink to="/about">
+              <button className="bg-yellow-500 py-1 px-2 rounded-sm mt-5 cursor-pointer text-white font-semibold">
+                READ MORE
+              </button>
+            </NavLink>
+          </div>
+          {/* images  */}
+          <div className="w-2/5 h-5/6 flex flex-col justify-center items-center overflow-auto">
+            <div className="w-40 h-40 bg-yellow-500 ml-40"></div>
+            <div className="w-40 h-40 bg-red-500 mr-20"></div>
+            <div className="w-40 h-40 bg-blue-500 ml-40"></div>
+          </div>
+        </div>
+      </div>
+
+      {/* location  */}
+      <div className="flex justify-evenly items-center gap-4 h-80 bg-slate-100">
+        {/* left side  */}
+        <div className="w-2/5">
+          <div>
+            <h1 className="text-3xl font-semibold">Contact</h1>
+            <ul>
+              <li>
+                <span className="font-semibold">Website:</span>{" "}
+                <a
+                  className="underline"
+                  href="https://creepy-duck-glasses.cyclic.app/"
+                >
+                  {name}
+                </a>
+              </li>
+              <li>
+                <span className="font-semibold">Mobile:</span> +880 16457 39121
+              </li>
+              <li>
+                <span className="font-semibold">WhatsApp:</span> +880 17800
+                73651
+              </li>
+              <li>
+                <span className="font-semibold">E-Mail:</span>{" "}
+                abdullah.dev.it@gmail.com
+              </li>
+              <li>
+                <span className="font-semibold">Address:</span> Thanapara,
+                Tangail, 1900
+              </li>
+            </ul>
+          </div>
+        </div>
+        {/* right side  */}
+        {/* <div className="w-2/5"> */}
+        <iframe
+          className="w-2/5 h-40 rounded-md"
+          src="https://www.google.com/maps/embed?pb=!4v1705479286115!6m8!1m7!1sOQjHQQsKxUVBfSopYrb3sA!2m2!1d24.24195897481565!2d89.9169039670362!3f105.55959168835903!4f0!5f0.7820865974627469"
+          width="600"
+          height="450"
+          style={{ border: "0" }}
+          allowFullScreen
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+        />
+        {/* </div> */}
       </div>
     </div>
   );

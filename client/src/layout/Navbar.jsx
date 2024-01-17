@@ -31,7 +31,7 @@ function Navbar() {
         <img
           className="w-16 h-16 shadow-md rounded-full"
           src={Logo}
-          alt="Logo"
+          alt="Logo Loading..."
         />
       </div>
       <div>
