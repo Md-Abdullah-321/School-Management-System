@@ -34,7 +34,7 @@ function Home() {
 
       {/* messages and notice  */}
       <div className="h-screen w-full flex flex-col md:flex-row justify-around items-center bg-slate-100">
-        <div className="md:w-2/5 mt-20 md:mt-0 md:h-5/6 shadow-lg p-5 border-b-4 border-yellow-500 rounded-md flex flex-col items-center justify-center bg-white">
+        <div className="md:w-2/5 mt-4 md:mt-0 md:h-5/6 shadow-lg p-5 border-b-4 border-yellow-500 rounded-md flex flex-col items-center justify-center bg-white">
           {/* image */}
           <div className="flex justify-center items-center">
             <img
@@ -158,16 +158,18 @@ function Home() {
         </div>
         {/* right side  */}
         {/* <div className="w-2/5"> */}
-        <iframe
-          className="md:w-2/5 h-40 rounded-md m-5"
-          src="https://www.google.com/maps/embed?pb=!4v1705479286115!6m8!1m7!1sOQjHQQsKxUVBfSopYrb3sA!2m2!1d24.24195897481565!2d89.9169039670362!3f105.55959168835903!4f0!5f0.7820865974627469"
-          width="600"
-          height="450"
-          style={{ border: "0" }}
-          allowFullScreen
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-        />
+        <div className=" w-full p-3 md:p-0 md:w-2/5 h-40 rounded-md m-5">
+          <iframe
+            className="w-full h-full rounded-md"
+            src="https://www.google.com/maps/embed?pb=!4v1705479286115!6m8!1m7!1sOQjHQQsKxUVBfSopYrb3sA!2m2!1d24.24195897481565!2d89.9169039670362!3f105.55959168835903!4f0!5f0.7820865974627469"
+            width="600"
+            height="450"
+            style={{ border: "0" }}
+            allowFullScreen
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+          />
+        </div>
         {/* </div> */}
       </div>
     </div>

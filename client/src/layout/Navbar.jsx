@@ -7,8 +7,8 @@ import { setHomeInfo } from "../features/homeSlice";
 function Navbar() {
   const dispatch = useDispatch();
   const [screenSize, setScreenSize] = useState(window.innerWidth);
-  const [toggleNavbar, setToggleNavbar] = useState(false);
-  console.log(toggleNavbar);
+  const [toggleNavbar, setToggleNavbar] = useState(window.innerWidth > 650);
+
   useEffect(() => {
     const handleResize = () => {
       setScreenSize(window.innerWidth);
