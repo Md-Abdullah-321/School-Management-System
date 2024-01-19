@@ -7,31 +7,31 @@ function Footer() {
     <div className="w-full h-40 bg-yellow-500 p-5 flex flex-col justify-center items-center">
       <nav className="flex justify-center gap-x-2 md:gap-x-4 flex-wrap">
         <NavLink
-          className="font-semibold hover:text-white text-sm sm:text-lg"
+          className="font-semibold hover:text-white text-sm sm:text-md"
           to="/"
         >
           HOME
         </NavLink>
         <NavLink
-          className="font-semibold hover:text-white text-sm sm:text-lg"
+          className="font-semibold hover:text-white text-sm sm:text-md"
           to="/about"
         >
           ABOUT
         </NavLink>
         <NavLink
-          className="font-semibold hover:text-white text-sm sm:text-lg"
+          className="font-semibold hover:text-white text-sm sm:text-md"
           to="department"
         >
           DEPARTMENT
         </NavLink>
         <NavLink
-          className="font-semibold hover:text-white text-sm sm:text-lg"
+          className="font-semibold hover:text-white text-sm sm:text-md"
           to="gallery"
         >
           GALLERY
         </NavLink>
         <NavLink
-          className="font-semibold hover:text-white text-sm sm:text-lg"
+          className="font-semibold hover:text-white text-sm sm:text-md"
           to="contact"
         >
           CONTACT US
