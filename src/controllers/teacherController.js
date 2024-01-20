@@ -39,6 +39,7 @@ const handleLoginTeacher = async (req, res, next) => {
         return successResponse(res, {
             statusCode: 200,
             message: "Teacher logged in successfully",
+            payload: user,
         })
 
     } catch (error) {

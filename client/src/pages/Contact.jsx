@@ -40,6 +40,7 @@ function Contact() {
         const data = await res.json();
         if (data.success) {
           setLoading(false);
+          setFormData({ ...init });
         }
         alert(data.messege);
       } catch (error) {
