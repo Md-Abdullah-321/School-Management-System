@@ -21,6 +21,8 @@ require("dotenv").config();
 const handleLoginTeacher = async (req, res, next) => {
     try {
         const { email, password } = req.body;
+
+        console.log(email, password);
         const user = await checkExistanceWithEmail(Teacher, email);
         if (!user) {
             throw createError(404, "Teacher does not exist with this email");
