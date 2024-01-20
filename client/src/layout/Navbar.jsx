@@ -30,12 +30,13 @@ function Navbar() {
       const response = await fetch(
         "https://creepy-duck-glasses.cyclic.app/api/home"
       );
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
+
       const data = await response.json();
-      const { name, logo, backgroundImage } = data.payload["0"];
-      dispatch(setHomeInfo({ name, logo, backgroundImage }));
+
+      if (data.success) {
+        const { name, logo, backgroundImage } = data.payload["0"];
+        dispatch(setHomeInfo({ name, logo, backgroundImage }));
+      }
     } catch (error) {
       console.error("Error fetching data:", error.message);
     }
@@ -48,7 +49,8 @@ function Navbar() {
   useEffect(() => {
     fetchData();
   }, []);
-  const Logo = useSelector((state) => state.home.logo);
+  const Logo = useSelector((state) => state.sitesettingsinfo.logo);
+  console.log(Logo);
   return (
     <div className="w-full min-h-16 sm:h-20 flex md:justify-center md:items-center p-5">
       {window.innerWidth < 650 && (

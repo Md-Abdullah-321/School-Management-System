@@ -3,7 +3,9 @@ import { NavLink } from "react-router-dom";
 
 function Home() {
   // Use the useSelector hook to get data from the Redux store
-  const { backgroundImage, name, logo } = useSelector((state) => state.home);
+  const { backgroundImage, name, logo } = useSelector(
+    (state) => state.sitesettingsinfo
+  );
 
   // Check if backgroundImage is available before setting it in the style
   const backgroundStyle = backgroundImage

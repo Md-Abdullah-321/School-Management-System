@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { setTeacherInfo } from "../../features/loginSlice";
 
 const init = {
   email: "",
@@ -40,8 +41,29 @@ function Login() {
         const data = await res.json();
         if (data.success) {
           setFormData({ ...init });
-          //   navigate("/admin");
-          console.log(data);
+          const {
+            firstName,
+            lastName,
+            email,
+            phoneNumber,
+            address,
+            subjects,
+            role,
+            picture,
+          } = data.payload;
+          dispatch(
+            setTeacherInfo({
+              firstName,
+              lastName,
+              email,
+              phoneNumber,
+              address,
+              subjects,
+              role,
+              picture,
+            })
+          );
+          navigate("/admin");
         }
         alert(data.messege);
       } catch (error) {
