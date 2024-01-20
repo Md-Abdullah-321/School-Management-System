@@ -13,17 +13,18 @@ const runValidation = require("../validators");
 const { isLoggedIn, isAdmin, isLoggedOut } = require("../middleware/auth");
 const teachersRouter = express.Router();
 
-//POST -> Create teacher
-teachersRouter.post("/",validateCreateTeacher, runValidation, isLoggedIn, isAdmin, handleCreateTeacher);
-
 //POST -> Log as a  teacher
-teachersRouter.post("/sign-in", validateTeacherLogin, runValidation, isLoggedOut,handleLoginTeacher);
+teachersRouter.post("/sign-in", validateTeacherLogin, runValidation, isLoggedOut, handleLoginTeacher);
 
 //GET -> Log out teacher
 teachersRouter.get("/sign-out", isLoggedIn,handleTeacherLogout);
 
+
 //GET -> get teacher by id
 teachersRouter.get("/:id", handleGetTeacherById);
+
+//POST -> Create teacher
+teachersRouter.post("/",validateCreateTeacher, runValidation, isLoggedIn, isAdmin, handleCreateTeacher);
 
 //GET -> get all teachers
 teachersRouter.get("/", handleGetTeacher);
