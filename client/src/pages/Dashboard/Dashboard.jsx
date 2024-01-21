@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import Sidebar from "../../layout/Sidebar";
 
 function Dashboard() {
   const navigate = useNavigate();
@@ -10,7 +11,12 @@ function Dashboard() {
       navigate("/admin/login");
     }
   }, []);
-  return <h1>Admin Dashboard</h1>;
+  return (
+    <div className="flex w-full">
+      <Sidebar />
+      <p>HI</p>
+    </div>
+  );
 }
 
 export default Dashboard;
