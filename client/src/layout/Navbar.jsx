@@ -50,7 +50,7 @@ function Navbar() {
     fetchData();
   }, []);
   const Logo = useSelector((state) => state.sitesettingsinfo.logo);
-  console.log(Logo);
+
   return (
     <div className="w-full min-h-16 sm:h-20 flex md:justify-center md:items-center p-5">
       {window.innerWidth < 650 && (

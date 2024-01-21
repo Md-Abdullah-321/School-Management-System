@@ -16,10 +16,9 @@ function App() {
     return (
       <BrowserRouter>
         <Routes>
-          {/* Admin Route  */}
           <Route path="/admin" element={<Dashboard />} />
           <Route path="/admin/login" element={<Login />} />
-          <Route path="*" element={<NotFoundPage />} />
+          <Route path="*" element={<NotFoundPage />} />{" "}
         </Routes>
       </BrowserRouter>
     );

@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 
 function About() {
-  const backgroundImage = useSelector((state) => state.home.backgroundImage);
+  const { backgroundImage } = useSelector((state) => state.sitesettingsinfo);
 
   const backgroundStyle = backgroundImage
     ? { backgroundImage: `url(${backgroundImage})` }
