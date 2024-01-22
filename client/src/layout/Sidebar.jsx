@@ -15,7 +15,7 @@ import { NavLink, useLocation } from "react-router-dom";
 function Sidebar() {
   const [toggleSidebar, setToggleSidebar] = useState(false);
   const location = useLocation();
-  console.log(location.pathname);
+
   const handleToggleBar = () => {
     setToggleSidebar(!toggleSidebar);
   };
@@ -76,9 +76,9 @@ function Sidebar() {
               <IoInformationCircleOutline className="w-4 h-4 font-light" />
             </NavLink>
             <NavLink
-              to="/admin/fees&Payments"
+              to="/admin/fees&payments"
               className={
-                location.pathname === "/admin/fees&Payments"
+                location.pathname === "/admin/fees&payments"
                   ? activeClassName
                   : className
               }
