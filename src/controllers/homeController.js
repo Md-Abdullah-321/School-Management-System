@@ -56,6 +56,22 @@ const handleUpdateHomeInfo = async (req, res) => {
 const handleAddUtility = async (req, res) => {
     try {
         const { id, utility } = req.body;
+        const site = await HomeInfo.findOne({});
+        let isExist = false;
+        site.utility.forEach((util) => {
+            if (util.year === utility.year && util.month === utility.month) {
+                isExist = true;
+            }
+        })
+
+        if (isExist) {
+            return errorResponse(res, {
+                statusCode: 404,
+                message: "Utility of this month is already exist.",
+            });
+        }
+        
+
         const siteInfo = await checkExistanceWithId(HomeInfo, id);
         siteInfo.utility.unshift(utility)
 

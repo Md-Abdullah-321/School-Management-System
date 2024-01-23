@@ -60,22 +60,19 @@ export const getDetails = async () => {
       });
     });
 
-      console.log(teachers.payload);
-      console.log(students.payload);
-    //   teachers.payload.map((teacher) => {
-    //       console.log(teacher);
-    //   })
-    // teachers.payload.forEach((teacher) => {
-    //   totalExpense += teacher.salary;
+   
 
-    //   if (teacher.paymentHistory.length > 0) {
-    //     teacher.paymentHistory.forEach((payment) => {
-    //       if (!payment.paid) {
-    //         duePayments += teacher.salary;
-    //       }
-    //     });
-    //   }
-    // });
+    teachers.payload.forEach((teacher) => {
+      totalExpense += teacher.salary;
+
+      if (teacher.paymentHistory.length > 0) {
+        teacher.paymentHistory.forEach((payment) => {
+          if (!payment.paid) {
+            duePayments += teacher.salary;
+          }
+        });
+      }
+    });
 
     return { students, dueFees, receivedFees, duePayments, totalExpense };
   } catch (error) {
