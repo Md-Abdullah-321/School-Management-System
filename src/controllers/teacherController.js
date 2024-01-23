@@ -89,7 +89,7 @@ const handleGetTeacher = async (req, res, next) => {
         return successResponse(res, {
             statusCode: 200,
             message: "Teacher fetched successfully",
-            payload: { ...teacher }
+            payload: teacher
         });
     } catch (error) {
         next(error);

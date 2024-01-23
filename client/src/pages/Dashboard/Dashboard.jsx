@@ -3,21 +3,34 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import PieChart from "../../components/PieChart";
 import { createStudentArry } from "../../helper/createStudentArray";
+import { getDetails } from "../../helper/getDetails";
 import Sidebar from "../../layout/Sidebar";
 
 function Dashboard() {
   const [chartData, setChartData] = useState({ datasets: [] });
+  const [basicInfo, setBasicInfo] = useState({
+    DueFees: 0,
+    ReceivedFees: 0,
+    TotalExpense: 0,
+    DuePayments: 0,
+    Profit: 0,
+  });
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
+  const utility = useSelector((state) => state.sitesettingsinfo.utility);
 
   const fetchStudentData = async () => {
-    const res = await fetch(
-      "https://creepy-duck-glasses.cyclic.app/api/student"
-    );
+    const { students, DueFees, ReceivedFees, DuePayments, TotalExpense } =
+      await getDetails();
+    setBasicInfo({
+      DueFees,
+      ReceivedFees,
+      DuePayments,
+      TotalExpense: TotalExpense + utility,
+    });
     const studentArray = [0, 0, 0, 0, 0, 0, 0];
 
-    const data = await res.json();
-    createStudentArry(data, studentArray);
+    createStudentArry(students, studentArray);
     setChartData({
       labels: ["Play", "Narsary", "One", "Two", "Three", "Four", "Five"],
       datasets: [
@@ -60,17 +73,32 @@ function Dashboard() {
           <div className="flex flex-col sm:w-7/12 gap-4 border h-full justify-center items-center">
             <div className="w-full flex justify-around">
               {/* Due and Recived fees  */}
-              <div className="w-1/3 bg-slate-400">Due Fees</div>
-              <div className="w-1/3 bg-slate-400">Received Fees</div>
+              <div className="w-1/3 bg-slate-400">
+                <div>{basicInfo.DueFees}</div>
+                <div>Due Fees</div>
+              </div>
+              <div className="w-1/3 bg-slate-400">
+                <div>{basicInfo.ReceivedFees}</div>
+                <div>Received Fees</div>
+              </div>
             </div>
             <div className="w-full flex justify-around">
               {/* Total Expenses and Due Payments  */}
-              <div className="w-1/3 bg-slate-400">Total Expense</div>
-              <div className="w-1/3 bg-slate-400">Due Payments</div>
+              <div className="w-1/3 bg-slate-400">
+                <div>{basicInfo.TotalExpense}</div>
+                <div>Total Expense</div>
+              </div>
+              <div className="w-1/3 bg-slate-400">
+                <div>{basicInfo.DuePayments}</div>
+                <div>Due Payments</div>
+              </div>
             </div>
             <div className="w-full flex justify-around">
               {/* Profit  */}
-              <div className="w-2/3 bg-slate-400">Profit</div>
+              <div className="w-2/3 bg-slate-400">
+                <div>{basicInfo.Profit}</div>
+                <div>Profits</div>
+              </div>
             </div>
           </div>
         </div>
