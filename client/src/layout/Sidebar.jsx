@@ -26,7 +26,7 @@ function Sidebar() {
   const activeClassName =
     "flex justify-between items-center bg-yellow-500 hover:bg-yellow-400 py-1 px-2";
   return (
-    <div className="flex flex-col h-screen border-r-2 border-gray-100 shadow-md p-2 justify-between">
+    <div className="flex flex-col  min-h-screen border-r-2 border-gray-100 shadow-md p-2 justify-between">
       <div className="relative left-3 top-3 cursor-pointer w-10 h-10">
         <GiHamburgerMenu className="text-2xl" onClick={handleToggleBar} />
       </div>
@@ -129,16 +129,6 @@ function Sidebar() {
               <RiArrowRightSLine className="w-6 h-6 bg-gray-200 rounded-full" />
             </NavLink>
           </div>
-        </div>
-      )}
-
-      {!toggleSidebar && (
-        <div className="w-10 h-10 border-2 border-yellow-500 rounded-full">
-          <img
-            src={user.picture}
-            alt="User image"
-            className="w-full h-full rounded-full"
-          />
         </div>
       )}
     </div>

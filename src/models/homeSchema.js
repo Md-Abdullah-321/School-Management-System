@@ -9,6 +9,14 @@ const homeSchema = new Schema({
   name: { type: String, required: true },
   logo: { type: String, required: true },
   backgroundImage: { type: String, required: true },
+  utility: [
+    {
+      year: Number,
+      month: String,
+      amount: Number,
+      paid: { type: Boolean, default: false }
+    }
+  ]
 }, { timestamps: true });
 
 const HomeInfo = model('HomeInfo', homeSchema);

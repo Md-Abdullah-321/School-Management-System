@@ -53,7 +53,31 @@ const handleUpdateHomeInfo = async (req, res) => {
 };
 
 
+const handleAddUtility = async (req, res) => {
+    try {
+        const { id, utility } = req.body;
+        const siteInfo = await checkExistanceWithId(HomeInfo, id);
+        siteInfo.utility.unshift(utility)
+
+        const updates = {utility: siteInfo.utility};
+        const updatedHomeInfo = await updateHomeInfo(id, updates);
+
+        return successResponse(res, {
+            statusCode: 200,
+            message: "Utility added successfully.",
+            payload: {updatedHomeInfo},
+        });
+    } catch (error) {
+        return errorResponse(res, {
+            statusCode: 404,
+            message: "Could not add utility.",
+        });
+    }
+};
+
+
 module.exports = {
     handleGetHomeInfo,
-    handleUpdateHomeInfo
+    handleUpdateHomeInfo,
+    handleAddUtility
 }
