@@ -55,6 +55,26 @@ const teacherSchema = new mongoose.Schema(
         },
       },
     ],
+    salary: {
+      type: Number,
+      required: true
+    },
+    paymentHistory: [
+          {
+            year: {
+              type: Number,
+              required: true,
+            },
+            month: {
+              type: String,
+              required: true,
+            },
+            paid: {
+              type: Boolean,
+              default: false,
+            },
+          },
+        ],
   },
   { timestamps: true }
 );

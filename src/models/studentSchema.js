@@ -65,15 +65,16 @@ const studentSchema = new mongoose.Schema(
         required: true,
       
     },
-    image: {type: String},
+    image: { type: String },
+    tution_fees: {type: Number, required: true},
     feesHistory: [
       {
-        month: {
-          type: String,
-          required: true,
-        },
         year: {
           type: Number,
+          required: true,
+        },
+        month: {
+          type: String,
           required: true,
         },
         paid: {

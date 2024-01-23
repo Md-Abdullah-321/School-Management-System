@@ -52,9 +52,9 @@ const handleLoginTeacher = async (req, res, next) => {
 
 const handleCreateTeacher = async (req, res, next) => {
     try {
-        const { firstName, lastName, email, phoneNumber, subjects, address, picture, password } = req.body;
+        const { firstName, lastName, email, phoneNumber, subjects,salary, address, picture, password} = req.body;
 
-        const requiredFields = [firstName, lastName, email, phoneNumber, subjects, address, picture, password];
+        const requiredFields = [firstName, lastName, email, phoneNumber, subjects, salary,address, picture, password];
         if (requiredFields.some(field => !field)) {
             throw createError(204, "Error: All fields are required. Please provide the required information.");
         }
@@ -66,7 +66,7 @@ const handleCreateTeacher = async (req, res, next) => {
         }
 
         const hashedPassword = bcrypt.hashSync(password, 10);
-        const teacherInfo = { firstName, lastName, email, phoneNumber, subjects, address, picture , password: hashedPassword};
+        const teacherInfo = { firstName, lastName, email, phoneNumber, subjects, address,salary, picture , password: hashedPassword};
         const teacher = await createEntity(Teacher, teacherInfo);
 
         return successResponse(res, {

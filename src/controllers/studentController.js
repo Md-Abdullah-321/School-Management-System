@@ -15,9 +15,9 @@ const { successResponse } = require("./responseController");
 
 const handleCreateStudent = async (req, res, next) => {
    try {
-       const { studentName, fathersName, mothersName, phoneNumber, address, dateOfBirth, className, admissionDate, image, feesHistory } = req.body;
+       const { studentName, fathersName, mothersName, phoneNumber, address, dateOfBirth, className,tution_fees, admissionDate, image, feesHistory } = req.body;
        
-       const studentInfo = { studentName, fathersName, mothersName, phoneNumber, address, dateOfBirth, className, admissionDate, image, feesHistory };
+       const studentInfo = { studentName, fathersName, mothersName, phoneNumber, address, dateOfBirth, className,tution_fees, admissionDate, image, feesHistory };
 
        const student = await createStudent(Student, studentInfo);
 
