@@ -34,8 +34,8 @@ function Navbar() {
       const data = await response.json();
 
       if (data.success) {
-        const { name, logo, backgroundImage } = data.payload["0"];
-        dispatch(setHomeInfo({ name, logo, backgroundImage }));
+        const { name, logo, backgroundImage, utility } = data.payload["0"];
+        dispatch(setHomeInfo({ name, logo, backgroundImage, utility }));
       }
     } catch (error) {
       console.error("Error fetching data:", error.message);

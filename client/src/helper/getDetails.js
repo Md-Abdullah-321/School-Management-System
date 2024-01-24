@@ -31,52 +31,36 @@ const getTeacherData = async () => {
 }
 
 export const getDetails = async () => {
-  try {
     const students = await getStudentData();
-    const teachers = await getTeacherData();
+    const teacher = await getTeacherData();
 
-    let dueFees = 0;
-    let receivedFees = 0;
-    let totalExpense = 0;
-    let duePayments = 0;
 
-    const currentDate = new Date();
-    const currentMonth = currentDate.getMonth();
-    const currentYear = currentDate.getFullYear();
+    let DueFees = 0;
+    let ReceivedFees = 0;
+    let DuePayments = 0;
+    
+    let date = new Date();
+    students.payload.forEach(student => {
+        student.feesHistory.forEach((tutionFee) => {
+            if (tutionFee.paid === false) {
+                DueFees += student.tution_fees;
+            }
 
-    students.payload.forEach((student) => {
-      student.feesHistory.forEach((tuitionFee) => {
-        if (!tuitionFee.paid) {
-          dueFees += student.tuitionFees;
-        }
-
-        if (
-          months[tuitionFee.month] === currentMonth &&
-          tuitionFee.year === currentYear &&
-          tuitionFee.paid
-        ) {
-          receivedFees += student.tuitionFees;
-        }
-      });
+            if (months[tutionFee.month] === date.getMonth() && tutionFee.year === date.getFullYear() && tutionFee.paid === true) {
+                ReceivedFees += student.tution_fees;
+            }
+        })
     });
 
-   
-
-    teachers.payload.forEach((teacher) => {
-      totalExpense += teacher.salary;
-
-      if (teacher.paymentHistory.length > 0) {
-        teacher.paymentHistory.forEach((payment) => {
-          if (!payment.paid) {
-            duePayments += teacher.salary;
-          }
-        });
-      }
-    });
-
-    return { students, dueFees, receivedFees, duePayments, totalExpense };
-  } catch (error) {
-    console.error('Error fetching data:', error.message);
-    throw error; // Rethrow the error to be handled elsewhere if needed
-  }
-};
+    teacher.payload.forEach((teacher) => {
+        if (teacher?.feesHistory?.length > 0) {
+            teacher.paymentHistory.forEach((payment) => {
+                if (payment.paid === false) {
+                    DuePayments += teacher.salary;
+                }
+        })
+        }
+    })
+    
+    return { students, DueFees, ReceivedFees, DuePayments };
+}

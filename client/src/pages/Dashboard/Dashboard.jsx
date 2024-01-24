@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import Messages from "../../components/Messages";
 import PieChart from "../../components/PieChart";
 import { createStudentArry } from "../../helper/createStudentArray";
 import { getDetails } from "../../helper/getDetails";
@@ -19,14 +20,21 @@ function Dashboard() {
   const user = useSelector((state) => state.user);
   const utility = useSelector((state) => state.sitesettingsinfo.utility);
 
+  let utility_bills = 0;
+  utility.forEach((util) => {
+    if (util.paid === false) {
+      utility_bills += util.amount;
+    }
+  });
   const fetchStudentData = async () => {
-    const { students, DueFees, ReceivedFees, DuePayments, TotalExpense } =
-      await getDetails();
+    const { students, DueFees, ReceivedFees, DuePayments } = await getDetails();
+
     setBasicInfo({
       DueFees,
       ReceivedFees,
       DuePayments,
-      TotalExpense: TotalExpense + utility,
+      TotalExpense: DuePayments + utility_bills,
+      Profit: DueFees + ReceivedFees - (DuePayments + utility_bills),
     });
     const studentArray = [0, 0, 0, 0, 0, 0, 0];
 
@@ -64,49 +72,71 @@ function Dashboard() {
       <Sidebar />
 
       {/* Dashboard content  */}
-      <div className="p-5 w-full h-screen">
+      <div className="p-5 w-full sm:h-screen">
         {/* chart and small info  */}
-        <div className="w-full flex flex-col sm:flex-row sm:justify-between items-center sm:h-1/2">
-          <div className="sm:w-4/12 border flex justify-center items-center h-full">
+        <div className="w-full flex flex-col sm:flex-row sm:justify-between gap-4 sm:gap-0 items-center sm:h-1/2">
+          <div className="w-full p-4 sm:w-4/12 border flex justify-center items-center sm:h-full rounded-md">
             <PieChart chartData={chartData} />
           </div>
-          <div className="flex flex-col sm:w-7/12 gap-4 border h-full justify-center items-center">
-            <div className="w-full flex justify-around">
+          <div className="flex flex-col w-full p-2 sm:p-0 sm:w-7/12 gap-2 sm:gap-4 border h-full justify-center items-center rounded-md">
+            <div className="w-full flex flex-col sm:flex-row justify-around items-center">
               {/* Due and Recived fees  */}
-              <div className="w-1/3 bg-slate-400">
-                <div>{basicInfo.DueFees}</div>
-                <div>Due Fees</div>
+              <div className="w-full sm:w-1/3 flex justify-between items-center shadow-md">
+                <div className="bg-red-500 w-1/2 h-full text-center p-2 text-lg font-semibold">
+                  {basicInfo.DueFees}
+                </div>
+                <div className="text-center p-2 w-1/2 font-semibold text-xs uppercase">
+                  Due Fees
+                </div>
               </div>
-              <div className="w-1/3 bg-slate-400">
-                <div>{basicInfo.ReceivedFees}</div>
-                <div>Received Fees</div>
+              <div className="w-full sm:w-1/3 flex justify-between items-center shadow-md">
+                <div className="bg-green-500 w-1/2 h-full text-center p-2 text-lg font-semibold">
+                  {basicInfo.ReceivedFees}
+                </div>
+                <div className="text-center p-2 w-1/2 font-semibold text-xs uppercase">
+                  Received Fees
+                </div>
               </div>
             </div>
-            <div className="w-full flex justify-around">
+            <div className="w-full flex flex-col sm:flex-row justify-around items-center">
               {/* Total Expenses and Due Payments  */}
-              <div className="w-1/3 bg-slate-400">
-                <div>{basicInfo.TotalExpense}</div>
-                <div>Total Expense</div>
+              <div className="w-full sm:w-1/3 flex justify-between items-center shadow-md">
+                <div className="bg-yellow-500 w-1/2 h-full text-center p-2 text-lg font-semibold">
+                  {basicInfo.TotalExpense}
+                </div>
+                <div className="text-center p-2 w-1/2 font-semibold text-xs uppercase">
+                  Total Expense
+                </div>
               </div>
-              <div className="w-1/3 bg-slate-400">
-                <div>{basicInfo.DuePayments}</div>
-                <div>Due Payments</div>
+              <div className="w-full sm:w-1/3 flex justify-between items-center shadow-md">
+                <div className="bg-blue-500 w-1/2 h-full text-center p-2 text-lg font-semibold">
+                  {basicInfo.DuePayments}
+                </div>
+                <div className="text-center p-2 w-1/2 font-semibold text-xs uppercase">
+                  Due Payments
+                </div>
               </div>
             </div>
             <div className="w-full flex justify-around">
               {/* Profit  */}
-              <div className="w-2/3 bg-slate-400">
-                <div>{basicInfo.Profit}</div>
-                <div>Profits</div>
+              <div className="w-full sm:w-2/3 flex  justify-between items-center shadow-md">
+                <div className="bg-purple-500 w-1/2 h-full text-center p-2 text-lg font-semibold">
+                  {basicInfo.Profit}
+                </div>
+                <div className="text-center p-2 w-1/2 font-semibold text-lg uppercase">
+                  Profits
+                </div>
               </div>
             </div>
           </div>
         </div>
 
         {/* expense and extra info  */}
-        <div>
-          <div></div>
-          <div></div>
+        <div className="flex h-1/2 flex-col sm:flex-row justify-between items-center mt-5">
+          <div className="w-full sm:w-4/12"></div>
+          <div className="w-full sm:w-7/12 h-full">
+            <Messages />
+          </div>
         </div>
       </div>
     </div>

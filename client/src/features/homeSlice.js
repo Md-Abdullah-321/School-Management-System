@@ -3,7 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialHomeInfo = {
   name: "",
   logo: "",
-  backgroundImage: ""
+  backgroundImage: "",
+  utility: []
 };
 
 export const homeSlice = createSlice({
@@ -11,10 +12,11 @@ export const homeSlice = createSlice({
   initialState: initialHomeInfo,
   reducers: {
     setHomeInfo: (state, action) => {
-      const { name, logo, backgroundImage } = action.payload;
+      const { name, logo, backgroundImage, utility } = action.payload;
       state.name = name || state.name;
       state.logo = logo || state.logo;
       state.backgroundImage = backgroundImage || state.backgroundImage;
+      state.utility = utility || state.utility
     }
   }
 });
