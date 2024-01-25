@@ -69,13 +69,7 @@ function CreateTeacher() {
         return getDownloadURL(snapshot.ref);
       })
       .then(async (downloadURL) => {
-        setFormData((prev) => {
-          return {
-            ...prev,
-            image: downloadURL,
-          };
-        });
-
+        console.log(downloadURL);
         const res = await fetch(
           "https://creepy-duck-glasses.cyclic.app/api/teacher",
           {
@@ -98,13 +92,13 @@ function CreateTeacher() {
               },
               password: formData.password,
               salary: formData.salary,
-              picture: formData.image,
+              picture: downloadURL,
             }),
           }
         );
 
         const data = await res.json();
-        console.log(data);
+        alert(data.messege);
       });
   };
 
