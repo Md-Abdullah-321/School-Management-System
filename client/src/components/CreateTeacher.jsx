@@ -60,46 +60,48 @@ function CreateTeacher() {
     e.preventDefault();
 
     if (!formData.image) return;
-    const imageRef = ref(
-      storage,
-      `images/teacher/${formData.image.name + Date.now()}`
-    );
-    uploadBytes(imageRef, formData.image)
-      .then((snapshot) => {
-        return getDownloadURL(snapshot.ref);
-      })
-      .then(async (downloadURL) => {
-        console.log(downloadURL);
-        const res = await fetch(
-          "https://creepy-duck-glasses.cyclic.app/api/teacher",
-          {
-            method: "POST",
-            credentials: "include",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              firstName: formData.firstName,
-              lastName: formData.lastName,
-              email: formData.email,
-              phoneNumber: formData.phoneNumber,
-              subjects: formData.subject,
-              address: {
-                street: formData.street,
-                city: formData.city,
-                state: formData.state,
-                zip: formData.zip,
-              },
-              password: formData.password,
-              salary: formData.salary,
-              picture: downloadURL,
-            }),
-          }
-        );
 
-        const data = await res.json();
-        alert(data.messege);
-      });
+    try {
+      const imageRef = ref(
+        storage,
+        `images/teacher/${formData.image.name + Date.now()}`
+      );
+      const snapshot = await uploadBytes(imageRef, formData.image);
+      const downloadURL = await getDownloadURL(snapshot.ref);
+
+      const response = await fetch(
+        "https://creepy-duck-glasses.cyclic.app/api/teacher",
+        {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            firstName: formData.firstName,
+            lastName: formData.lastName,
+            email: formData.email,
+            phoneNumber: formData.phoneNumber,
+            subjects: formData.subject,
+            address: {
+              street: formData.street,
+              city: formData.city,
+              state: formData.state,
+              zip: formData.zip,
+            },
+            salary: formData.salary,
+            picture: downloadURL,
+            password: formData.password,
+          }),
+        }
+      );
+
+      const data = await response.json();
+      alert(data.message); // Fix the typo in your code (messege -> message)
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      // Handle the error accordingly (e.g., show an error message to the user)
+    }
   };
 
   return (
