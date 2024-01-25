@@ -1,4 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import CreateTeacher from "./components/CreateTeacher";
+import ViewTeacher from "./components/ViewTeacher";
 import Footer from "./layout/Footer";
 import Navbar from "./layout/Navbar";
 import About from "./pages/About";
@@ -24,6 +26,8 @@ function App() {
         <Routes>
           <Route path="/admin" element={<Dashboard />} />
           <Route path="/admin/teacher" element={<Teachers />} />
+          <Route path="/admin/teacher/:id" element={<ViewTeacher />} />
+          <Route path="/admin/teacher/create" element={<CreateTeacher />} />
           <Route path="/admin/classes" element={<Classes />} />
           <Route path="/admin/notice" element={<Notice />} />
           <Route path="/admin/fees&payments" element={<FeesAndPayments />} />
