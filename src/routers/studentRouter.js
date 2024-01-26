@@ -20,16 +20,17 @@ studentRouter.post("/payment/:id", handleGetPayment);
 studentRouter.post("/update/:id", handleUpdateStudentInfo);
 
 // POST -> create student :
-studentRouter.post("/",validateCreateStudent,runValidation,handleCreateStudent);
+studentRouter.post("/", validateCreateStudent, runValidation, handleCreateStudent);
+
+// GET -> delete students by id :
+studentRouter.get("/:id", handleGetStudentById);
 
 // GET -> get students by className :
-studentRouter.get("/:className", handleGetStudentsByClassName);
+studentRouter.get("/get/:className", handleGetStudentsByClassName);
 
 // GET -> delete students by id :
 studentRouter.delete("/:id", handleDeleteStudent);
 
-// GET -> delete students by id :
-studentRouter.get("/:id", handleGetStudentById);
 
 // GET -> delete students by id :
 studentRouter.get("/", handleGetStudents);

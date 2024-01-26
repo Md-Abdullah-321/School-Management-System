@@ -135,7 +135,7 @@ const handleGetStudentById = async (req, res, next) => {
         return successResponse(res, {
         statusCode: 200,
         message: `Student updated successfully.`,
-        payload: {...student},
+        payload: student,
         });
   } catch (error) {
     next(error);
