@@ -85,7 +85,7 @@ function Classes() {
                   name={stu.studentName}
                   phoneNumber={stu.phoneNumber}
                   className={stu.className}
-                  picture={stu?.picture}
+                  picture={stu?.image}
                 />
               ))}
             </div>
