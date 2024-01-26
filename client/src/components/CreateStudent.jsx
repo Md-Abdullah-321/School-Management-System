@@ -98,7 +98,6 @@ function CreateStudent() {
     }
   }, []);
 
-  console.log(formData);
   return (
     <div className="w-full min-h-screen flex justify-center items-center">
       <div className="w-11/12 sm:w-1/2 shadow-lg">
