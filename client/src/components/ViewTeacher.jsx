@@ -1,9 +1,13 @@
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import DeleteTeacherMoadal from "./DeleteTeacherModal";
 
 function ViewTeacher() {
   const id = useParams().id;
   const [teacher, setTeacher] = useState({});
+  const [modal, setModal] = useState(false);
+  const user = useSelector((state) => state.user);
 
   const fetchTeacher = async () => {
     const res = await fetch(
@@ -13,18 +17,27 @@ function ViewTeacher() {
     const data = await res.json();
     setTeacher({ ...data.payload });
   };
+
   useEffect(() => {
     fetchTeacher();
   }, []);
   return (
     <div className="w-full h-screen flex justify-center items-center">
       <div className="w-11/12 sm:w-1/2 flex flex-col shadow-lg border p-4">
-        <div className="flex w-full h-40">
+        <div className="flex w-full h-40 justify-between items-start">
           <img
             src={teacher.picture}
             alt="Profile Picture"
             className="w-40 h-40 shadow-md rounded-md"
           />
+          {user.role === "admin" && (
+            <button
+              className="bg-red-500 py-0.5 px-1 rounded-md hover:shadow-xl text-sm uppercase font-medium text-white"
+              onClick={() => setModal(true)}
+            >
+              Delete
+            </button>
+          )}
         </div>
         <div>
           <h1 className="mt-2">{teacher.firstName + " " + teacher.lastName}</h1>
@@ -69,6 +82,14 @@ function ViewTeacher() {
           </ul>
         </div>
       </div>
+
+      {modal && (
+        <DeleteTeacherMoadal
+          name={teacher.firstName + " " + teacher.lastName}
+          setModal={setModal}
+          id={id}
+        />
+      )}
     </div>
   );
 }

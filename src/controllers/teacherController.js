@@ -135,10 +135,26 @@ const handleTeacherLogout = async(req, res, next) => {
 }
 
 
+const handleDeleteTeacherById = async(req, res, next) => {
+    try {
+        const { id } = req.params;
+        await Teacher.findByIdAndDelete(id);
+        //success response
+        return successResponse(res, {
+            statusCode: 200,
+            message: "Teacher Deleted successfully"
+        })
+    } catch (error) {
+        next(error);
+    }
+}
+
+
 module.exports = {
     handleCreateTeacher,
     handleGetTeacher,
     handleGetTeacherById,
     handleLoginTeacher,
     handleTeacherLogout,
+    handleDeleteTeacherById,
 }

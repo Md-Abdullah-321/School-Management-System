@@ -75,7 +75,7 @@ function Classes() {
               key={year}
               className={
                 year.length > 0 &&
-                "w-full mt-2 flex flex-wrap justify-between items-center"
+                "w-full mt-2 flex flex-wrap gap-4 items-center justify-center sm:justify-start"
               }
             >
               {students[year]?.map((stu) => (
