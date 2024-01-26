@@ -9,7 +9,7 @@
 //Dependencies:
 
 
-const createStudent = async (Model, studentInfo) => await Model.create(studentInfo);
+const createStudent = async (Model, studentInfo) => await Model.create({...studentInfo});
 
 const getStudentsByClassName = async (Model, className) => await Model.find({ className });
 
