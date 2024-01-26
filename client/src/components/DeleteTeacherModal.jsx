@@ -4,10 +4,27 @@ function DeleteTeacherMoadal({ name, setModal, id }) {
     setModal(false);
   };
 
-  const handleDelete = () => {
-    console.log(id);
-    setModal(false);
+  const handleDelete = async () => {
+    try {
+      setModal(false);
+      const res = await fetch(
+        `https://creepy-duck-glasses.cyclic.app/api/teacher/${id}`,
+        {
+          method: "DELETE",
+        }
+      );
+
+      if (res.ok) {
+        const data = await res.json();
+        console.log(data);
+      } else {
+        console.error(`Error: ${res.status} - ${res.statusText}`);
+      }
+    } catch (error) {
+      console.error("Error deleting data:", error);
+    }
   };
+
   return (
     <>
       <div className="fixed left-0 right-0 bottom-0 top-0 bg-white opacity-85"></div>

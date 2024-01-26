@@ -90,6 +90,15 @@ function ViewTeacher() {
           id={id}
         />
       )}
+
+      {!teacher.firstName && (
+        <div className="w-full">
+          <div className="fixed left-0 right-0 top-0 bottom-0 bg-white"></div>
+          <div className="fixed text-center font-medium uppercase text-2xl">
+            Teacher Not Found with this Id
+          </div>
+        </div>
+      )}
     </div>
   );
 }
