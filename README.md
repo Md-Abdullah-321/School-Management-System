@@ -125,7 +125,7 @@ Framer Motion is utilized to incorporate smooth animations and transitions throu
 
 ## Firebase Integration
 
-Firebase is integrated for handling user authentication, cloud storage, or any other relevant features. Ensure to set up Firebase credentials for proper functionality.
+Firebase is integrated for handling cloud storage, or any other relevant features. Ensure to set up Firebase credentials for proper functionality.
 
 ## Contributing
 
