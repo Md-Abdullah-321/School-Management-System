@@ -100,7 +100,6 @@ function CreateTeacher() {
       alert(data.message); // Fix the typo in your code (messege -> message)
     } catch (error) {
       console.error("Error submitting form:", error);
-      // Handle the error accordingly (e.g., show an error message to the user)
     }
   };
 
@@ -118,7 +117,7 @@ function CreateTeacher() {
               name="firstName"
               value={formData.firstName}
               onChange={(e) => handleChange(e)}
-              className="w-6/12 outline-none bg-gray-100 p-1"
+              className="w-full sm:w-6/12 outline-none bg-gray-100 p-1"
               placeholder="First Name"
             />
             <input
@@ -126,7 +125,7 @@ function CreateTeacher() {
               name="lastName"
               value={formData.lastName}
               onChange={(e) => handleChange(e)}
-              className="w-6/12 outline-none bg-gray-100 p-1"
+              className="w-full sm:w-6/12 outline-none bg-gray-100 p-1"
               placeholder="Last Name"
             />
           </div>
@@ -137,7 +136,7 @@ function CreateTeacher() {
               name="email"
               value={formData.email}
               onChange={(e) => handleChange(e)}
-              className="w-6/12 outline-none bg-gray-100 p-1"
+              className="w-full sm:w-6/12 outline-none bg-gray-100 p-1"
               placeholder="Email"
             />
             <input
@@ -145,7 +144,7 @@ function CreateTeacher() {
               name="phoneNumber"
               value={formData.phoneNumber}
               onChange={(e) => handleChange(e)}
-              className="w-6/12 outline-none bg-gray-100 p-1"
+              className="w-full sm:w-6/12 outline-none bg-gray-100 p-1"
               placeholder="Phone Number"
             />
           </div>
@@ -156,7 +155,7 @@ function CreateTeacher() {
               name="street"
               value={formData.street}
               onChange={(e) => handleChange(e)}
-              className="w-3/12 outline-none bg-gray-100 p-1"
+              className="w-full sm:w-3/12 outline-none bg-gray-100 p-1"
               placeholder="Street"
             />
             <input
@@ -164,7 +163,7 @@ function CreateTeacher() {
               name="city"
               value={formData.city}
               onChange={(e) => handleChange(e)}
-              className="w-3/12 outline-none bg-gray-100 p-1"
+              className="w-full sm:w-3/12 outline-none bg-gray-100 p-1"
               placeholder="City"
             />
             <input
@@ -172,7 +171,7 @@ function CreateTeacher() {
               name="state"
               value={formData.state}
               onChange={(e) => handleChange(e)}
-              className="w-3/12 outline-none bg-gray-100 p-1"
+              className="w-full sm:w-3/12 outline-none bg-gray-100 p-1"
               placeholder="State"
             />
             <input
@@ -180,7 +179,7 @@ function CreateTeacher() {
               name="zip"
               value={formData.zip}
               onChange={(e) => handleChange(e)}
-              className="w-3/12 outline-none bg-gray-100 p-1"
+              className="w-full sm:w-3/12 outline-none bg-gray-100 p-1"
               placeholder="Zip"
             />
           </div>
@@ -188,7 +187,7 @@ function CreateTeacher() {
           <div className="flex flex-col sm:flex-row justify-between items-center gap-1">
             {subject?.map((_, index) => {
               return (
-                <div className="flex w-6/12  items-center gap-1">
+                <div className="flex w-full sm:w-6/12  items-center gap-1">
                   <input
                     type="text"
                     name="subject"
@@ -210,7 +209,7 @@ function CreateTeacher() {
 
           <div className="flex flex-col sm:flex-row justify-between items-center gap-1 w-full">
             <input
-              className="w-6/12 outline-none bg-gray-100 p-1"
+              className="w-full sm:w-6/12 outline-none bg-gray-100 p-1"
               type="number"
               value={formData.salary}
               onChange={handleChange}
@@ -218,7 +217,7 @@ function CreateTeacher() {
               placeholder="Salary"
             />
             <input
-              className="w-6/12 outline-none bg-gray-100 p-1"
+              className="w-full sm:w-6/12 outline-none bg-gray-100 p-1"
               type="file"
               value={formData.file}
               onChange={handleChange}
@@ -226,8 +225,8 @@ function CreateTeacher() {
             />
           </div>
 
-          <div className="w-full flex justify-center items-center">
-            <button className="bg-yellow-500 w-1/2 uppercase rounded-sm hover:shadow-lg cursor-pointer">
+          <div className="w-full flex justify-center items-center mt-5 sm:mt-0">
+            <button className="bg-yellow-500 w-2/3 sm:w-1/2 uppercase rounded-sm hover:shadow-lg cursor-pointer">
               Create
             </button>
           </div>

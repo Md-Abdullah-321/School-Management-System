@@ -7,7 +7,7 @@ function Cart({ id, name, email, phoneNumber, picture }) {
     navigate(`/admin/teacher/${id}`);
   };
   return (
-    <div className="bg-green-500 w-48 h-60 shadow-lg rounded-tr-3xl rounded-bl-3xl">
+    <div className="bg-green-500 w-48 h-60 shadow-lg rounded-sm rounded-bl-3xl">
       <div className="w-full h-4/6 bg-white flex justify-center items-center">
         <img
           src={picture}

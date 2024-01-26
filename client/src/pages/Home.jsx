@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
+import Teachers from "./Dashboard/Teachers";
 
 function Home() {
   // Use the useSelector hook to get data from the Redux store
@@ -13,7 +14,7 @@ function Home() {
     : {};
 
   return (
-    <div className="w-full">
+    <div className="w-full mx-auto">
       {/* Hero section  */}
       <div style={backgroundStyle} className="w-full bg-cover sm:h-screen">
         <div className="w-full h-full bg-slate-900 opacity-80 flex items-center ">
@@ -124,8 +125,10 @@ function Home() {
         </div>
       </div>
 
+      <Teachers />
+
       {/* location  */}
-      <div className="flex flex-col md:flex-row justify-around items-center gap-4 md:h-80 bg-slate-100">
+      <div className="flex flex-col md:flex-row justify-around items-center gap-4 md:h-80">
         {/* left side  */}
         <div className="w-full md:w-2/5 p-5 md:p-0">
           <div className="w-full">

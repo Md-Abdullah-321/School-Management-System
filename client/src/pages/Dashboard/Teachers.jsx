@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Cart from "../../components/Cart";
 import Sidebar from "../../layout/Sidebar";
 
@@ -8,6 +8,8 @@ function Teachers() {
   const navigate = useNavigate();
   const [teachers, setTeachers] = useState([]);
   const user = useSelector((state) => state.user);
+
+  const isDashboard = useLocation().pathname.split("/").includes("admin");
 
   const fetchTeacherData = async () => {
     const res = await fetch(
@@ -30,8 +32,8 @@ function Teachers() {
   }, []);
 
   return (
-    <div className="flex w-full min-h-screen">
-      <Sidebar />
+    <div className="flex w-full min-h-screen  bg-slate-100">
+      {isDashboard && <Sidebar />}
       <div className="p-4 w-full flex flex-col justify-around items-center">
         <h1 className="text-center text-xl sm:text-3xl uppercase">
           Our Honorable Teachers
@@ -52,14 +54,16 @@ function Teachers() {
           })}
         </div>
 
-        <div className="w-full flex justify-center items-center mt-5">
-          <button
-            className="bg-yellow-500 py-1 px-2 w-52 rounded-sm cursor-pointer font-semibold text-sm uppercase hover:shadow-md"
-            onClick={handleClick}
-          >
-            Create New Teacher
-          </button>
-        </div>
+        {isDashboard && (
+          <div className="w-full flex justify-center items-center mt-5">
+            <button
+              className="bg-yellow-500 py-1 px-2 w-52 rounded-sm cursor-pointer font-semibold text-sm uppercase hover:shadow-md"
+              onClick={handleClick}
+            >
+              Create New Teacher
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
