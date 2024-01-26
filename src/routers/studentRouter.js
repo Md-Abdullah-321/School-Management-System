@@ -8,7 +8,7 @@
 
 //Dependencies:
 const express = require("express");
-const { handleCreateStudent, handleGetStudentsByClassName, handleDeleteStudent, handleGetStudents, handleGetPayment, handleUpdateStudentInfo } = require("../controllers/studentController");
+const { handleCreateStudent, handleGetStudentsByClassName, handleDeleteStudent, handleGetStudents, handleGetPayment, handleUpdateStudentInfo, handleGetStudentById } = require("../controllers/studentController");
 const { validateCreateStudent } = require("../validators/auth");
 const runValidation = require("../validators");
 const studentRouter = express.Router();
@@ -27,6 +27,9 @@ studentRouter.get("/:className", handleGetStudentsByClassName);
 
 // GET -> delete students by id :
 studentRouter.delete("/:id", handleDeleteStudent);
+
+// GET -> delete students by id :
+studentRouter.get("/:id", handleGetStudentById);
 
 // GET -> delete students by id :
 studentRouter.get("/", handleGetStudents);

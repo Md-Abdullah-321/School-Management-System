@@ -1,7 +1,10 @@
+import { useNavigate } from "react-router-dom";
+
 /* eslint-disable react/prop-types */
 function StudentCart({ id, name, phoneNumber, className, picture }) {
+  const navigate = useNavigate();
   const handleClick = (id) => {
-    console.log(id);
+    navigate(`/admin/student/${id}`);
   };
   return (
     <div className="bg-amber-500 w-48 h-60 shadow-lg rounded-sm rounded-bl-3xl">

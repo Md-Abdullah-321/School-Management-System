@@ -127,6 +127,21 @@ const handleUpdateStudentInfo = async (req, res, next) => {
   }
 };
 
+const handleGetStudentById = async (req, res, next) => {
+    try {        
+        const { id } = req.params;
+
+        const student = await Student.findById(id);
+        return successResponse(res, {
+        statusCode: 200,
+        message: `Student updated successfully.`,
+        payload: {...student},
+        });
+  } catch (error) {
+    next(error);
+  }
+};
+
 
 
 
@@ -137,4 +152,5 @@ module.exports = {
     handleGetStudents,
     handleGetPayment,
     handleUpdateStudentInfo,
+    handleGetStudentById,
 }
