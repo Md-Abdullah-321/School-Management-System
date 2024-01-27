@@ -14,7 +14,9 @@ function Notice() {
   return (
     <div className="flex w-full">
       <Sidebar />
-      <p>HI</p>
+      <div className="flex w-full min-h-screen flex-col p-5">
+        <div>PDF</div>
+      </div>
     </div>
   );
 }

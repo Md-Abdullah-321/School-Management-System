@@ -49,7 +49,7 @@ function CreateStudent() {
     try {
       const imageRef = ref(
         storage,
-        `images/teacher/${formData.image.name + Date.now()}`
+        `images/student/${formData.image.name + Date.now()}`
       );
       const snapshot = await uploadBytes(imageRef, formData.image);
       const downloadURL = await getDownloadURL(snapshot.ref);
