@@ -24,7 +24,7 @@ function Teachers() {
     navigate("/admin/teacher/create");
   };
   useEffect(() => {
-    if (!user.firstName) {
+    if (!user.firstName && isDashboard) {
       navigate("/admin/login");
     }
 
