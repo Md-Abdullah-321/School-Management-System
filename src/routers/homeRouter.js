@@ -7,13 +7,16 @@
 
 //dependencies:
 const express = require("express");
-const { handleGetHomeInfo, handleUpdateHomeInfo, handleAddUtility } = require("../controllers/homeController");
+const { handleGetHomeInfo, handleUpdateHomeInfo, handleAddUtility, handleUpdateLocation } = require("../controllers/homeController");
 const { isLoggedIn, isAdmin } = require("../middleware/auth");
 const homeRouter = express.Router();
 
 
 //PUT -> update home info
 homeRouter.put("/update-site", isLoggedIn, isAdmin, handleUpdateHomeInfo);
+
+//PUT -> update home info
+homeRouter.put("/update-location", isLoggedIn, isAdmin, handleUpdateLocation);
 
 //PUT -> update home info
 homeRouter.post("/utility", isLoggedIn, isAdmin, handleAddUtility);

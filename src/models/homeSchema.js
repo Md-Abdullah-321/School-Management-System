@@ -38,7 +38,7 @@ const homeSchema = new Schema({
     address: {
       street: String,
       city: String,
-      state: String,
+      district: String,
       zip: String,
     },
   },

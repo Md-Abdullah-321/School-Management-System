@@ -139,7 +139,7 @@ function Home() {
                   className="underline"
                   href="https://creepy-duck-glasses.cyclic.app/"
                 >
-                  {name}
+                  {Info?.name}
                 </a>
               </li>
               <li>

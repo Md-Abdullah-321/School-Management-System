@@ -52,6 +52,27 @@ const handleUpdateHomeInfo = async (req, res) => {
     }
 };
 
+const handleUpdateLocation = async (req, res) => {
+    try {
+        const { id, website, phone, whatsApp, email, address } = req.body;
+         const site = await checkExistanceWithId(HomeInfo, id);
+
+        site.location = { website, phone, whatsApp, email, address };
+        const updatedHomeInfo = await updateHomeInfo(id, site);
+
+        return successResponse(res, {
+            statusCode: 200,
+            message: "Location and Info updated successfully.",
+            payload: {updatedHomeInfo},
+        });
+    } catch (error) {
+        return errorResponse(res, {
+            statusCode: 404,
+            message: "Could not update location info.",
+        });
+    }
+};
+
 
 const handleAddUtility = async (req, res) => {
     try {
@@ -95,5 +116,6 @@ const handleAddUtility = async (req, res) => {
 module.exports = {
     handleGetHomeInfo,
     handleUpdateHomeInfo,
-    handleAddUtility
+    handleAddUtility,
+    handleUpdateLocation,
 }
