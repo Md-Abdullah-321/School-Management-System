@@ -14,7 +14,6 @@ function Home() {
     ? { backgroundImage: `url(${Info.backgroundImage})` }
     : {};
 
-  console.log(Info.logo);
   return (
     <div className="w-full mx-auto">
       {/* Hero section  */}
@@ -31,7 +30,7 @@ function Home() {
               className="text-white
             text-4xl sm:text-7xl font-bold"
             >
-              {Info.name}
+              {Info?.name}
             </h1>
           </div>
         </div>
@@ -44,7 +43,7 @@ function Home() {
           <div className="flex justify-center items-center">
             <img
               className="w-24 h-24 shadow-md rounded-full"
-              src={Info.logo}
+              src={Info?.logo}
               alt="Image Loading..."
             />
           </div>
@@ -97,7 +96,7 @@ function Home() {
           {/* about text  */}
           <div className="md:w-2/5 md:h-5/6 flex flex-col justify-center p-5 md:p-0">
             <h1 className="text-3xl font-semibold">About Us</h1>
-            <p className="">{name}</p>
+            <p className="">{Info?.name}</p>
             <p className="text-sm text-gray-800 mt-5">
               Dhaka University of Engineering & Technology (DUET), Gazipur was
               founded as the College of Engineering, Dhaka with the motto
