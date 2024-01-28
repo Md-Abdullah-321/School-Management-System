@@ -28,12 +28,11 @@ function Navbar() {
   const fetchData = async () => {
     try {
       const response = await fetch(
-        "https://creepy-duck-glasses.cyclic.app/api/home"
+        "https://creepy-duck-glasses.cyclic.app/api/site"
       );
 
       const data = await response.json();
 
-      console.log(data);
       if (data.success) {
         const { siteInfo, location, gallery, notice, utility } =
           data.payload["0"];

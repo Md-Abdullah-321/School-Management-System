@@ -1,13 +1,16 @@
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 
 function Home() {
-  // Use the useSelector hook to get data from the Redux store
+  const [Info, setInfo] = useState({});
+
   const { siteInfo } = useSelector((state) => state.sitesettingsinfo);
-  const { name, logo, backgroundImage } = siteInfo;
-  // Check if backgroundImage is available before setting it in the style
-  const backgroundStyle = backgroundImage
-    ? { backgroundImage: `url(${backgroundImage})` }
+  useEffect(() => {
+    setInfo({ ...siteInfo });
+  }, []);
+  const backgroundStyle = Info.backgroundImage
+    ? { backgroundImage: `url(${Info.backgroundImage})` }
     : {};
 
   return (
@@ -26,7 +29,7 @@ function Home() {
               className="text-white
             text-4xl sm:text-7xl font-bold"
             >
-              {name}
+              {Info.name}
             </h1>
           </div>
         </div>
@@ -39,7 +42,7 @@ function Home() {
           <div className="flex justify-center items-center">
             <img
               className="w-24 h-24 shadow-md rounded-full"
-              src={logo}
+              src={Info.logo}
               alt="Image Loading..."
             />
           </div>

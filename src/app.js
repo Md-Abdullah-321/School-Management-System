@@ -32,7 +32,7 @@ app.use(cors({
 app.use(cookieParser());
 
 //Routers:
-app.use("/api/home", homeRouter);
+app.use("/api/site", homeRouter);
 app.use("/api/teacher", teachersRouter);
 app.use("/api/student", studentRouter);
 app.use("/api/message", messageRouter);
