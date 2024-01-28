@@ -1,13 +1,10 @@
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-import Teachers from "./Dashboard/Teachers";
 
 function Home() {
   // Use the useSelector hook to get data from the Redux store
   const { siteInfo } = useSelector((state) => state.sitesettingsinfo);
   const { name, logo, backgroundImage } = siteInfo;
-
-  console.log(siteInfo);
   // Check if backgroundImage is available before setting it in the style
   const backgroundStyle = backgroundImage
     ? { backgroundImage: `url(${backgroundImage})` }
@@ -125,10 +122,8 @@ function Home() {
         </div>
       </div>
 
-      <Teachers />
-
       {/* location  */}
-      <div className="flex flex-col md:flex-row justify-around items-center gap-4 md:h-80">
+      <div className="flex flex-col md:flex-row justify-around items-center gap-4 md:h-80 bg-slate-100">
         {/* left side  */}
         <div className="w-full md:w-2/5 p-5 md:p-0">
           <div className="w-full">
