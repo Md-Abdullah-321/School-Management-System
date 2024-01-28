@@ -4,11 +4,13 @@ import { NavLink } from "react-router-dom";
 
 function Home() {
   const [Info, setInfo] = useState({});
+  const [locationInfo, setLocationInfo] = useState({});
+  const { siteInfo, location } = useSelector((state) => state.sitesettingsinfo);
 
-  const { siteInfo } = useSelector((state) => state.sitesettingsinfo);
-
+  console.log(location);
   useEffect(() => {
     setInfo({ ...siteInfo });
+    setLocationInfo({ ...location });
   }, []);
   const backgroundStyle = Info.backgroundImage
     ? { backgroundImage: `url(${Info.backgroundImage})` }
@@ -135,27 +137,25 @@ function Home() {
             <ul>
               <li>
                 <span className="font-semibold">Website:</span>{" "}
-                <a
-                  className="underline"
-                  href="https://creepy-duck-glasses.cyclic.app/"
-                >
+                <a className="underline" href={locationInfo.website}>
                   {Info?.name}
                 </a>
               </li>
               <li>
-                <span className="font-semibold">Mobile:</span> +880 16457 39121
+                <span className="font-semibold">Mobile:</span> +88{" "}
+                {locationInfo.phone}
               </li>
               <li>
-                <span className="font-semibold">WhatsApp:</span> +880 17800
-                73651
+                <span className="font-semibold">WhatsApp:</span> +88{" "}
+                {location.whatsApp}
               </li>
               <li>
-                <span className="font-semibold">E-Mail:</span>{" "}
-                abdullah.dev.it@gmail.com
+                <span className="font-semibold">E-Mail:</span> {location.email}
               </li>
               <li>
-                <span className="font-semibold">Address:</span> Thanapara,
-                Tangail, 1900
+                <span className="font-semibold">Address:</span>{" "}
+                {location.address.street}, {location.address.city},{" "}
+                {location.address.zip}
               </li>
             </ul>
           </div>

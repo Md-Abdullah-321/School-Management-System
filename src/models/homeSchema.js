@@ -50,7 +50,7 @@ const homeSchema = new Schema({
   ],
   notice: [
     {
-      title: { type: String, required: true },
+      title: { type: String, required: true, unique: true },
       url: { type: String, required: true },
     }
   ],
