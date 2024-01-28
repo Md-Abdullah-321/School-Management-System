@@ -6,6 +6,7 @@ function Home() {
   const [Info, setInfo] = useState({});
 
   const { siteInfo } = useSelector((state) => state.sitesettingsinfo);
+
   useEffect(() => {
     setInfo({ ...siteInfo });
   }, []);
@@ -13,6 +14,7 @@ function Home() {
     ? { backgroundImage: `url(${Info.backgroundImage})` }
     : {};
 
+  console.log(Info.logo);
   return (
     <div className="w-full mx-auto">
       {/* Hero section  */}

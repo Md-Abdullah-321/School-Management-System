@@ -50,7 +50,7 @@ function Navbar() {
   useEffect(() => {
     fetchData();
   }, []);
-  const Logo = useSelector((state) => state.sitesettingsinfo.logo);
+  const Logo = useSelector((state) => state.sitesettingsinfo.siteInfo.logo);
 
   return (
     <div className="w-full min-h-16 sm:h-20 flex md:justify-center md:items-center p-5">
