@@ -4,10 +4,10 @@ import Teachers from "./Dashboard/Teachers";
 
 function Home() {
   // Use the useSelector hook to get data from the Redux store
-  const { backgroundImage, name, logo } = useSelector(
-    (state) => state.sitesettingsinfo.siteInfo
-  );
+  const { siteInfo } = useSelector((state) => state.sitesettingsinfo);
+  const { name, logo, backgroundImage } = siteInfo;
 
+  console.log(siteInfo);
   // Check if backgroundImage is available before setting it in the style
   const backgroundStyle = backgroundImage
     ? { backgroundImage: `url(${backgroundImage})` }
