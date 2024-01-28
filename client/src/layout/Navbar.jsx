@@ -65,11 +65,13 @@ function Navbar() {
       <div className="w-full flex sm:justify-center md:justify-around items-center">
         {screenSize > 767 && (
           <div className="sm:w-1/6 flex justify-center items-center">
-            <img
-              className="w-16 h-16 shadow-md rounded-full"
-              src={logo}
-              alt="Logo Loading..."
-            />
+            {logo && (
+              <img
+                className="w-16 h-16 shadow-md rounded-full"
+                src={logo}
+                alt="Logo Loading..."
+              />
+            )}
           </div>
         )}
 
