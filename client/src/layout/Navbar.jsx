@@ -50,7 +50,7 @@ function Navbar() {
   useEffect(() => {
     fetchData();
   }, []);
-  const Logo = useSelector((state) => state.sitesettingsinfo.siteInfo.logo);
+  const { logo } = useSelector((state) => state.sitesettingsinfo.siteInfo);
 
   return (
     <div className="w-full min-h-16 sm:h-20 flex md:justify-center md:items-center p-5">
@@ -67,7 +67,7 @@ function Navbar() {
           <div className="sm:w-1/6 flex justify-center items-center">
             <img
               className="w-16 h-16 shadow-md rounded-full"
-              src={Logo}
+              src={logo}
               alt="Logo Loading..."
             />
           </div>
