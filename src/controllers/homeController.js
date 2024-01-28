@@ -34,10 +34,10 @@ const handleGetHomeInfo = async (req, res) => {
 const handleUpdateHomeInfo = async (req, res) => {
     try {
         const { id, name, logo, backgroundImage } = req.body;
-        await checkExistanceWithId(HomeInfo, id);
+        const site = await checkExistanceWithId(HomeInfo, id);
 
-        const updates = { name, logo, backgroundImage };
-        const updatedHomeInfo = await updateHomeInfo(id, updates);
+        site.siteInfo = { name, logo, backgroundImage };
+        const updatedHomeInfo = await updateHomeInfo(id, site);
 
         return successResponse(res, {
             statusCode: 200,

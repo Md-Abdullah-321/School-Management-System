@@ -24,7 +24,14 @@ const teacherSchema = new mongoose.Schema(
     },
     phoneNumber: {
       type: String,
-      unique: true,
+      validate: {
+        validator: function(value) {
+          // Regular expression for validating Bangladeshi phone numbers
+          const phoneNumberRegex = /^(?:\+88|88)?(01[3-9]\d{8})$/;
+          return phoneNumberRegex.test(value);
+        },
+        message: 'Please enter a valid Bangladeshi phone number.',
+      },
     },
     subjects: [String],
     role: {

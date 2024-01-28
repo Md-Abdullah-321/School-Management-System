@@ -13,7 +13,7 @@ const homeRouter = express.Router();
 
 
 //PUT -> update home info
-homeRouter.put("/update", isLoggedIn, isAdmin, handleUpdateHomeInfo);
+homeRouter.put("/update-site", isLoggedIn, isAdmin, handleUpdateHomeInfo);
 
 //PUT -> update home info
 homeRouter.post("/utility", isLoggedIn, isAdmin, handleAddUtility);

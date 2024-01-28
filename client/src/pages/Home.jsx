@@ -5,7 +5,7 @@ import Teachers from "./Dashboard/Teachers";
 function Home() {
   // Use the useSelector hook to get data from the Redux store
   const { backgroundImage, name, logo } = useSelector(
-    (state) => state.sitesettingsinfo
+    (state) => state.sitesettingsinfo.siteInfo
   );
 
   // Check if backgroundImage is available before setting it in the style

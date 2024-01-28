@@ -1,9 +1,25 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialHomeInfo = {
-  name: "",
-  logo: "",
-  backgroundImage: "",
+  siteInfo: {
+    name: "",
+    logo: "",
+    backgroundImage: [],
+  },
+  location: {
+    website: "",
+    phone: "",
+    whatsApp: "",
+    email: "",
+    address: {
+      stree: "",
+      city: "",
+      state: "",
+      zip: "",
+    }
+  },
+  gallery: [],
+  notice: [],
   utility: []
 };
 
@@ -12,11 +28,12 @@ export const homeSlice = createSlice({
   initialState: initialHomeInfo,
   reducers: {
     setHomeInfo: (state, action) => {
-      const { name, logo, backgroundImage, utility } = action.payload;
-      state.name = name || state.name;
-      state.logo = logo || state.logo;
-      state.backgroundImage = backgroundImage || state.backgroundImage;
-      state.utility = utility || state.utility
+      const { siteInfo, location, gallery, notice, utility } = action.payload;
+      state.siteInfo = siteInfo || state.siteInfo;
+      state.location = location || state.location;
+      state.gallery = gallery || state.gallery;
+      state.notice = notice || state.notice;
+      state.utility = utility || state.utility;
     }
   }
 });
