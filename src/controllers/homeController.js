@@ -59,7 +59,7 @@ const handleUpdateLocation = async (req, res) => {
         const { website, phone, whatsApp, email, address } = req.body;
         const site = await HomeInfo.find({}); 
 
-        site.location = { website, phone, whatsApp, email, address };
+        site[0].location = { website, phone, whatsApp, email, address };
         const updatedHomeInfo = await updateHomeInfo(ID, site[0]);
 
         return successResponse(res, {
