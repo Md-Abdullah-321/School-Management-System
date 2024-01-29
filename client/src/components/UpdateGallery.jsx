@@ -34,7 +34,7 @@ function AddNewMemory() {
       );
 
       const data = await response.json();
-      alert(data.message);
+      alert(data.messege);
       setShowBtn(true);
     } catch (error) {
       console.error("Error uploading images:", error);

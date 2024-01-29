@@ -59,7 +59,6 @@ function UpdateLocationInfo() {
     });
   };
 
-  console.log(locationForm);
   return (
     <div className="w-11/12 sm:w-8/12 shadow-lg bg-slate-100 mt-5 rounded-md">
       <form method="post" className="p-2 sm:p-4">
