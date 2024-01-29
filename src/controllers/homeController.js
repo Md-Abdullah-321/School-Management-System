@@ -57,7 +57,7 @@ const handleUpdateHomeInfo = async (req, res) => {
 const handleUpdateLocation = async (req, res) => {
     try {
         const { website, phone, whatsApp, email, address } = req.body;
-        const site = await checkExistanceWithId(HomeInfo, ID);
+        const site = await HomeInfo.find({}); 
 
         site.location = { website, phone, whatsApp, email, address };
         const updatedHomeInfo = await updateHomeInfo(ID, site[0]);
