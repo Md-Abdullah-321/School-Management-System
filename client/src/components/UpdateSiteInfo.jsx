@@ -9,32 +9,38 @@ function UpdateSiteInfo() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const bgImageUrls = [];
-    siteForm.backgroundImage.map(async (url) => {
-      const firebasrURL = await UploadToFirebase("settings", url);
-      bgImageUrls.push(firebasrURL);
-    });
 
-    const logo = await UploadToFirebase("settings", siteForm.logo);
-    const response = await fetch(
-      "https://creepy-duck-glasses.cyclic.app/api/site/update-site",
-      {
-        method: "POST",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: siteForm.name,
-          logo: logo,
-          backgroundImage: bgImageUrls,
-        }),
-      }
-    );
-    const data = await response.json();
-    alert(data.messege);
-    setShowBtn(true);
+    try {
+      const bgImageUrls = await Promise.all(
+        siteForm.backgroundImage.map((url) => UploadToFirebase("settings", url))
+      );
+
+      const logo = await UploadToFirebase("settings", siteForm.logo);
+
+      const response = await fetch(
+        "https://creepy-duck-glasses.cyclic.app/api/site/update-site",
+        {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: siteForm.name,
+            logo,
+            backgroundImage: bgImageUrls,
+          }),
+        }
+      );
+
+      const data = await response.json();
+      alert(data.messege);
+      setShowBtn(true);
+    } catch (error) {
+      console.error("Error updating site:", error);
+    }
   };
+
   const handleChange = (e) => {
     setShowBtn(false);
     if (e.target.name === "logo") {

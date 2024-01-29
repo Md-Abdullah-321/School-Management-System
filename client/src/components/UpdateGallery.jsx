@@ -11,29 +11,36 @@ function AddNewMemory() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const event_collection = [];
-    gallery.event_collection.map(async (url) => {
-      const firebaseURL = await UploadToFirebase("gallery", url);
-      event_collection.push(firebaseURL);
-    });
-    const response = await fetch(
-      "https://creepy-duck-glasses.cyclic.app/api/site/event",
-      {
-        method: "POST",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          event_name: gallery.event_name,
-          event_collection: event_collection,
-        }),
-      }
+
+    const uploadPromises = gallery.event_collection.map((url) =>
+      UploadToFirebase("gallery", url)
     );
-    const data = await response.json();
-    alert(data.messege);
-    setShowBtn(true);
+
+    try {
+      const event_collection = await Promise.all(uploadPromises);
+      const response = await fetch(
+        "https://creepy-duck-glasses.cyclic.app/api/site/event",
+        {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            event_name: gallery.event_name,
+            event_collection,
+          }),
+        }
+      );
+
+      const data = await response.json();
+      alert(data.message);
+      setShowBtn(true);
+    } catch (error) {
+      console.error("Error uploading images:", error);
+    }
   };
+
   const handleChange = (e) => {
     setShowBtn(false);
     if (e.target.name === "eventCollection") {
