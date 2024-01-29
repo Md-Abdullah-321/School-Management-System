@@ -30,7 +30,7 @@ function CreateStudent() {
       setFormData((prev) => {
         return {
           ...prev,
-          image: e.target.files[0],
+          image: e.target.files,
         };
       });
     } else {

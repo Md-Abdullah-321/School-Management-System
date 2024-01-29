@@ -118,6 +118,53 @@ const handlePostNotice = async (req, res) => {
 };
 
 
+const handlePostGallery = async (req, res) => {
+    try {
+ 
+        const { event_name, event_collection } = req.body;
+        const gallery = {
+            event_name,
+            event_collection
+        }
+        const site = await HomeInfo.find({});
+        site[0].gallery.push(gallery);
+
+         const updatedSite = await updateHomeInfo(ID, site[0]);
+
+        return successResponse(res, {
+            statusCode: 200,
+            message: "New event post successfully.",
+            payload: updatedSite.gallery,
+        });
+    } catch (error) {
+        return errorResponse(res, {
+            statusCode: 404,
+            message: "Could not post event.",
+        });
+    }
+};
+
+
+const handleGetGallery = async (req, res) => {
+    try {
+ 
+        const site = await HomeInfo.find({});
+
+
+        return successResponse(res, {
+            statusCode: 200,
+            message: "New event fetched successfully.",
+            payload: site[0].gallery,
+        });
+    } catch (error) {
+        return errorResponse(res, {
+            statusCode: 404,
+            message: "Could not fetch event.",
+        });
+    }
+};
+
+
 const handleAddUtility = async (req, res) => {
     try {
         const {utility } = req.body;
@@ -164,4 +211,6 @@ module.exports = {
     handleUpdateLocation,
     handleGetNotices,
     handlePostNotice,
+    handlePostGallery,
+    handleGetGallery,
 }

@@ -64,7 +64,9 @@ function CreateTeacher() {
     try {
       const imageRef = ref(
         storage,
-        `images/teacher/${formData.image.name + Date.now()}`
+        `images/teacher/${
+          formData.image.name + Date.now() + Math.round(Math.random() * 1000)
+        }`
       );
       const snapshot = await uploadBytes(imageRef, formData.image);
       const downloadURL = await getDownloadURL(snapshot.ref);

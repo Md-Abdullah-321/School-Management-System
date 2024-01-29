@@ -8,14 +8,13 @@ function Messages() {
     );
 
     const data = await res.json();
+
     const lastSixMsg = [];
     for (let i = data.payload.length - 1; i >= 0; i--) {
       if (i === data.payload.length - 7) {
         break;
       }
-      if (data.payload[i].seen === false) {
-        lastSixMsg.push(data.payload[i]);
-      }
+      lastSixMsg.push(data.payload[i]);
     }
     setMessages([...lastSixMsg]);
   };
