@@ -35,7 +35,7 @@ const handleGetHomeInfo = async (req, res) => {
 const handleUpdateHomeInfo = async (req, res) => {
     try {
         const {name, logo, backgroundImage } = req.body;
-        const site = await checkExistanceWithId(HomeInfo, id);
+        const site = await checkExistanceWithId(HomeInfo, ID);
 
         site.siteInfo = { name, logo, backgroundImage };
         const updatedHomeInfo = await updateHomeInfo(ID, site);
@@ -56,7 +56,7 @@ const handleUpdateHomeInfo = async (req, res) => {
 const handleUpdateLocation = async (req, res) => {
     try {
         const { website, phone, whatsApp, email, address } = req.body;
-        const site = await checkExistanceWithId(HomeInfo, id);
+        const site = await checkExistanceWithId(HomeInfo, ID);
 
         site.location = { website, phone, whatsApp, email, address };
         const updatedHomeInfo = await updateHomeInfo(ID, site);
