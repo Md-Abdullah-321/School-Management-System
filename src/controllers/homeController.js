@@ -38,7 +38,8 @@ const handleUpdateHomeInfo = async (req, res) => {
         const site = await HomeInfo.find({});
 
         site[0].siteInfo = { name, logo, backgroundImage };
-        const updatedHomeInfo = await updateHomeInfo(ID, site);
+
+        const updatedHomeInfo = await updateHomeInfo(ID, site[0]);
 
         return successResponse(res, {
             statusCode: 200,
@@ -59,7 +60,7 @@ const handleUpdateLocation = async (req, res) => {
         const site = await checkExistanceWithId(HomeInfo, ID);
 
         site.location = { website, phone, whatsApp, email, address };
-        const updatedHomeInfo = await updateHomeInfo(ID, site);
+        const updatedHomeInfo = await updateHomeInfo(ID, site[0]);
 
         return successResponse(res, {
             statusCode: 200,
