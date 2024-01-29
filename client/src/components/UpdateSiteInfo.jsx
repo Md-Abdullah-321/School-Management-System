@@ -15,8 +15,7 @@ function UpdateSiteInfo() {
         siteForm.backgroundImage.map((url) => UploadToFirebase("settings", url))
       );
 
-      const logo = await UploadToFirebase("settings", siteForm.logo);
-
+      const { name, logo } = siteForm;
       const response = await fetch(
         "https://creepy-duck-glasses.cyclic.app/api/site/update-site",
         {
@@ -26,16 +25,15 @@ function UpdateSiteInfo() {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            name: siteForm.name,
-            logo,
+            name,
+            logo: await UploadToFirebase("settings", logo),
             backgroundImage: bgImageUrls,
           }),
         }
       );
 
-      const data = await response.json();
-      alert(data.messege);
-      console.log(data);
+      const { message } = await response.json();
+      alert(message);
       setShowBtn(true);
     } catch (error) {
       console.error("Error updating site:", error);

@@ -12,7 +12,7 @@ function Home() {
     setInfo({ ...siteInfo });
     setLocationInfo({ ...location });
   }, []);
-  const backgroundStyle = Info.backgroundImage
+  const backgroundStyle = Info.backgroundImage[0]
     ? { backgroundImage: `url(${Info.backgroundImage})` }
     : {};
 
