@@ -14,7 +14,7 @@ const initialHomeInfo = {
     address: {
       stree: "",
       city: "",
-      state: "",
+      district: "",
       zip: "",
     }
   },

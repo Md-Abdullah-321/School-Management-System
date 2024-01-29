@@ -36,6 +36,7 @@ function Navbar() {
       if (data.success) {
         const { siteInfo, location, gallery, notice, utility } =
           data.payload["0"];
+        console.log(location);
         dispatch(setHomeInfo({ siteInfo, location, gallery, notice, utility }));
       }
     } catch (error) {

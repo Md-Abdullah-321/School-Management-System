@@ -24,7 +24,7 @@ function UpdateLocationInfo() {
           address: {
             street: locationForm.address.street,
             city: locationForm.address.city,
-            district: locationForm.address.state,
+            district: locationForm.address.district,
             zip: locationForm.address.zip,
           },
         }),
