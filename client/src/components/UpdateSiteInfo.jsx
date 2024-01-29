@@ -19,7 +19,7 @@ function UpdateSiteInfo() {
       const response = await fetch(
         "https://creepy-duck-glasses.cyclic.app/api/site/update-site",
         {
-          method: "POST",
+          method: "PUT",
           credentials: "include",
           headers: {
             "Content-Type": "application/json",
