@@ -11,7 +11,7 @@ function UpdateLocationInfo() {
     const response = await fetch(
       "https://creepy-duck-glasses.cyclic.app/api/site/update-location",
       {
-        method: "POST",
+        method: "PUT",
         credentials: "include",
         headers: {
           "Content-Type": "application/json",
