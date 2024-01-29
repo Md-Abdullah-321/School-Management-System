@@ -35,6 +35,7 @@ function UpdateSiteInfo() {
 
       const data = await response.json();
       alert(data.messege);
+      console.log(data);
       setShowBtn(true);
     } catch (error) {
       console.error("Error updating site:", error);
