@@ -35,9 +35,9 @@ const handleGetHomeInfo = async (req, res) => {
 const handleUpdateHomeInfo = async (req, res) => {
     try {
         const {name, logo, backgroundImage } = req.body;
-        const site = await checkExistanceWithId(HomeInfo, ID);
+        const site = await HomeInfo.find({});
 
-        site.siteInfo = { name, logo, backgroundImage };
+        site[0].siteInfo = { name, logo, backgroundImage };
         const updatedHomeInfo = await updateHomeInfo(ID, site);
 
         return successResponse(res, {

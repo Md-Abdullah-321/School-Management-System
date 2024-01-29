@@ -25,7 +25,7 @@ function UpdateSiteInfo() {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            name,
+            name: name,
             logo: await UploadToFirebase("settings", logo),
             backgroundImage: bgImageUrls,
           }),
