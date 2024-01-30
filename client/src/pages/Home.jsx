@@ -1,45 +1,28 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
+import "swiper/swiper-bundle.css";
+import { HeroSlider } from "../components/HeroSlider";
 
 function Home() {
   const [Info, setInfo] = useState({});
   const [locationInfo, setLocationInfo] = useState({});
   const { siteInfo, location } = useSelector((state) => state.sitesettingsinfo);
 
-  console.log(location);
   useEffect(() => {
     setInfo({ ...siteInfo });
     setLocationInfo({ ...location });
   }, []);
-  const backgroundStyle = Info.backgroundImage
-    ? { backgroundImage: `url(${Info.backgroundImage})` }
-    : {};
+  // const backgroundStyle = Info.backgroundImage
+  //   ? { backgroundImage: `url(${Info.backgroundImage})` }
+  //   : {};
 
   return (
     <div className="w-full mx-auto">
       {/* Hero section  */}
-      <div style={backgroundStyle} className="w-full bg-cover sm:h-screen">
-        <div className="w-full h-full bg-slate-900 opacity-80 flex items-center ">
-          <div className="w-full p-10">
-            <h5
-              className="text-yellow-500
-            text-3xl sm:text-5xl font-semibold"
-            >
-              Welcome To
-            </h5>
-            <h1
-              className="text-white
-            text-4xl sm:text-7xl font-bold"
-            >
-              {Info?.name}
-            </h1>
-          </div>
-        </div>
-      </div>
-
+      <HeroSlider />
       {/* messages and notice  */}
-      <div className="h-screen w-full flex flex-col md:flex-row justify-around items-center bg-slate-100">
+      <div className="h-screen w-full flex flex-col md:flex-row justify-around items-center bg-slate-100 mt-20 sm:mt-0">
         <div className="md:w-2/5 mt-4 md:mt-0 md:h-5/6 shadow-lg p-5 border-b-4 border-yellow-500 rounded-md flex flex-col items-center justify-center bg-white">
           {/* image */}
           <div className="flex justify-center items-center">
