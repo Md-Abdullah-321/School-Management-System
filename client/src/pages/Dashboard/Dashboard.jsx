@@ -68,11 +68,11 @@ function Dashboard() {
     fetchStudentData();
   }, []);
   return (
-    <div className="flex w-full">
+    <div className="flex flex-col sm:flex-row w-full">
       <Sidebar />
 
       {/* Dashboard content  */}
-      <div className="p-5 w-full sm:h-screen">
+      <div className="p-4 w-full sm:h-screen">
         {/* chart and small info  */}
         <div className="w-full flex flex-col sm:flex-row sm:justify-between gap-4 sm:gap-0 items-center sm:h-1/2">
           <div className="w-full p-4 sm:w-4/12 border flex justify-center items-center sm:h-full rounded-md">

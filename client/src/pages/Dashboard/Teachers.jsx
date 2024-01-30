@@ -32,7 +32,7 @@ function Teachers() {
   }, []);
 
   return (
-    <div className="flex w-full min-h-screen  bg-slate-100">
+    <div className="flex w-full flex-col sm:flex-row h-screen  bg-slate-100">
       {isDashboard && <Sidebar />}
       <div className="p-4 w-full flex flex-col justify-around items-center">
         <h1 className="text-center text-xl sm:text-3xl uppercase font-semibold">

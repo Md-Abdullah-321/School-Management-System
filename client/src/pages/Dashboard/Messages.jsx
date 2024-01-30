@@ -31,7 +31,7 @@ function Messages() {
 
   console.log(messages);
   return (
-    <div className="flex w-full">
+    <div className="flex flex-col sm:flex-row w-full">
       <Sidebar />
       <div className="flex w-full min-h-screen flex-col p-5">
         <div className="w-full flex items-center gap-4 flex-wrap">

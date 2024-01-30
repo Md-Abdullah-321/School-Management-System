@@ -12,7 +12,7 @@ function FeesAndPayments() {
     }
   }, []);
   return (
-    <div className="flex w-full">
+    <div className="flex flex-col sm:flex-row w-full">
       <Sidebar />
       <p>HI</p>
     </div>

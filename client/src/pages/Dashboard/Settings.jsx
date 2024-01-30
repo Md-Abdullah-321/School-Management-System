@@ -16,9 +16,9 @@ function Settings() {
     }
   }, []);
   return (
-    <div className="flex w-full">
+    <div className="flex flex-col sm:flex-row w-full">
       <Sidebar />
-      <div className="p-5 w-full flex flex-col justify-start items-center mt-5">
+      <div className="sm:p-5 w-full flex flex-col justify-start items-center mt-5">
         <UpdateSiteInfo />
         <UpdateLocationInfo />
         <AddNewMemory />

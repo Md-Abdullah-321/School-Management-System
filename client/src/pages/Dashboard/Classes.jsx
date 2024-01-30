@@ -63,31 +63,35 @@ function Classes() {
     fetchStudents();
   }, []);
   return (
-    <div className="flex w-full">
+    <div className="flex flex-col sm:flex-row w-full">
       <Sidebar />
-      <div className="p-4 w-full">
+      <div className="w-full py-5">
         <h1 className="text-center text-3xl uppercase font-semibold">
           Our <span className="text-amber-500">Students</span>
         </h1>
         {Object.keys(students).map((year) => {
           return (
-            <div
-              key={year}
-              className={
-                year.length > 0 &&
-                "w-full mt-2 flex flex-wrap gap-4 items-center justify-center sm:justify-start"
-              }
-            >
-              {students[year]?.map((stu) => (
-                <StudentCart
-                  key={stu._id}
-                  id={stu._id}
-                  name={stu.studentName}
-                  phoneNumber={stu.phoneNumber}
-                  className={stu.className}
-                  picture={stu?.image}
-                />
-              ))}
+            <div key={year}>
+              <h3 className="bg-green-500 w-20 text-center mt-3 mb-1 uppercase text-sm font-medium text-white shadow-md rounded-sm">
+                {students[year].length > 0 && year}
+              </h3>
+              <div
+                className={
+                  students[year].length > 0 &&
+                  "w-full flex flex-wrap gap-4 items-center justify-center sm:justify-start"
+                }
+              >
+                {students[year]?.map((stu) => (
+                  <StudentCart
+                    key={stu._id}
+                    id={stu._id}
+                    name={stu.studentName}
+                    phoneNumber={stu.phoneNumber}
+                    className={stu.className}
+                    picture={stu?.image}
+                  />
+                ))}
+              </div>
             </div>
           );
         })}
