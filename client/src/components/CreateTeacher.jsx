@@ -99,7 +99,7 @@ function CreateTeacher() {
       );
 
       const data = await response.json();
-      alert(data.message); // Fix the typo in your code (messege -> message)
+      alert(data.message);
     } catch (error) {
       console.error("Error submitting form:", error);
     }

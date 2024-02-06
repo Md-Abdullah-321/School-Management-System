@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import CreateStudent from "./components/CreateStudent";
 import CreateTeacher from "./components/CreateTeacher";
+import ShowAndUpdateProfile from "./components/ShowAndUpdateProfile";
 import ViewStudent from "./components/ViewStudent";
 import ViewTeacher from "./components/ViewTeacher";
 import Footer from "./layout/Footer";
@@ -38,6 +39,7 @@ function App() {
           <Route path="/admin/messages" element={<Messages />} />
           <Route path="/admin/settings" element={<Settings />} />
           <Route path="/admin/login" element={<Login />} />
+          <Route path="/admin/profile" element={<ShowAndUpdateProfile />} />
           <Route path="*" element={<NotFoundPage />} />{" "}
         </Routes>
       </BrowserRouter>

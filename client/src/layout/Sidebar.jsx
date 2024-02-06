@@ -128,7 +128,7 @@ function Sidebar() {
               </h2>
               <p className="text-xs text-gray-700">{user.email}</p>
             </div>
-            <NavLink className="cursor-pointer">
+            <NavLink className="cursor-pointer" to="/admin/profile">
               <RiArrowRightSLine className="w-6 h-6 bg-gray-200 rounded-full" />
             </NavLink>
           </div>
