@@ -99,7 +99,7 @@ function CreateTeacher() {
       );
 
       const data = await response.json();
-      alert(data.message);
+      alert(data.messege);
     } catch (error) {
       console.error("Error submitting form:", error);
     }
