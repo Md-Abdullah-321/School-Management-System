@@ -50,17 +50,30 @@ const teacherSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    dailyAttendance: [
+    attendance: [
       {
-        date: {
-          type: Date,
-          default: Date.now,
-        },
-        present: {
-          type: Boolean,
-          default: false,
-        },
+        year: {
+        type: Number,
+        required: true
       },
+      month: {
+        type: Number,
+        required: true
+      },
+      day: {
+        type: Number,
+        required: true
+      },
+      status: {
+        type: String,
+        enum: ['Present', 'Absent'],
+        required: true
+      },
+      teacher: {
+        type: String,
+        required: true
+      }
+      }
     ],
     salary: {
       type: Number,
@@ -75,6 +88,10 @@ const teacherSchema = new mongoose.Schema(
             month: {
               type: String,
               required: true,
+          },
+          amount: {
+            type: Number,
+            required: true
             },
             paid: {
               type: Boolean,

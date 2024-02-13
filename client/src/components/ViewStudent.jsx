@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
 function ViewStudent() {
   const id = useParams().id;
   const [student, setStudent] = useState({});
+  const user = useSelector((state) => state.user);
 
   const fetchTeacher = async () => {
     const res = await fetch(
@@ -15,10 +17,9 @@ function ViewStudent() {
   useEffect(() => {
     fetchTeacher();
   }, []);
-  console.log(student);
   return (
-    <div className="w-full h-screen flex justify-center items-center">
-      <div className="w-11/12 sm:w-1/2 flex flex-col shadow-lg border p-4">
+    <div className="w-full h-screen flex flex-col justify-center items-center">
+      <div className="w-11/12 sm:w-1/2 flex flex-col shadow-sm border p-4">
         <div className="flex w-full h-40">
           <img
             src={student.image}
@@ -59,6 +60,34 @@ function ViewStudent() {
             <span className="font-medium">Tution Fees: </span>
             {student.tution_fees}
           </p>
+        </div>
+      </div>
+
+      <div className="mt-3">
+        {user.role === "admin" && (
+          <button className="text-xl uppercase bg-yellow-500 px-3 py-1 rounded-sm font-medium">
+            Pay Tution Fee
+          </button>
+        )}
+      </div>
+      <div className="w-11/12 sm:w-1/2 mt-3">
+        <h3 className="uppercase font-medium">Tution Fees:</h3>
+        <div className="flex  flex-wrap justify-between items-center gap-x-2">
+          {student?.feesHistory?.map((fees) => {
+            return (
+              <div
+                key={fees._id}
+                className="w-[49%] shadow-sm border mt-1 flex items-end justify-between"
+              >
+                <div className="w-1/2 p-2 text-center font-medium text-lg">
+                  {fees.month.slice(0, 3)} - {fees.year}
+                </div>
+                <div className="bg-yellow-500 w-1/2 p-2 text-center font-semibold text-lg">
+                  {student.tution_fees}
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>

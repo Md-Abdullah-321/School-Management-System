@@ -84,7 +84,7 @@ const handleGetStudents = async (req, res, next) => {
 const handleGetPayment = async (req, res, next) => {
   try {
     const { month, year } = req.body;
-      const { id } = req.params;
+    const { id } = req.params;
       
     const student = await checkExistanceWithId(Student, id);
     const paymentInfo = { month, year, paid: true };
@@ -141,6 +141,8 @@ const handleGetStudentById = async (req, res, next) => {
     next(error);
   }
 };
+
+
 
 
 

@@ -14,6 +14,7 @@ const createError = require("http-errors");
 const bcrypt = require("bcryptjs");
 const createJSONWebToken = require("../helper/createJSONWebToken");
 const { setAccessTokenCookie } = require("../helper/cookie");
+const checkExistanceWithId = require("../helper/checkExistanceWithId");
 require("dotenv").config();
 
 
@@ -97,6 +98,29 @@ const handleGetTeacher = async (req, res, next) => {
 };
 
 
+const handlePaySalary = async (req, res, next) => {
+    try {
+    const { month, year, amount, paid} = req.body;
+    const { id } = req.params;
+      
+    const teacher = await checkExistanceWithId(Teacher, id);
+    const paymentInfo = { month, year,amount, paid };
+    teacher.paymentHistory.unshift(paymentInfo);
+      
+    const updates = { paymentHistory: teacher.paymentHistory };
+    const updatedTeacherInfo = await Teacher.findOneAndUpdate({ _id: id }, updates, { new: true });
+      
+    return successResponse(res, {
+      statusCode: 200,
+      message: `Payment has been done for ${month} ${year}.`,
+      payload: updatedTeacherInfo,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+
 const handleGetTeacherById = async (req, res, next) => {
     try {
         
@@ -157,4 +181,5 @@ module.exports = {
     handleLoginTeacher,
     handleTeacherLogout,
     handleDeleteTeacherById,
+    handlePaySalary
 }

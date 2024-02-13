@@ -64,7 +64,7 @@ function Sidebar() {
                   : className
               }
             >
-              <h3>Classes</h3>
+              <h3>Students</h3>
               <FaBookReader className="w-4 h-4 font-light" />
             </NavLink>
             <NavLink

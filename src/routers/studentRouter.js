@@ -11,10 +11,11 @@ const express = require("express");
 const { handleCreateStudent, handleGetStudentsByClassName, handleDeleteStudent, handleGetStudents, handleGetPayment, handleUpdateStudentInfo, handleGetStudentById } = require("../controllers/studentController");
 const { validateCreateStudent } = require("../validators/auth");
 const runValidation = require("../validators");
+const { isLoggedIn, isAdmin } = require("../middleware/auth");
 const studentRouter = express.Router();
 
 // POST -> get payment by id:
-studentRouter.post("/payment/:id", handleGetPayment);
+studentRouter.post("/payment/:id",isLoggedIn,isAdmin, handleGetPayment);
 
 // POST -> update student by id:
 studentRouter.post("/update/:id", handleUpdateStudentInfo);

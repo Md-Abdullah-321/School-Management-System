@@ -7,7 +7,7 @@
 
 //dependencies:
 const express = require("express");
-const {handleCreateTeacher, handleGetTeacher, handleGetTeacherById, handleLoginTeacher, handleTeacherLogout, handleDeleteTeacherById } = require("../controllers/teacherController");
+const {handleCreateTeacher, handleGetTeacher, handleGetTeacherById, handleLoginTeacher, handleTeacherLogout, handleDeleteTeacherById, handlePaySalary } = require("../controllers/teacherController");
 const { validateTeacherLogin, validateCreateTeacher } = require("../validators/auth");
 const runValidation = require("../validators");
 const { isLoggedIn, isAdmin, isLoggedOut } = require("../middleware/auth");
@@ -22,6 +22,10 @@ teachersRouter.get("/sign-out", isLoggedIn,handleTeacherLogout);
 
 //GET -> get teacher by id
 teachersRouter.get("/:id", handleGetTeacherById);
+
+
+//GET -> get teacher by id
+teachersRouter.post("/pay/:id", handlePaySalary);
 
 //POST -> Create teacher
 teachersRouter.post("/",validateCreateTeacher, runValidation, isLoggedIn, isAdmin, handleCreateTeacher);

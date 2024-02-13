@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import DeleteTeacherMoadal from "./DeleteTeacherModal";
 
 function ViewTeacher() {
   const id = useParams().id;
   const [teacher, setTeacher] = useState({});
   const [modal, setModal] = useState(false);
+  const navigate = useNavigate();
   const user = useSelector((state) => state.user);
 
   const fetchTeacher = async () => {
@@ -18,12 +19,15 @@ function ViewTeacher() {
     setTeacher({ ...data.payload });
   };
 
+  const handleNavigate = () => {
+    navigate(`/admin/student/pay/${id}`);
+  };
   useEffect(() => {
     fetchTeacher();
   }, []);
   return (
-    <div className="w-full h-screen flex justify-center items-center">
-      <div className="w-11/12 sm:w-1/2 flex flex-col shadow-lg border p-4">
+    <div className="w-full h-screen flex flex-col justify-center items-center">
+      <div className="w-11/12 sm:w-1/2 flex flex-col shadow-sm border p-4">
         <div className="flex w-full h-40 justify-between items-start">
           <img
             src={teacher.picture}
@@ -91,6 +95,14 @@ function ViewTeacher() {
         />
       )}
 
+      <div className="mt-3" onClick={handleNavigate}>
+        {user.role === "admin" && (
+          <button className="text-xl uppercase bg-yellow-500 px-3 py-1 rounded-sm font-medium">
+            Pay Salary
+          </button>
+        )}
+      </div>
+
       {!teacher.firstName && (
         <div className="w-full">
           <div className="fixed left-0 right-0 top-0 bottom-0 bg-white"></div>
@@ -99,6 +111,25 @@ function ViewTeacher() {
           </div>
         </div>
       )}
+
+      <div className="w-11/12 sm:w-1/2 flex mt-5 flex-wrap justify-between items-center gap-x-2">
+        {teacher?.paymentHistory?.map((salary) => {
+          const salaryStyle = salary.paid
+            ? "bg-green-500 w-1/2 p-2 text-center font-semibold text-lg"
+            : "bg-red-500 w-1/2 p-2 text-center font-semibold text-lg";
+          return (
+            <div
+              key={salary._id}
+              className="w-[49%] shadow-sm border p-2 mt-1 flex items-end justify-between"
+            >
+              <div className="w-1/2 p-2 text-center font-medium text-lg">
+                {salary.month.slice(0, 3)} - {salary.year}
+              </div>
+              <div className={salaryStyle}>{teacher.salary}</div>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }
