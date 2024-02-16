@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { getLastFiveYears } from "../helper/getLastFiveYears";
 
 const teacherInit = {
@@ -17,6 +17,7 @@ const studentInit = {
 };
 function Pay() {
   const isTeacher = useLocation().pathname.split("/").includes("teacher");
+  const navigate = useNavigate();
   const [formData, setFormData] = useState(
     isTeacher ? { ...teacherInit } : { ...studentInit }
   );
@@ -38,7 +39,6 @@ function Pay() {
   ];
 
   const fetchData = async () => {
-    console.log(isTeacher);
     if (isTeacher) {
       const res = await fetch(
         `https://creepy-duck-glasses.cyclic.app/api/teacher/${id}`
@@ -113,12 +113,14 @@ function Pay() {
         return alert("Please, fill all the input field.");
       }
       await payTeacherSalary();
+      return navigate(`/admin/teacher/${id}`);
     }
 
     if (!formData.year || !formData.month || !formData.tution_fees) {
       return alert("Please, fill all the input field.");
     }
     await payStudentTutionFee();
+    return navigate(`/admin/teacher/${id}`);
   };
   useEffect(() => {
     fetchData();
