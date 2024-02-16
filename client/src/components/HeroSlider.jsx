@@ -39,12 +39,12 @@ export function HeroSlider() {
                   }}
                   className="w-full h-60 sm:h-96 md:h-[550px] flex items-center bg-slate-900"
                 >
-                  <div className="w-full h-full bg-slate-900 opacity-70 flex items-center">
-                    <div className="ml-8">
+                  <div className="w-full h-full bg-slate-900 opacity-70 flex items-center ">
+                    <div className="ml-16">
                       <p className="text-white font-semibold text-lg sm:text-3xl uppercase">
                         Welcome to
                       </p>
-                      <p className="text-yellow-500 font-semibold uppercase sm:text-5xl text-xl w-5/6 sm:w-full">
+                      <p className="text-yellow-500 font-semibold uppercase sm:text-5xl text-xl w-5/6 sm:w-full ">
                         {siteInfo.name}
                       </p>
                     </div>

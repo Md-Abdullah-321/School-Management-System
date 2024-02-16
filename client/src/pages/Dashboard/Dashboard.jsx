@@ -11,14 +11,15 @@ function Dashboard() {
   const [chartData, setChartData] = useState({ datasets: [] });
   const [basicInfo, setBasicInfo] = useState({
     DueFees: 0,
-    ReceivedFees: 0,
+    reserve: 0,
     TotalExpense: 0,
     DuePayments: 0,
     Profit: 0,
   });
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
-  const utility = useSelector((state) => state.sitesettingsinfo.utility);
+  const { utility, reserve } = useSelector((state) => state.sitesettingsinfo);
+  console.log(reserve);
 
   let utility_bills = 0;
   utility.forEach((util) => {
@@ -27,14 +28,14 @@ function Dashboard() {
     }
   });
   const fetchStudentData = async () => {
-    const { students, DueFees, ReceivedFees, DuePayments } = await getDetails();
+    const { students, DueFees, DuePayments } = await getDetails();
 
     setBasicInfo({
       DueFees,
-      ReceivedFees,
+      reserve,
       DuePayments,
       TotalExpense: DuePayments + utility_bills,
-      Profit: DueFees + ReceivedFees - (DuePayments + utility_bills),
+      Profit: DueFees + reserve - (DuePayments + utility_bills),
     });
     const studentArray = [0, 0, 0, 0, 0, 0, 0];
 
@@ -91,7 +92,7 @@ function Dashboard() {
               </div>
               <div className="w-full sm:w-1/3 flex justify-between items-center shadow-md">
                 <div className="bg-green-500 w-1/2 h-full text-center p-2 text-lg font-semibold">
-                  {basicInfo.ReceivedFees}
+                  {basicInfo.reserve}
                 </div>
                 <div className="text-center p-2 w-1/2 font-semibold text-xs uppercase">
                   Received Fees

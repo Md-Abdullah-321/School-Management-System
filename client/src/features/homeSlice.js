@@ -18,6 +18,7 @@ const initialHomeInfo = {
       zip: "",
     }
   },
+  reserve: 0,
   gallery: [],
   notice: [],
   utility: []
@@ -28,12 +29,13 @@ export const homeSlice = createSlice({
   initialState: initialHomeInfo,
   reducers: {
     setHomeInfo: (state, action) => {
-      const { siteInfo, location, gallery, notice, utility } = action.payload;
+      const { siteInfo, location, gallery, notice, utility, reserve } = action.payload;
       state.siteInfo = siteInfo || state.siteInfo;
       state.location = location || state.location;
       state.gallery = gallery || state.gallery;
       state.notice = notice || state.notice;
       state.utility = utility || state.utility;
+      state.reserve = reserve || state.reserve;
     }
   }
 });

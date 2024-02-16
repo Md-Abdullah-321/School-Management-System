@@ -125,7 +125,7 @@ function ViewTeacher() {
               <div className="w-1/2 p-2 text-center font-medium text-lg">
                 {salary.month.slice(0, 3)} - {salary.year}
               </div>
-              <div className={salaryStyle}>{teacher.salary}</div>
+              <div className={salaryStyle}>{salary.amount}</div>
             </div>
           );
         })}

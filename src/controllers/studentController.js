@@ -9,6 +9,7 @@ const checkExistanceWithId = require("../helper/checkExistanceWithId");
 const Student = require("../models/studentSchema");
 const { createStudent, getStudentsByClassName, deletestudent, getAllStudents } = require("../services/studentServices");
 const { successResponse } = require("./responseController");
+const ID = process.env.SITE_DOCUMENT_ID;
 
 //Dependencies:
 
@@ -92,6 +93,10 @@ const handleGetPayment = async (req, res, next) => {
       
     const updates = { feesHistory: student.feesHistory };
     const updatedStudentInfo = await Student.findOneAndUpdate({ _id: id }, updates, { new: true });
+      
+    const site = await HomeInfo.find({});
+    site[0].reserve = site[0].reserve + student.tution_fees;
+    const updatedHomeInfo = await updateHomeInfo(ID, site[0]);
       
     return successResponse(res, {
       statusCode: 200,

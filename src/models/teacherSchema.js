@@ -68,10 +68,6 @@ const teacherSchema = new mongoose.Schema(
         type: String,
         enum: ['Present', 'Absent'],
         required: true
-      },
-      teacher: {
-        type: String,
-        required: true
       }
       }
     ],

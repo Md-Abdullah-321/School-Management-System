@@ -42,6 +42,9 @@ const homeSchema = new Schema({
       zip: String,
     },
   },
+  reserve: {
+    type: Number,
+  },
   gallery: [
     {
       event_name: { type: String, required: true },
