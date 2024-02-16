@@ -98,7 +98,7 @@ const handleGetPayment = async (req, res, next) => {
       
     const site = await HomeInfo.find({});
     site[0].reserve = site[0].reserve + student.tution_fees;
-    const updatedHomeInfo = await updateHomeInfo(ID, site[0]);
+    await updateHomeInfo(ID, site[0]);
       
     return successResponse(res, {
       statusCode: 200,

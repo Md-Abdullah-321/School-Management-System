@@ -20,7 +20,7 @@ function ViewTeacher() {
   };
 
   const handleNavigate = () => {
-    navigate(`/admin/student/pay/${id}`);
+    navigate(`/admin/teacher/pay/${id}`);
   };
   useEffect(() => {
     fetchTeacher();

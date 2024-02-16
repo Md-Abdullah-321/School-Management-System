@@ -1,13 +1,18 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 function ViewStudent() {
   const id = useParams().id;
   const [student, setStudent] = useState({});
   const user = useSelector((state) => state.user);
+  const navigate = useNavigate();
 
-  const fetchTeacher = async () => {
+  const handlePayFees = () => {
+    navigate(`/admin/student/pay/${id}`);
+  };
+
+  const fetchStudent = async () => {
     const res = await fetch(
       `https://creepy-duck-glasses.cyclic.app/api/student/${id}`
     );
@@ -15,7 +20,7 @@ function ViewStudent() {
     setStudent({ ...data.payload });
   };
   useEffect(() => {
-    fetchTeacher();
+    fetchStudent();
   }, []);
   return (
     <div className="w-full h-screen flex flex-col justify-center items-center">
@@ -65,7 +70,10 @@ function ViewStudent() {
 
       <div className="mt-3">
         {user.role === "admin" && (
-          <button className="text-xl uppercase bg-yellow-500 px-3 py-1 rounded-sm font-medium">
+          <button
+            className="text-xl uppercase bg-yellow-500 px-3 py-1 rounded-sm font-medium"
+            onClick={handlePayFees}
+          >
             Pay Tution Fee
           </button>
         )}

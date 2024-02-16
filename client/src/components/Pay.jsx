@@ -1,15 +1,25 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { getLastFiveYears } from "../helper/getLastFiveYears";
 
-const init = {
+const teacherInit = {
   year: null,
   month: null,
   salary: null,
   paid: true,
 };
+
+const studentInit = {
+  year: null,
+  month: null,
+  tution_fees: null,
+  paid: true,
+};
 function Pay() {
-  const [formData, setFormData] = useState({ ...init });
+  const isTeacher = useLocation().pathname.split("/").includes("teacher");
+  const [formData, setFormData] = useState(
+    isTeacher ? { ...teacherInit } : { ...studentInit }
+  );
   const id = useParams().id;
   const lastFiveYears = getLastFiveYears();
   const months = [
@@ -27,17 +37,27 @@ function Pay() {
     "December",
   ];
 
-  const fetchTeacher = async () => {
-    const res = await fetch(
-      `https://creepy-duck-glasses.cyclic.app/api/teacher/${id}`
-    );
-
-    const data = await res.json();
-
-    setFormData((prev) => ({ ...prev, salary: data.payload.salary }));
+  const fetchData = async () => {
+    console.log(isTeacher);
+    if (isTeacher) {
+      const res = await fetch(
+        `https://creepy-duck-glasses.cyclic.app/api/teacher/${id}`
+      );
+      const data = await res.json();
+      setFormData((prev) => ({ ...prev, salary: data.payload.salary }));
+    } else {
+      const res = await fetch(
+        `https://creepy-duck-glasses.cyclic.app/api/student/${id}`
+      );
+      const data = await res.json();
+      setFormData((prev) => ({
+        ...prev,
+        tution_fees: data.payload.tution_fees,
+      }));
+    }
   };
 
-  const paySalary = async () => {
+  const payTeacherSalary = async () => {
     const res = await fetch(
       `https://creepy-duck-glasses.cyclic.app/api/teacher/pay/${id}`,
       {
@@ -59,6 +79,27 @@ function Pay() {
 
     alert(data.messege);
   };
+  const payStudentTutionFee = async () => {
+    const res = await fetch(
+      `https://creepy-duck-glasses.cyclic.app/api/student/pay/${id}`,
+      {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          year: formData.year,
+          month: formData.month,
+          paid: true,
+        }),
+      }
+    );
+
+    const data = await res.json();
+
+    alert(data.messege);
+  };
 
   const handleChange = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -67,14 +108,20 @@ function Pay() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!formData.year || !formData.month || !formData.salary) {
-      return alert("Please, fill all the input field.");
+    if (isTeacher) {
+      if (!formData.year || !formData.month || !formData.salary) {
+        return alert("Please, fill all the input field.");
+      }
+      await payTeacherSalary();
     }
 
-    await paySalary();
+    if (!formData.year || !formData.month || !formData.tution_fees) {
+      return alert("Please, fill all the input field.");
+    }
+    await payStudentTutionFee();
   };
   useEffect(() => {
-    fetchTeacher();
+    fetchData();
   }, []);
 
   return (
@@ -122,14 +169,14 @@ function Pay() {
 
           <div className="flex flex-col sm:flex-row gap-x-2 mt-2 justify-between">
             <label htmlFor="year" className="font-medium">
-              Salary:{" "}
+              {isTeacher ? "Salary" : "Tution Fee"}:{" "}
             </label>
             <input
               type="number"
               className="sm:w-2/3 px-1 rounded-sm outline-none"
-              name="salary"
+              name={isTeacher ? "salary" : "tution_fees"}
               onChange={handleChange}
-              value={formData.salary}
+              value={isTeacher ? formData.salary : formData.tution_fees}
             />
           </div>
 

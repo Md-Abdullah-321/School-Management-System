@@ -15,7 +15,7 @@ const { isLoggedIn, isAdmin } = require("../middleware/auth");
 const studentRouter = express.Router();
 
 // POST -> get payment by id:
-studentRouter.post("/payment/:id",isLoggedIn,isAdmin, handleGetPayment);
+studentRouter.post("/pay/:id",isLoggedIn,isAdmin, handleGetPayment);
 
 // POST -> update student by id:
 studentRouter.post("/update/:id", handleUpdateStudentInfo);

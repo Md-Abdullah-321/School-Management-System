@@ -19,7 +19,6 @@ function Dashboard() {
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
   const { utility, reserve } = useSelector((state) => state.sitesettingsinfo);
-  console.log(reserve);
 
   let utility_bills = 0;
   utility.forEach((util) => {

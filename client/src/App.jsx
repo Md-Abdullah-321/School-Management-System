@@ -33,6 +33,7 @@ function App() {
           <Route path="/admin/teacher/:id" element={<ViewTeacher />} />
           <Route path="/admin/teacher/create" element={<CreateTeacher />} />
           <Route path="/admin/student/:id" element={<ViewStudent />} />
+          <Route path="/admin/teacher/pay/:id" element={<Pay />} />
           <Route path="/admin/student/pay/:id" element={<Pay />} />
           <Route path="/admin/classes" element={<Classes />} />
           <Route path="/admin/student/create" element={<CreateStudent />} />

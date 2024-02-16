@@ -34,10 +34,12 @@ function Navbar() {
       const data = await response.json();
 
       if (data.success) {
-        const { siteInfo, location, gallery, notice, utility } =
+        const { siteInfo, location, gallery, notice, utility, reserve } =
           data.payload["0"];
-        console.log(location);
-        dispatch(setHomeInfo({ siteInfo, location, gallery, notice, utility }));
+
+        dispatch(
+          setHomeInfo({ siteInfo, location, gallery, notice, utility, reserve })
+        );
       }
     } catch (error) {
       console.error("Error fetching data:", error.message);
