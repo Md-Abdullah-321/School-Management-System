@@ -6,7 +6,9 @@
  */
 
 const checkExistanceWithId = require("../helper/checkExistanceWithId");
+const HomeInfo = require("../models/homeSchema");
 const Student = require("../models/studentSchema");
+const { updateHomeInfo } = require("../services/siteServices");
 const { createStudent, getStudentsByClassName, deletestudent, getAllStudents } = require("../services/studentServices");
 const { successResponse } = require("./responseController");
 const ID = process.env.SITE_DOCUMENT_ID;
