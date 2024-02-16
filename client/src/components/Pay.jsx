@@ -120,7 +120,7 @@ function Pay() {
       return alert("Please, fill all the input field.");
     }
     await payStudentTutionFee();
-    return navigate(`/admin/teacher/${id}`);
+    return navigate(`/admin/student/${id}`);
   };
   useEffect(() => {
     fetchData();
