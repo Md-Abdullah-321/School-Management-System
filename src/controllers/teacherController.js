@@ -15,7 +15,10 @@ const bcrypt = require("bcryptjs");
 const createJSONWebToken = require("../helper/createJSONWebToken");
 const { setAccessTokenCookie } = require("../helper/cookie");
 const checkExistanceWithId = require("../helper/checkExistanceWithId");
+const HomeInfo = require("../models/homeSchema");
+const { updateHomeInfo } = require("../services/siteServices");
 require("dotenv").config();
+const ID = process.env.SITE_DOCUMENT_ID;
 
 
 
@@ -110,6 +113,10 @@ const handlePaySalary = async (req, res, next) => {
     const updates = { paymentHistory: teacher.paymentHistory };
     const updatedTeacherInfo = await Teacher.findOneAndUpdate({ _id: id }, updates, { new: true });
       
+    const site = await HomeInfo.find({});
+    site[0].reserve = site[0].reserve - amount;
+    await updateHomeInfo(ID, site[0]);
+        
     return successResponse(res, {
       statusCode: 200,
       message: `Payment has been done for ${month} ${year}.`,
