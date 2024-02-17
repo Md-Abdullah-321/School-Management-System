@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
+import ViewStudentStatement from "./ViewStudentStatement";
 
 function ViewStudent() {
   const id = useParams().id;
   const [student, setStudent] = useState({});
+  const [toggleTutionFeesAndAttendence, setToggleTutionFeesAndAttendence] =
+    useState(true);
   const user = useSelector((state) => state.user);
   const navigate = useNavigate();
 
@@ -18,6 +21,14 @@ function ViewStudent() {
     );
     const data = await res.json();
     setStudent({ ...data.payload });
+  };
+
+  const handleClick = (option) => {
+    if (option === "attendence") {
+      setToggleTutionFeesAndAttendence(true);
+    } else {
+      setToggleTutionFeesAndAttendence(false);
+    }
   };
   useEffect(() => {
     fetchStudent();
@@ -68,35 +79,36 @@ function ViewStudent() {
         </div>
       </div>
 
-      <div className="mt-3">
-        {user.role === "admin" && (
-          <button
-            className="text-xl uppercase bg-yellow-500 px-3 py-1 rounded-sm font-medium"
-            onClick={handlePayFees}
+      <div className="w-11/12 sm:w-1/2 shadow-sm border p-4 mt-10 mx-auto">
+        <div className="w-full flex justify-around text-center">
+          <div
+            onClick={() => handleClick("attendence")}
+            className={
+              toggleTutionFeesAndAttendence
+                ? "w-1/2 bg-gray-300 p-2 shadow-sm hover:bg-gray-200"
+                : "w-1/2 p-2 cursor-pointer"
+            }
           >
-            Pay Tution Fee
-          </button>
-        )}
-      </div>
-      <div className="w-11/12 sm:w-1/2 mt-3">
-        <h3 className="uppercase font-medium">Tution Fees:</h3>
-        <div className="flex  flex-wrap justify-between items-center gap-x-2">
-          {student?.feesHistory?.map((fees) => {
-            return (
-              <div
-                key={fees._id}
-                className="w-[49%] shadow-sm border mt-1 flex items-end justify-between"
-              >
-                <div className="w-1/2 p-2 text-center font-medium text-lg">
-                  {fees.month.slice(0, 3)} - {fees.year}
-                </div>
-                <div className="bg-yellow-500 w-1/2 p-2 text-center font-semibold text-lg">
-                  {student.tution_fees}
-                </div>
-              </div>
-            );
-          })}
+            Attendence
+          </div>
+          <div
+            onClick={() => handleClick("tution_fees")}
+            className={
+              !toggleTutionFeesAndAttendence
+                ? "w-1/2 bg-gray-300 p-2 shadow-sm hover:bg-gray-200"
+                : "w-1/2 p-2 cursor-pointer"
+            }
+          >
+            Tution Fees
+          </div>
         </div>
+        {!toggleTutionFeesAndAttendence && (
+          <ViewStudentStatement
+            user={user}
+            handlePayFees={handlePayFees}
+            student={student}
+          />
+        )}
       </div>
     </div>
   );

@@ -10,7 +10,7 @@ const HomeInfo = require("../models/homeSchema");
 const Student = require("../models/studentSchema");
 const { updateHomeInfo } = require("../services/siteServices");
 const { createStudent, getStudentsByClassName, deletestudent, getAllStudents } = require("../services/studentServices");
-const { successResponse } = require("./responseController");
+const { successResponse, errorResponse } = require("./responseController");
 const ID = process.env.SITE_DOCUMENT_ID;
 
 //Dependencies:
@@ -90,6 +90,18 @@ const handleGetPayment = async (req, res, next) => {
     const { id } = req.params;
       
     const student = await checkExistanceWithId(Student, id);
+      let isPaid = false;  
+    student.feesHistory.map((payment) => {
+        if (payment.month === month && payment.year === year) {
+            isPaid = true;
+        }   
+    })
+    if (isPaid) {
+          return errorResponse(res, {
+              statusCode: 400,
+              message: `Tution fee is already paid for ${month} ${year}.`
+        })
+    }
     const paymentInfo = { month, year, paid: true };
     student.feesHistory.unshift(paymentInfo);
       
@@ -102,7 +114,7 @@ const handleGetPayment = async (req, res, next) => {
       
     return successResponse(res, {
       statusCode: 200,
-      message: `Payment has been done for ${month} ${year}.`,
+      message: `Tution Fee has been paid for ${month} ${year}.`,
       payload: updatedStudentInfo,
     });
   } catch (error) {

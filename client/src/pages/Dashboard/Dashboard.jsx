@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Messages from "../../components/Messages";
 import PieChart from "../../components/PieChart";
+import { setHomeInfo } from "../../features/homeSlice";
 import { createStudentArry } from "../../helper/createStudentArray";
 import { getDetails } from "../../helper/getDetails";
 import Sidebar from "../../layout/Sidebar";
@@ -17,6 +18,7 @@ function Dashboard() {
     Profit: 0,
   });
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const { utility, reserve } = useSelector((state) => state.sitesettingsinfo);
 
@@ -61,10 +63,39 @@ function Dashboard() {
     });
   };
 
+  const fetchData = async () => {
+    try {
+      const response = await fetch(
+        "https://creepy-duck-glasses.cyclic.app/api/site"
+      );
+
+      const data = await response.json();
+
+      if (data.success) {
+        const { siteInfo, location, gallery, notice, utility, reserve } =
+          data.payload["0"];
+
+        dispatch(
+          setHomeInfo({
+            siteInfo,
+            location,
+            gallery,
+            notice,
+            utility,
+            reserve,
+          })
+        );
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error.message);
+    }
+  };
+
   useEffect(() => {
     if (!user.firstName) {
       navigate("/admin/login");
     }
+    fetchData();
     fetchStudentData();
   }, []);
   return (

@@ -46,13 +46,13 @@ function Navbar() {
     }
   };
 
-  const handleToggleMenu = () => {
-    setToggleNavbar(!toggleNavbar);
-  };
-
   useEffect(() => {
     fetchData();
   }, []);
+
+  const handleToggleMenu = () => {
+    setToggleNavbar(!toggleNavbar);
+  };
   const { logo } = useSelector((state) => state?.sitesettingsinfo?.siteInfo);
 
   return (
