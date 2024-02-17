@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import DeleteTeacherMoadal from "./DeleteTeacherModal";
+import ViewTeacherStatement from "./ViewTeacherStatement";
 
 function ViewTeacher() {
   const id = useParams().id;
@@ -9,6 +10,8 @@ function ViewTeacher() {
   const [modal, setModal] = useState(false);
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
+  const [toggleSalaryAndAttendence, setToggleSalaryAndAttendence] =
+    useState(true);
 
   const fetchTeacher = async () => {
     const res = await fetch(
@@ -19,6 +22,13 @@ function ViewTeacher() {
     setTeacher({ ...data.payload });
   };
 
+  const handleClick = (option) => {
+    if (option === "attendence") {
+      setToggleSalaryAndAttendence(true);
+    } else {
+      setToggleSalaryAndAttendence(false);
+    }
+  };
   const handleNavigate = () => {
     navigate(`/admin/teacher/pay/${id}`);
   };
@@ -26,8 +36,8 @@ function ViewTeacher() {
     fetchTeacher();
   }, []);
   return (
-    <div className="w-full h-screen flex flex-col justify-center items-center">
-      <div className="w-11/12 sm:w-1/2 flex flex-col shadow-sm border p-4">
+    <div className="w-full flex flex-col justify-center items-center my-10">
+      <div className="w-11/12 sm:w-2/3 md:w-1/2 flex flex-col shadow-sm border p-4">
         <div className="flex w-full h-40 justify-between items-start">
           <img
             src={teacher.picture}
@@ -95,14 +105,6 @@ function ViewTeacher() {
         />
       )}
 
-      <div className="mt-3" onClick={handleNavigate}>
-        {user.role === "admin" && (
-          <button className="text-xl uppercase bg-yellow-500 px-3 py-1 rounded-sm font-medium">
-            Pay Salary
-          </button>
-        )}
-      </div>
-
       {!teacher.firstName && (
         <div className="w-full">
           <div className="fixed left-0 right-0 top-0 bottom-0 bg-white"></div>
@@ -112,23 +114,36 @@ function ViewTeacher() {
         </div>
       )}
 
-      <div className="w-11/12 sm:w-1/2 flex mt-5 flex-wrap justify-between items-center gap-x-2">
-        {teacher?.paymentHistory?.map((salary) => {
-          const salaryStyle = salary.paid
-            ? "bg-green-500 w-1/2 p-2 text-center font-semibold text-lg"
-            : "bg-red-500 w-1/2 p-2 text-center font-semibold text-lg";
-          return (
-            <div
-              key={salary._id}
-              className="w-[49%] shadow-sm border p-2 mt-1 flex items-end justify-between"
-            >
-              <div className="w-1/2 p-2 text-center font-medium text-lg">
-                {salary.month.slice(0, 3)} - {salary.year}
-              </div>
-              <div className={salaryStyle}>{salary.amount}</div>
-            </div>
-          );
-        })}
+      <div className="w-11/12 sm:w-2/3 md:w-1/2 mt-5 border">
+        <div className="w-full flex justify-around text-center">
+          <div
+            onClick={() => handleClick("attendence")}
+            className={
+              toggleSalaryAndAttendence
+                ? "w-1/2 bg-gray-300 p-2 shadow-sm hover:bg-gray-200"
+                : "w-1/2 p-2 cursor-pointer"
+            }
+          >
+            Attendence
+          </div>
+          <div
+            onClick={() => handleClick("salary")}
+            className={
+              !toggleSalaryAndAttendence
+                ? "w-1/2 bg-gray-300 p-2 shadow-sm hover:bg-gray-200"
+                : "w-1/2 p-2 cursor-pointer"
+            }
+          >
+            Salary
+          </div>
+        </div>
+        {!toggleSalaryAndAttendence && (
+          <ViewTeacherStatement
+            teacher={teacher}
+            user={user}
+            handleNavigate={handleNavigate}
+          />
+        )}
       </div>
     </div>
   );

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
+import ViewStudentAttendence from "./ViewStudentAttendence";
 import ViewStudentStatement from "./ViewStudentStatement";
 
 function ViewStudent() {
@@ -102,6 +103,9 @@ function ViewStudent() {
             Tution Fees
           </div>
         </div>
+
+        {toggleTutionFeesAndAttendence && <ViewStudentAttendence />}
+
         {!toggleTutionFeesAndAttendence && (
           <ViewStudentStatement
             user={user}

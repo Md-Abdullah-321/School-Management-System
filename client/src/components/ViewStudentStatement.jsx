@@ -3,7 +3,7 @@ function ViewStudentStatement({ user, handlePayFees, student }) {
   return (
     <div className="w-full mx-auto mt-5">
       <div className="mt-3 mx-auto">
-        {user.role === "admin" && (
+        {user?.role === "admin" && (
           <button
             className="text-xl uppercase bg-yellow-500 px-3 py-1 rounded-sm font-medium"
             onClick={handlePayFees}
