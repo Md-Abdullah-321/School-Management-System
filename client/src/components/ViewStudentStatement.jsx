@@ -19,12 +19,12 @@ function ViewStudentStatement({ user, handlePayFees, student }) {
             return (
               <div
                 key={fees._id}
-                className="w-[49%] shadow-sm border mt-1 flex items-end justify-between"
+                className="w-full sm:w-[49%] shadow-sm border mt-1 flex items-end justify-between"
               >
-                <div className="w-1/2 p-2 text-center font-medium text-lg">
+                <div className="w-full sm:w-1/2 p-2 text-center font-medium text-lg">
                   {fees.month.slice(0, 3)} - {fees.year}
                 </div>
-                <div className="bg-green-500 w-1/2 p-2 text-center font-semibold text-lg">
+                <div className="bg-green-500 w-full sm:w-1/2 p-2 text-center font-semibold text-lg">
                   {student.tution_fees}
                 </div>
               </div>
