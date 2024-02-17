@@ -90,7 +90,7 @@ const handleGetPayment = async (req, res, next) => {
     const { id } = req.params;
       
     const student = await checkExistanceWithId(Student, id);
-      let isPaid = false;  
+    let isPaid = false;  
     student.feesHistory.map((payment) => {
         if (payment.month === month && payment.year === year) {
             isPaid = true;

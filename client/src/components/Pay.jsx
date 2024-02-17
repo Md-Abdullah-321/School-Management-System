@@ -98,7 +98,7 @@ function Pay() {
 
     const data = await res.json();
 
-    alert(data.messege);
+    alert(data.message);
   };
 
   const handleChange = (e) => {
