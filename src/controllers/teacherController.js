@@ -111,7 +111,7 @@ const handlePaySalary = async (req, res, next) => {
     teacher.paymentHistory.unshift(paymentInfo);
         
     let isPaid = false;  
-    teacher.feesHistory.map((payment) => {
+    teacher.paymentHistory.map((payment) => {
     if (payment.month === month && parseInt(payment.year) === parseInt(year)) {
         isPaid = true;
     }   
