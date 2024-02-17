@@ -109,13 +109,20 @@ const handlePaySalary = async (req, res, next) => {
     const teacher = await checkExistanceWithId(Teacher, id);
     const paymentInfo = { month, year,amount, paid };
     teacher.paymentHistory.unshift(paymentInfo);
+        
+    const site = await HomeInfo.find({});
+    if (parseInt(site[0].reserve) < parseInt(amount)) {
+        return errorResponse(res, {
+            statusCode: 400,
+            message: `Reserve payment is less than the payment.`,
+        });
+    }
+    site[0].reserve = site[0].reserve - amount;
+    await updateHomeInfo(ID, site[0]);
       
     const updates = { paymentHistory: teacher.paymentHistory };
     const updatedTeacherInfo = await Teacher.findOneAndUpdate({ _id: id }, updates, { new: true });
       
-    const site = await HomeInfo.find({});
-    site[0].reserve = site[0].reserve - amount;
-    await updateHomeInfo(ID, site[0]);
         
     return successResponse(res, {
       statusCode: 200,

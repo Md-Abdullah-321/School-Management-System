@@ -94,7 +94,7 @@ function Dashboard() {
                   {basicInfo.reserve}
                 </div>
                 <div className="text-center p-2 w-1/2 font-semibold text-xs uppercase">
-                  Received Fees
+                  Reserve Fees
                 </div>
               </div>
             </div>
