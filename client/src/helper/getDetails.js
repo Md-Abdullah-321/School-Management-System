@@ -7,20 +7,20 @@
 
 import { formatDateTime } from "./formatDateAndTime";
 
-const months = {
-    "January": 0,
-    "February": 1,
-    "March": 2,
-    "April": 3,
-    "May": 4,
-    "June": 5,
-    "July": 6,
-    "August": 7,
-    "September": 8,
-    "October": 9,
-    "November": 10,
-    "December": 11,
-}
+// const months = {
+//     "January": 0,
+//     "February": 1,
+//     "March": 2,
+//     "April": 3,
+//     "May": 4,
+//     "June": 5,
+//     "July": 6,
+//     "August": 7,
+//     "September": 8,
+//     "October": 9,
+//     "November": 10,
+//     "December": 11,
+// }
 
 const getStudentData = async () => {
     const res = await fetch("https://creepy-duck-glasses.cyclic.app/api/student");
@@ -39,6 +39,7 @@ export const getDetails = async () => {
 
     let DueFees = 0;
     let DuePayments = 0;
+    let MonthlyExpenses = 0;
     
     students.payload.forEach(student => {
         let totalFees = (parseInt(formatDateTime(student.createdAt).slice(0, 2)) + 1) * student.tution_fees;
@@ -50,15 +51,18 @@ export const getDetails = async () => {
         DueFees += totalFees;
     });
 
-    teacher.payload.forEach((teacher) => {
-        let totalFees = parseInt(formatDateTime(teacher.createdAt).slice(0, 2)) * teacher.salary;
-        teacher.paymentHistory.forEach((payment) => {
+    teacher?.payload?.forEach((teacher) => {
+        let totalFees = ((new Date().getMonth() + 1) - parseInt(formatDateTime(teacher.createdAt).slice(0, 2))) * teacher.salary;
+        teacher?.paymentHistory?.forEach((payment) => {
             if (payment) {
                 totalFees -= teacher.salary;
             }
         })
         DuePayments += totalFees;
+        MonthlyExpenses += teacher.salary;
     })
+
+
     
-    return { students, DueFees, DuePayments };
+    return { students, DueFees, DuePayments, MonthlyExpenses };
 }
