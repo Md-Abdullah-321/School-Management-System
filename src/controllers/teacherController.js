@@ -107,9 +107,6 @@ const handlePaySalary = async (req, res, next) => {
     const { id } = req.params;
       
     const teacher = await checkExistanceWithId(Teacher, id);
-    const paymentInfo = { month, year,amount, paid };
-    teacher.paymentHistory.unshift(paymentInfo);
-        
     let isPaid = false;  
     teacher?.paymentHistory?.map((payment) => {
     if (payment?.month === month && parseInt(payment?.year) === parseInt(year)) {
@@ -123,6 +120,8 @@ const handlePaySalary = async (req, res, next) => {
         })
     }
         
+    const paymentInfo = { month, year,amount, paid };
+    teacher.paymentHistory.unshift(paymentInfo);
     const site = await HomeInfo.find({});
     if (parseInt(site[0].reserve) < parseInt(amount)) {
         return errorResponse(res, {
