@@ -69,6 +69,16 @@ function Classes() {
         <h1 className="text-center text-3xl uppercase font-semibold">
           Our <span className="text-amber-500">Students</span>
         </h1>
+        {user.role === "admin" && (
+          <div className="w-full flex justify-center items-center mt-5">
+            <button
+              className="bg-yellow-500 py-1 px-2 rounded-sm cursor-pointer font-semibold text-md sm:text-lg uppercase hover:shadow-md"
+              onClick={handleClick}
+            >
+              Create New Student
+            </button>
+          </div>
+        )}
         {Object.keys(students).map((year) => {
           return (
             <div key={year}>
@@ -95,16 +105,6 @@ function Classes() {
             </div>
           );
         })}
-        {user.role === "admin" && (
-          <div className="w-full flex justify-center items-center mt-5">
-            <button
-              className="bg-yellow-500 py-1 px-2 w-52 rounded-sm cursor-pointer font-semibold text-sm uppercase hover:shadow-md"
-              onClick={handleClick}
-            >
-              Create New Student
-            </button>
-          </div>
-        )}
       </div>
     </div>
   );

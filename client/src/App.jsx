@@ -38,7 +38,7 @@ function App() {
           <Route path="/admin/classes" element={<Classes />} />
           <Route path="/admin/student/create" element={<CreateStudent />} />
           <Route path="/admin/notice" element={<Notice />} />
-          <Route path="/admin/fees&payments" element={<FeesAndPayments />} />
+          <Route path="/admin/attendance" element={<FeesAndPayments />} />
           <Route path="/admin/messages" element={<Messages />} />
           <Route path="/admin/settings" element={<Settings />} />
           <Route path="/admin/login" element={<Login />} />

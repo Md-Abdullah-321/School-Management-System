@@ -79,14 +79,14 @@ function Sidebar() {
               <IoInformationCircleOutline className="w-4 h-4 font-light" />
             </NavLink>
             <NavLink
-              to="/admin/fees&payments"
+              to="/admin/attendance"
               className={
-                location.pathname === "/admin/fees&payments"
+                location.pathname === "/admin/attendance"
                   ? activeClassName
                   : className
               }
             >
-              <h3>Attendence</h3>
+              <h3>Attendance</h3>
               <FaCheckCircle className="w-4 h-4" />
             </NavLink>
             <NavLink

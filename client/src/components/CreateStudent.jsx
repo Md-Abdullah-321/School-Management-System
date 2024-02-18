@@ -145,7 +145,7 @@ function CreateStudent() {
           <div className="flex flex-col sm:flex-row justify-between items-center gap-1">
             <select
               name="className"
-              className="w-full sm:w-6/12 outline-none bg-gray-100 p-1"
+              className="w-full sm:w-6/12 outline-none bg-gray-100 p-1 py-2"
               value={formData.className}
               onChange={(e) => handleChange(e)}
             >
@@ -208,7 +208,7 @@ function CreateStudent() {
               value={formData.tution_fees}
               onChange={(e) => handleChange(e)}
               className="w-full sm:w-6/12 outline-none bg-gray-100 p-1"
-              placeholder="Student Name"
+              placeholder="Tution Fee"
             />
             <input
               type="file"
