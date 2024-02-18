@@ -1,7 +1,9 @@
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import Sidebar from "../layout/Sidebar";
 
 function ShowAndUpdateProfile() {
+  const navigate = useNavigate();
   const user = useSelector((state) => state.user);
 
   const handleLogout = async () => {
@@ -14,6 +16,7 @@ function ShowAndUpdateProfile() {
         }
       );
       const data = await res.json();
+      navigate("/admin/login");
       alert(data.messege);
     } catch (error) {
       console.log(error);

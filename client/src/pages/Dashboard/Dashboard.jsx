@@ -90,6 +90,7 @@ function Dashboard() {
     if (!user.firstName) {
       navigate("/admin/login");
     }
+
     fetchData();
     fetchStudentData();
   }, []);
