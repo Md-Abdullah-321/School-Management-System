@@ -3,7 +3,7 @@ import { BiMessageDetail } from "react-icons/bi";
 import {
   FaBookReader,
   FaChalkboardTeacher,
-  FaMoneyCheck,
+  FaCheckCircle,
 } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoInformationCircleOutline, IoSettingsOutline } from "react-icons/io5";
@@ -86,8 +86,8 @@ function Sidebar() {
                   : className
               }
             >
-              <h3>Fees & Payments</h3>
-              <FaMoneyCheck className="w-4 h-4" />
+              <h3>Attendence</h3>
+              <FaCheckCircle className="w-4 h-4" />
             </NavLink>
             <NavLink
               to="/admin/messages"

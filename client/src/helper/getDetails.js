@@ -5,6 +5,8 @@
  * Date: 23/01/24
  */
 
+import { formatDateTime } from "./formatDateAndTime";
+
 const months = {
     "January": 0,
     "February": 1,
@@ -36,31 +38,27 @@ export const getDetails = async () => {
 
 
     let DueFees = 0;
-    let ReceivedFees = 0;
     let DuePayments = 0;
     
-    let date = new Date();
     students.payload.forEach(student => {
-        student.feesHistory.forEach((tutionFee) => {
-            if (tutionFee.paid === false) {
-                DueFees += student.tution_fees;
-            }
-
-            if (months[tutionFee.month] === date.getMonth() && tutionFee.year === date.getFullYear() && tutionFee.paid === true) {
-                ReceivedFees += student.tution_fees;
+        let totalFees = (parseInt(formatDateTime(student.createdAt).slice(0, 2)) + 1) * student.tution_fees;
+        student?.feesHistory?.forEach((tutionFee) => {
+            if (tutionFee) {
+                totalFees -= student.tution_fees;
             }
         })
+        DueFees += totalFees;
     });
 
     teacher.payload.forEach((teacher) => {
-        if (teacher?.feesHistory?.length > 0) {
-            teacher.paymentHistory.forEach((payment) => {
-                if (payment.paid === false) {
-                    DuePayments += teacher.salary;
-                }
+        let totalFees = parseInt(formatDateTime(teacher.createdAt).slice(0, 2)) * teacher.salary;
+        teacher.paymentHistory.forEach((payment) => {
+            if (payment) {
+                totalFees -= teacher.salary;
+            }
         })
-        }
+        DuePayments += totalFees;
     })
     
-    return { students, DueFees, ReceivedFees, DuePayments };
+    return { students, DueFees, DuePayments };
 }
