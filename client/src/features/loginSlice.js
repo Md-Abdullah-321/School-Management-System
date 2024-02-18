@@ -28,10 +28,20 @@ export const teacherSlice = createSlice({
             state.subjects = subjects || state.subjects;
             state.role = role || state.role;
             state.picture = picture || state.picture;
+        },
+        removeTeacherInfo: (state) => {
+            state.firstName = "";
+            state.lastName = "";
+            state.email = "";
+            state.phoneNumber = "";
+            state.address = "";
+            state.subjects = "";
+            state.role = "";
+            state.picture = "";
         }
     }
 })
 
-export const { setTeacherInfo } = teacherSlice.actions;
+export const { setTeacherInfo, removeTeacherInfo } = teacherSlice.actions;
 
 export const teacherReducer = teacherSlice.reducer;

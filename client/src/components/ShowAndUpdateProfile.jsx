@@ -1,9 +1,11 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { removeTeacherInfo } from "../features/loginSlice";
 import Sidebar from "../layout/Sidebar";
 
 function ShowAndUpdateProfile() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
 
   const handleLogout = async () => {
@@ -16,6 +18,7 @@ function ShowAndUpdateProfile() {
         }
       );
       const data = await res.json();
+      dispatch(removeTeacherInfo());
       navigate("/admin/login");
       alert(data.messege);
     } catch (error) {
