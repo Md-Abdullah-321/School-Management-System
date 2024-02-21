@@ -30,7 +30,7 @@ function CreateStudent() {
       setFormData((prev) => {
         return {
           ...prev,
-          image: e.target.files,
+          image: e.target.files[0],
         };
       });
     } else {
@@ -45,11 +45,14 @@ function CreateStudent() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!formData.image) return;
 
     try {
       const imageRef = ref(
         storage,
-        `images/student/${formData.image.name + Date.now()}`
+        `images/student/${
+          formData.image.name + Date.now() + Math.round(Math.random() * 1000)
+        }`
       );
       const snapshot = await uploadBytes(imageRef, formData.image);
       const downloadURL = await getDownloadURL(snapshot.ref);
