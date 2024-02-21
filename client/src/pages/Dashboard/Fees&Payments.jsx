@@ -13,6 +13,14 @@ function FeesAndPayments() {
       navigate("/admin/login");
     }
   }, []);
+
+  const handleClick = (option) => {
+    if (option === "teacher") {
+      navigate("/admin/teacher/attendance");
+    } else {
+      navigate("/admin/student/attendance");
+    }
+  };
   return (
     <div className="flex flex-col sm:flex-row w-full sm:h-screen">
       <Sidebar />
@@ -20,7 +28,10 @@ function FeesAndPayments() {
         <div className="w-1/2">
           <div className="w-11/12 h-80 bg-yellow-500 p-2 rounded-md flex justify-center items-center">
             <img src={Teaching} className="w-full h-full opacity-90" />
-            <button className="fixed uppercase bg-green-500 px-3 py-1 font-medium cursor-pointer rounded-sm hover:shadow-md">
+            <button
+              className="fixed uppercase bg-green-500 px-3 py-1 font-medium cursor-pointer rounded-sm hover:shadow-md"
+              onClick={() => handleClick("teacher")}
+            >
               Teacher Attendance
             </button>
           </div>
@@ -28,7 +39,10 @@ function FeesAndPayments() {
         <div className="w-1/2">
           <div className="w-11/12 h-80 bg-green-500 p-2 rounded-md flex justify-center items-center">
             <img src={Studying} className="w-full h-full opacity-90" />
-            <button className="fixed uppercase bg-yellow-500 px-3 py-1 font-medium cursor-pointer rounded-sm hover:shadow-md">
+            <button
+              className="fixed uppercase bg-yellow-500 px-3 py-1 font-medium cursor-pointer rounded-sm hover:shadow-md"
+              onClick={handleClick}
+            >
               Student Attendance
             </button>
           </div>

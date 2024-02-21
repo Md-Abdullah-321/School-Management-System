@@ -161,6 +161,46 @@ const handleGetStudentById = async (req, res, next) => {
   }
 };
 
+const handleStudentPresents = async (req, res, next) => {
+    try {        
+        const { id } = req.params;
+        const { year, month, day, status} = req.body;
+        const student = await Student.findById(id);
+
+        let isPresented = false;
+        student.attendance.map(presence => {
+            if (presence.year === year && presence.month === month && presence.day === day) {
+                if (presence.status === "Present") {
+                    presence.status = "Absent";
+                } else {
+                    presence.status = "Present";
+                }
+                isPresented = true;
+            }
+        });
+
+        if (!isPresented) {
+            const updates = {
+                year,
+                month,
+                day,
+                status
+            }
+            student.attendance.unshift(updates);
+        }
+
+
+        await Student.findOneAndUpdate({ _id: id }, student);
+        return successResponse(res, {
+        statusCode: 200,
+        message: `Student present updated successfully.`,
+        payload: true,
+        });
+  } catch (error) {
+    next(error);
+  }
+};
+
 
 
 
@@ -174,4 +214,5 @@ module.exports = {
     handleGetPayment,
     handleUpdateStudentInfo,
     handleGetStudentById,
+    handleStudentPresents,
 }

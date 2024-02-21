@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Attendance from "./components/Attendance";
 import CreateStudent from "./components/CreateStudent";
 import CreateTeacher from "./components/CreateTeacher";
 import Pay from "./components/Pay";
@@ -39,6 +40,8 @@ function App() {
           <Route path="/admin/student/create" element={<CreateStudent />} />
           <Route path="/admin/notice" element={<Notice />} />
           <Route path="/admin/attendance" element={<FeesAndPayments />} />
+          <Route path="/admin/teacher/attendance" element={<Attendance />} />
+          <Route path="/admin/student/attendance" element={<Attendance />} />
           <Route path="/admin/messages" element={<Messages />} />
           <Route path="/admin/settings" element={<Settings />} />
           <Route path="/admin/login" element={<Login />} />

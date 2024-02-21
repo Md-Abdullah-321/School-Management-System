@@ -48,27 +48,23 @@ const studentSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-        attendance: [
+    attendance: [
       {
         year: {
         type: Number,
         required: true
       },
       month: {
-        type: Number,
+        type: String,
         required: true
       },
       day: {
-        type: Number,
+        type: String,
         required: true
       },
       status: {
         type: String,
         enum: ['Present', 'Absent'],
-        required: true
-      },
-      teacher: {
-        type: String,
         required: true
       }
       }
