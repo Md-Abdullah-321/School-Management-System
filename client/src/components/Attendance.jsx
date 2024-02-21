@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { fetchData } from "../helper/fetchData";
 import { parseDate } from "../helper/parseDate";
-import { postPresents } from "../helper/postPresents";
+import { postStudentPresents } from "../helper/postPresents";
 
 function Attendance() {
   const user = useSelector((state) => state.user);
@@ -81,7 +81,7 @@ function Attendance() {
 
   const handleSubmit = () => {
     presents.map(async (presentData) => {
-      const postedPresent = await postPresents(presentData);
+      const postedPresent = await postStudentPresents(presentData);
       console.log(postedPresent);
     });
   };

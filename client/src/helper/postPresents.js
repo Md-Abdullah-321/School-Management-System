@@ -1,5 +1,5 @@
-export const postPresents = async (presentData) => {
-    const res = await fetch("https://creepy-duck-glasses.cyclic.app/api/student", {
+export const postStudentPresents = async (presentData) => {
+    const res = await fetch("https://creepy-duck-glasses.cyclic.app/api/student/attendance", {
         method: "POST",
         credentials: "include",
         headers: {
