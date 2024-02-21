@@ -55,11 +55,11 @@ const studentSchema = new mongoose.Schema(
         required: true
       },
       month: {
-        type: String,
+        type: Number,
         required: true
       },
       day: {
-        type: String,
+        type: Number,
         required: true
       },
       status: {

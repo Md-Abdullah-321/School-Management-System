@@ -163,8 +163,7 @@ const handleGetStudentById = async (req, res, next) => {
 
 const handleStudentPresents = async (req, res, next) => {
     try {        
-        const { id } = req.params;
-        const { year, month, day, status} = req.body;
+        const {id, year, month, day, status} = req.body;
         const student = await Student.findById(id);
 
         let isPresented = false;

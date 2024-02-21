@@ -24,23 +24,33 @@ function FeesAndPayments() {
   return (
     <div className="flex flex-col sm:flex-row w-full sm:h-screen">
       <Sidebar />
-      <div className="p-5 flex flex-col sm:flex-row justify-between items-center w-full sm:h-screen">
-        <div className="w-1/2">
-          <div className="w-11/12 h-80 bg-yellow-500 p-2 rounded-md flex justify-center items-center">
-            <img src={Teaching} className="w-full h-full opacity-90" />
+      <div className="p-5 flex flex-col sm:flex-row justify-between items-center w-full h-screen gap-5">
+        <div
+          className="w-full sm:w-1/2 h-1/2"
+          style={{
+            backgroundImage: `url(${Teaching})`,
+            backgroundSize: "cover",
+          }}
+        >
+          <div className=" bg-yellow-500 p-2 rounded-md flex justify-center items-center opacity-85 w-full h-full">
             <button
-              className="fixed uppercase bg-green-500 px-3 py-1 font-medium cursor-pointer rounded-sm hover:shadow-md"
+              className="uppercase bg-green-500 px-3 py-1 font-medium cursor-pointer rounded-sm hover:shadow-md"
               onClick={() => handleClick("teacher")}
             >
               Teacher Attendance
             </button>
           </div>
         </div>
-        <div className="w-1/2">
-          <div className="w-11/12 h-80 bg-green-500 p-2 rounded-md flex justify-center items-center">
-            <img src={Studying} className="w-full h-full opacity-90" />
+        <div
+          className="w-full sm:w-1/2 h-1/2"
+          style={{
+            backgroundImage: `url(${Studying})`,
+            backgroundSize: "cover",
+          }}
+        >
+          <div className="w-full h-full bg-green-500 p-2 rounded-md flex justify-center items-center opacity-85">
             <button
-              className="fixed uppercase bg-yellow-500 px-3 py-1 font-medium cursor-pointer rounded-sm hover:shadow-md"
+              className="uppercase bg-yellow-500 px-3 py-1 font-medium cursor-pointer rounded-sm hover:shadow-md"
               onClick={handleClick}
             >
               Student Attendance

@@ -18,7 +18,7 @@ const studentRouter = express.Router();
 studentRouter.post("/pay/:id",isLoggedIn,isAdmin, handleGetPayment);
 
 // POST -> get payment by id:
-studentRouter.post("/attendance/:id",isLoggedIn, handleStudentPresents);
+studentRouter.post("/attendance/",isLoggedIn, handleStudentPresents);
 
 // POST -> update student by id:
 studentRouter.post("/update/:id", handleUpdateStudentInfo);
