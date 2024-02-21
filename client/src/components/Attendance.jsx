@@ -80,10 +80,12 @@ function Attendance() {
   };
 
   const handleSubmit = () => {
-    presents.map(async (presentData) => {
-      const postedPresent = await postStudentPresents(presentData);
-      console.log(postedPresent);
-    });
+    if (!isTeacher) {
+      presents.map(async (presentData) => {
+        const postedPresent = await postStudentPresents(presentData);
+        console.log(postedPresent);
+      });
+    }
   };
 
   useEffect(() => {

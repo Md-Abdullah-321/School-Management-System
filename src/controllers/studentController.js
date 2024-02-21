@@ -167,7 +167,7 @@ const handleStudentPresents = async (req, res, next) => {
         const student = await Student.findById(id);
 
         let isPresented = false;
-        student.attendance.map(presence => {
+        student.attendance?.map(presence => {
             if (presence.year === year && presence.month === month && presence.day === day) {
                 if (presence.status === "Present") {
                     presence.status = "Absent";
