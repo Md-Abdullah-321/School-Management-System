@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import DeleteTeacherMoadal from "./DeleteTeacherModal";
+import DeleteModal from "./DeleteModal";
 import ViewTeacherStatement from "./ViewTeacherStatement";
 
 function ViewTeacher() {
@@ -98,7 +98,8 @@ function ViewTeacher() {
       </div>
 
       {modal && (
-        <DeleteTeacherMoadal
+        <DeleteModal
+          type="teacher"
           name={teacher.firstName + " " + teacher.lastName}
           setModal={setModal}
           id={id}

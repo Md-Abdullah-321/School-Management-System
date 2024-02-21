@@ -1,5 +1,8 @@
+import { useNavigate } from "react-router-dom";
+
 /* eslint-disable react/prop-types */
-function DeleteTeacherMoadal({ name, setModal, id }) {
+function DeleteModal({ type, name, setModal, id }) {
+  const navigate = useNavigate();
   const handleNotDelete = () => {
     setModal(false);
   };
@@ -8,7 +11,9 @@ function DeleteTeacherMoadal({ name, setModal, id }) {
     try {
       setModal(false);
       const res = await fetch(
-        `https://creepy-duck-glasses.cyclic.app/api/teacher/${id}`,
+        type === "teacher"
+          ? `https://creepy-duck-glasses.cyclic.app/api/teacher/${id}`
+          : `https://creepy-duck-glasses.cyclic.app/api/student/${id}`,
         {
           method: "DELETE",
         }
@@ -16,7 +21,12 @@ function DeleteTeacherMoadal({ name, setModal, id }) {
 
       if (res.ok) {
         const data = await res.json();
-        console.log(data);
+        alert(data.messege);
+        if (type === "teacher") {
+          navigate("/admin/teacher");
+        } else {
+          navigate("/admin/classes");
+        }
       } else {
         console.error(`Error: ${res.status} - ${res.statusText}`);
       }
@@ -51,4 +61,4 @@ function DeleteTeacherMoadal({ name, setModal, id }) {
   );
 }
 
-export default DeleteTeacherMoadal;
+export default DeleteModal;

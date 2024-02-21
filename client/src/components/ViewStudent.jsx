@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
+import DeleteModal from "./DeleteModal";
 import ViewStudentAttendence from "./ViewStudentAttendence";
 import ViewStudentStatement from "./ViewStudentStatement";
 
 function ViewStudent() {
   const id = useParams().id;
   const [student, setStudent] = useState({});
+  const [modal, setModal] = useState(false);
   const [toggleTutionFeesAndAttendence, setToggleTutionFeesAndAttendence] =
     useState(true);
   const user = useSelector((state) => state.user);
@@ -37,12 +39,21 @@ function ViewStudent() {
   return (
     <div className="w-full h-screen flex flex-col justify-center items-center">
       <div className="w-11/12 sm:w-1/2 flex flex-col shadow-sm border p-4">
-        <div className="flex w-full h-40">
+        <div className="flex justify-between items-start w-full">
           <img
             src={student.image}
             alt="Profile Picture"
             className="w-40 h-40 shadow-md rounded-md"
           />
+
+          {user.role === "admin" && (
+            <button
+              className="bg-red-500 py-0.5 px-1 rounded-md hover:shadow-xl text-sm uppercase font-medium text-white"
+              onClick={() => setModal(true)}
+            >
+              Delete
+            </button>
+          )}
         </div>
         <div className="my-2">
           <h1 className="mt-2 text-xl">
@@ -79,6 +90,10 @@ function ViewStudent() {
           </p>
         </div>
       </div>
+
+      {modal && (
+        <DeleteModal name={student.studentName} setModal={setModal} id={id} />
+      )}
 
       <div className="w-11/12 sm:w-1/2 shadow-sm border p-4 mt-10 mx-auto">
         <div className="w-full flex justify-around text-center">
