@@ -3,7 +3,10 @@ import { useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { fetchData } from "../helper/fetchData";
 import { parseDate } from "../helper/parseDate";
-import { postStudentPresents } from "../helper/postPresents";
+import {
+  postStudentPresents,
+  postTeacherPresents,
+} from "../helper/postPresents";
 
 function Attendance() {
   const user = useSelector((state) => state.user);
@@ -75,17 +78,20 @@ function Attendance() {
       });
       return prev;
     });
-
-    console.log(presents);
   };
 
   const handleSubmit = () => {
     if (!isTeacher) {
-      presents.map(async (presentData) => {
+      return presents.map(async (presentData) => {
         const postedPresent = await postStudentPresents(presentData);
         console.log(postedPresent);
       });
     }
+
+    return presents.map(async (presentData) => {
+      const postedPresent = await postTeacherPresents(presentData);
+      console.log(postedPresent);
+    });
   };
 
   useEffect(() => {
@@ -106,6 +112,7 @@ function Attendance() {
     }
   }, [isTeacher]);
 
+  console.log(presents);
   return (
     <div className="w-full min-h-screen flex justify-center items-center flex-col">
       <div>
