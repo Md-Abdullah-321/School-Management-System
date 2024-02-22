@@ -37,7 +37,7 @@ function ViewStudent() {
     fetchStudent();
   }, []);
   return (
-    <div className="w-full h-screen flex flex-col justify-center items-center">
+    <div className="w-full flex flex-col justify-center items-center my-10">
       <div className="w-11/12 sm:w-1/2 flex flex-col shadow-sm border p-4">
         <div className="flex justify-between items-start w-full">
           <img
@@ -95,7 +95,7 @@ function ViewStudent() {
         <DeleteModal name={student.studentName} setModal={setModal} id={id} />
       )}
 
-      <div className="w-11/12 sm:w-1/2 shadow-sm border p-4 mt-10 mx-auto">
+      <div className="w-11/12 sm:w-1/2 shadow-sm border p-4 mt-5 mx-auto">
         <div className="w-full flex justify-around text-center">
           <div
             onClick={() => handleClick("attendence")}
@@ -119,7 +119,9 @@ function ViewStudent() {
           </div>
         </div>
 
-        {toggleTutionFeesAndAttendence && <ViewStudentAttendence />}
+        {toggleTutionFeesAndAttendence && (
+          <ViewStudentAttendence student={student} />
+        )}
 
         {!toggleTutionFeesAndAttendence && (
           <ViewStudentStatement

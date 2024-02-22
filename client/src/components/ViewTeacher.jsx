@@ -115,7 +115,7 @@ function ViewTeacher() {
         </div>
       )}
 
-      <div className="w-11/12 sm:w-2/3 md:w-1/2 mt-5 border">
+      <div className="w-11/12 sm:w-2/3 md:w-1/2 mt-5 p-4 border">
         <div className="w-full flex justify-around text-center">
           <div
             onClick={() => handleClick("attendence")}

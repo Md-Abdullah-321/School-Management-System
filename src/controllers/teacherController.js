@@ -200,6 +200,46 @@ const handleDeleteTeacherById = async(req, res, next) => {
 }
 
 
+const handleTeacherAttendance = async(req, res, next) => {
+    try {        
+        const {id, year, month, day, status} = req.body;
+        const teacher = await Teacher.findById(id);
+
+        let isPresented = false;
+        teacher?.attendance?.map(presence => {
+            if (presence.year === year && presence.month === month && presence.day === day) {
+                if (presence.status === "Present") {
+                    presence.status = "Absent";
+                } else {
+                    presence.status = "Present";
+                }
+                isPresented = true;
+            }
+        });
+
+        if (!isPresented) {
+            const updates = {
+                year,
+                month,
+                day,
+                status
+            }
+            teacher.attendance.unshift(updates);
+        }
+
+
+        await Teacher.findOneAndUpdate({ _id: id }, teacher);
+        return successResponse(res, {
+        statusCode: 200,
+        message: `Teacher present updated successfully.`,
+        payload: true,
+        });
+  } catch (error) {
+    next(error);
+  }
+}
+
+
 module.exports = {
     handleCreateTeacher,
     handleGetTeacher,
@@ -207,5 +247,6 @@ module.exports = {
     handleLoginTeacher,
     handleTeacherLogout,
     handleDeleteTeacherById,
-    handlePaySalary
+    handlePaySalary,
+    handleTeacherAttendance,
 }

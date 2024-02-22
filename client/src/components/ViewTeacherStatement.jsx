@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 function ViewTeacherStatement({ teacher, user, handleNavigate }) {
   return (
-    <div className="w-full mx-auto flex flex-col justify-center items-center mt-5">
+    <div className="w-full mx-auto flex flex-col justify-center items-center p-2">
       <div className="mt-3" onClick={handleNavigate}>
         {user.role === "admin" && (
           <button className="text-xl uppercase bg-yellow-500 px-3 py-1 rounded-sm font-medium">

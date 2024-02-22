@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
 function ViewStudentStatement({ user, handlePayFees, student }) {
   return (
-    <div className="w-full mx-auto mt-5">
-      <div className="mt-3 mx-auto">
+    <div className="w-full mx-auto p-2">
+      <div className="mt-3 mx-auto w-full flex justify-center items-center">
         {user?.role === "admin" && (
           <button
             className="text-xl uppercase bg-yellow-500 px-3 py-1 rounded-sm font-medium"
