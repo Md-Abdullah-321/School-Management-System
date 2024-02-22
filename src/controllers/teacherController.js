@@ -208,11 +208,7 @@ const handleTeacherAttendance = async(req, res, next) => {
         let isPresented = false;
         teacher?.attendance?.map(presence => {
             if (presence.year === year && presence.month === month && presence.day === day) {
-                if (presence.status === "Present") {
-                    presence.status = "Absent";
-                } else {
-                    presence.status = "Present";
-                }
+                presence.status = status;
                 isPresented = true;
             }
         });
