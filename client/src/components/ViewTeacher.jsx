@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import DeleteModal from "./DeleteModal";
+import ViewTeacherAttendence from "./ViewTeacherAttendence";
 import ViewTeacherStatement from "./ViewTeacherStatement";
 
 function ViewTeacher() {
@@ -144,6 +145,9 @@ function ViewTeacher() {
             user={user}
             handleNavigate={handleNavigate}
           />
+        )}
+        {toggleSalaryAndAttendence && (
+          <ViewTeacherAttendence teacher={teacher} />
         )}
       </div>
     </div>
