@@ -88,11 +88,13 @@ function Attendance() {
       });
     }
 
-    return presents.map(async (presentData) => {
+    presents.map(async (presentData) => {
       const postedPresent = await postTeacherPresents(presentData);
       console.log(postedPresent);
     });
   };
+
+  console.log(presents);
 
   useEffect(() => {
     if (user.role !== "admin" && !isTeacher) {
