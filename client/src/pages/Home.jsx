@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { IoCloudDownloadOutline } from "react-icons/io5";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import "swiper/swiper-bundle.css";
@@ -69,20 +70,31 @@ function Home() {
 
           {notices?.map((notice, index) => {
             return (
-              <div className="flex gap-5" key={index}>
+              <div className="flex gap-5 mt-1" key={index}>
                 <div className="w-1/6 text-center">
-                  <div className="bg-gray-100 p-1 text-yellow-500 font-semibold">
-                    04 JAN
+                  <div className="bg-gray-100 p-1 text-yellow-500 font-medium uppercase text-xs">
+                    {(notice.date < 10 ? "0" + notice.date : notice.date) +
+                      " " +
+                      notice.month}
                   </div>
-                  <div className="bg-yellow-500 p-1 text-white font-semibold">
-                    2024
+                  <div className="bg-yellow-500 p-1 text-white font-semibold text-xs">
+                    {notice.year}
                   </div>
                 </div>
                 <div className="w-4/6">
-                  <div className="p-1 font-semibold text-gray-500">
-                    Notice name
+                  <div className="p-1 font-semibold text-gray-900 text-xs">
+                    {notice.title}
                   </div>
-                  <div className="p-1 font-semibold">Link</div>
+                  <div className="p-1 font-light flex gap-x-1 items-center hover:bg-gray-200">
+                    <IoCloudDownloadOutline />
+                    <a
+                      className="text-xs"
+                      href={notice.url}
+                      download={`${notice.title}.pdf`}
+                    >
+                      Download
+                    </a>
+                  </div>
                 </div>
               </div>
             );
