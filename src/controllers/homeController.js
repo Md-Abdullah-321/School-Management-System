@@ -96,9 +96,9 @@ const handleGetNotices = async (req, res) => {
 const handlePostNotice = async (req, res) => {
     try {
  
-        const {date, year, title, url } = req.body;
+        const {date, month, year, title, url } = req.body;
         const notice = {
-            date, year: parseInt(year), title, url
+            date: parseInt(date), month, year: parseInt(year), title, url
         }
         const site = await HomeInfo.find({});
         site[0].notice.push(notice);

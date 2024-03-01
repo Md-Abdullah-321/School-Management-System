@@ -16,7 +16,8 @@ const months = {
 export const getDateAndMonth = () => {
     const date = new Date();
     return {
-        date: date.getDate() +" "+ months[date.getMonth()],
+        date: date.getDate(),
+        month: months[date.getMonth()],
         year: date.getFullYear()
     }
 }
