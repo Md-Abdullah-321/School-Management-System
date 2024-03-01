@@ -32,7 +32,7 @@ function Notice() {
       const snapshot = await uploadBytes(imageRef, pdf);
       const downloadURL = await getDownloadURL(snapshot.ref);
 
-      const { date, month } = getDateAndMonth();
+      const { date, year } = getDateAndMonth();
       const response = await fetch(
         "https://creepy-duck-glasses.cyclic.app/api/site/notice",
         {
@@ -43,7 +43,7 @@ function Notice() {
           },
           body: JSON.stringify({
             date,
-            month,
+            year,
             title,
             url: downloadURL,
           }),
