@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { storage } from "../../firebase";
+import { getDateAndMonth } from "../../helper/getDateAndMonth";
 import Sidebar from "../../layout/Sidebar";
 
 function Notice() {
@@ -30,6 +31,8 @@ function Notice() {
       );
       const snapshot = await uploadBytes(imageRef, pdf);
       const downloadURL = await getDownloadURL(snapshot.ref);
+
+      const { date, month } = getDateAndMonth();
       const response = await fetch(
         "https://creepy-duck-glasses.cyclic.app/api/site/notice",
         {
@@ -39,6 +42,8 @@ function Notice() {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
+            date,
+            month,
             title,
             url: downloadURL,
           }),
