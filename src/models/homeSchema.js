@@ -53,7 +53,7 @@ const homeSchema = new Schema({
   ],
   notice: [
     {
-      date: { type: String, required: true },
+      date: { type: Number, required: true },
       month: { type: String, required: true },
       year: { type: Number, required: true },
       title: { type: String, required: true, unique: true },
