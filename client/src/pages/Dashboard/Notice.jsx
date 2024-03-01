@@ -31,7 +31,7 @@ function Notice() {
       const snapshot = await uploadBytes(imageRef, pdf);
       const downloadURL = await getDownloadURL(snapshot.ref);
       const response = await fetch(
-        "https://creepy-duck-glasses.cyclic.app/api/notice",
+        "https://creepy-duck-glasses.cyclic.app/api/site/notice",
         {
           method: "POST",
           credentials: "include",
