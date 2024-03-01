@@ -10,6 +10,7 @@ import Sidebar from "../../layout/Sidebar";
 
 function Notice() {
   const navigate = useNavigate();
+  const [text, setText] = useState(false);
   const [toggleNoticeForm, setToggleNoticeForm] = useState(false);
   const [notices, setNotices] = useState([]);
   const [pdf, setPdf] = useState(null);
@@ -136,8 +137,15 @@ function Notice() {
 
       {!toggleNoticeForm && (
         <div className="w-full min-h-screen p-5">
+          {text && (
+            <p className="fixed bottom-20 right-4 bg-gray-100 text-sm p-1 rounded-xl text-gray-700">
+              Create Notice
+            </p>
+          )}
           <div
-            className="fixed bottom-8 right-8 bg-gray-100 p-4 rounded-full cursor-pointer"
+            className="fixed bottom-6 right-8 bg-gray-100 p-4 rounded-full cursor-pointer"
+            onMouseOver={() => setText(true)}
+            onMouseOut={() => setText(false)}
             onClick={() => setToggleNoticeForm(true)}
           >
             <IoCreateOutline className="w-5 h-5" />
