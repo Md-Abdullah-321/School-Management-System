@@ -7,11 +7,20 @@ import { HeroSlider } from "../components/HeroSlider";
 function Home() {
   const [Info, setInfo] = useState({});
   const [locationInfo, setLocationInfo] = useState({});
+  const [notices, setNotices] = useState([]);
   const { siteInfo, location } = useSelector((state) => state.sitesettingsinfo);
 
+  const fetchNotices = async () => {
+    const response = await fetch(
+      "https://creepy-duck-glasses.cyclic.app/api/site/notice"
+    );
+    const data = await response.json();
+    setNotices(data.payload);
+  };
   useEffect(() => {
     setInfo({ ...siteInfo });
     setLocationInfo({ ...location });
+    fetchNotices();
   }, []);
   // const backgroundStyle = Info.backgroundImage
   //   ? { backgroundImage: `url(${Info.backgroundImage})` }
@@ -58,20 +67,26 @@ function Home() {
         <div className="w-full md:w-2/5 mt-5 md:mt-0 shadow-lg p-5 border-t-4 border-yellow-500 rounded-md h-5/6 bg-white">
           <h2 className="text-center text-xl font-semibold mb-5">Notice</h2>
 
-          <div className="flex gap-5">
-            <div className="w-1/6 text-center">
-              <div className="bg-gray-100 p-1 text-yellow-500 font-semibold">
-                04 JAN
+          {notices?.map((notice, index) => {
+            return (
+              <div className="flex gap-5" key={index}>
+                <div className="w-1/6 text-center">
+                  <div className="bg-gray-100 p-1 text-yellow-500 font-semibold">
+                    04 JAN
+                  </div>
+                  <div className="bg-yellow-500 p-1 text-white font-semibold">
+                    2024
+                  </div>
+                </div>
+                <div className="w-4/6">
+                  <div className="p-1 font-semibold text-gray-500">
+                    Notice name
+                  </div>
+                  <div className="p-1 font-semibold">Link</div>
+                </div>
               </div>
-              <div className="bg-yellow-500 p-1 text-white font-semibold">
-                2024
-              </div>
-            </div>
-            <div className="w-4/6">
-              <div className="p-1 font-semibold text-gray-500">Notice name</div>
-              <div className="p-1 font-semibold">Link</div>
-            </div>
-          </div>
+            );
+          })}
         </div>
       </div>
 
