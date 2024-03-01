@@ -1,5 +1,7 @@
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { useEffect, useState } from "react";
+import { IoCloudDownloadOutline, IoCreateOutline } from "react-icons/io5";
+import { RxCross2 } from "react-icons/rx";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { storage } from "../../firebase";
@@ -8,13 +10,28 @@ import Sidebar from "../../layout/Sidebar";
 
 function Notice() {
   const navigate = useNavigate();
+  const [toggleNoticeForm, setToggleNoticeForm] = useState(false);
+  const [notices, setNotices] = useState([]);
   const [pdf, setPdf] = useState(null);
   const [title, setTitle] = useState("");
   const user = useSelector((state) => state.user);
+
+  const fetchNotice = async () => {
+    try {
+      const response = await fetch(
+        "https://creepy-duck-glasses.cyclic.app/api/site/notice"
+      );
+      const data = await response.json();
+      setNotices([...data.payload]);
+    } catch (error) {
+      console.error("Error fetching notices:", error);
+    }
+  };
   useEffect(() => {
     if (!user.firstName) {
       navigate("/admin/login");
     }
+    fetchNotice();
   }, []);
 
   const handleClick = async (e) => {
@@ -53,29 +70,90 @@ function Notice() {
 
       const data = await response.json();
       alert(data.messege);
+      setToggleNoticeForm(false);
     } catch (error) {
       console.error("Error submitting form:", error);
     }
   };
+
+  console.log(notices);
   return (
     <div className="flex flex-col sm:flex-row w-full">
       <Sidebar />
-      <div className="flex w-full min-h-screen flex-col p-5">
-        <div>
-          <input
-            type="text"
-            name="title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          />
-          <input
-            type="file"
-            name="pdf"
-            onChange={(e) => setPdf(e.target.files[0])}
-          />
-          <button onClick={handleClick}>upload</button>
+      {toggleNoticeForm && (
+        <div className="flex w-full min-h-screen p-5 justify-center items-center">
+          <form className="flex flex-col w-96 bg-yellow-100 p-3 rounded-md">
+            <div className="w-full flex justify-end items-center">
+              <RxCross2
+                onClick={() => setToggleNoticeForm(false)}
+                className="cursor-pointer hover:w-5 hover:h-5"
+              />
+            </div>
+            <input
+              type="text"
+              name="title"
+              className=" outline-none text-gray-700 text-sm p-1 rounded-sm mt-2"
+              placeholder="Notice Title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+            <input
+              type="file"
+              name="pdf"
+              className="mt-2"
+              onChange={(e) => setPdf(e.target.files[0])}
+            />
+            <button
+              className="mt-2 uppercase text-sm bg-yellow-500 p-0.5 rounded-sm"
+              onClick={handleClick}
+            >
+              upload
+            </button>
+          </form>
         </div>
-      </div>
+      )}
+
+      {!toggleNoticeForm && (
+        <div className="w-full min-h-screen p-5">
+          <div
+            className="fixed bottom-8 right-8 bg-gray-100 p-4 rounded-full cursor-pointer"
+            onClick={() => setToggleNoticeForm(true)}
+          >
+            <IoCreateOutline className="w-5 h-5" />
+          </div>
+
+          <div className="w-full flex items-center gap-2">
+            {notices.map((notice, index) => {
+              return (
+                <div
+                  key={index}
+                  className="w-60 bg-yellow-100 p-2 h-20 flex flex-col justify-center"
+                >
+                  <div className="w-full flex justify-between items-center px-0.5">
+                    <p className="text-xs uppercase text-gray-600">{`${notice.date} ${notice.month} ${notice.year}`}</p>
+                    <button className="text-xs uppercase bg-yellow-500 p-0.5 rounded-sm">
+                      delete
+                    </button>
+                  </div>
+                  <p className="text-sm truncate ml-1">{notice.title}</p>
+                  <div className="p-1 font-light flex gap-x-1 items-center hover:bg-gray-100">
+                    <IoCloudDownloadOutline />
+                    <a
+                      className="text-xs"
+                      href={notice.url}
+                      download={`${notice.title}.pdf`}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      Download
+                    </a>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

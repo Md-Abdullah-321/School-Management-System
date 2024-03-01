@@ -70,7 +70,7 @@ function Home() {
 
           {notices?.map((notice, index) => {
             return (
-              <div className="flex gap-5 mt-1" key={index}>
+              <div className="flex gap-5 mt-2 shadow-sm p-1" key={index}>
                 <div className="w-1/6 text-center">
                   <div className="bg-gray-100 p-1 text-yellow-500 font-medium uppercase text-xs">
                     {(notice.date < 10 ? "0" + notice.date : notice.date) +
@@ -91,6 +91,8 @@ function Home() {
                       className="text-xs"
                       href={notice.url}
                       download={`${notice.title}.pdf`}
+                      target="_blank"
+                      rel="noreferrer"
                     >
                       Download
                     </a>

@@ -118,6 +118,27 @@ const handlePostNotice = async (req, res) => {
     }
 };
 
+const handleDeleteNotice = async (req, res) => {
+    try {
+ 
+        const {id} = req.body;
+        const site = await HomeInfo.find({});
+
+        site[0].notice = site[0].notice.filter((notice) => notice._id != id);
+        await updateHomeInfo(ID, site[0]);
+
+        return successResponse(res, {
+            statusCode: 200,
+            message: "Notice deleted successfully.",
+        });
+    } catch (error) {
+        return errorResponse(res, {
+            statusCode: 404,
+            message: "Could not delete notice.",
+        });
+    }
+};
+
 
 const handlePostGallery = async (req, res) => {
     try {
@@ -214,4 +235,5 @@ module.exports = {
     handlePostNotice,
     handlePostGallery,
     handleGetGallery,
+    handleDeleteNotice,
 }

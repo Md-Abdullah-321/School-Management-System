@@ -7,7 +7,7 @@
 
 //dependencies:
 const express = require("express");
-const { handleGetHomeInfo, handleUpdateHomeInfo, handleAddUtility, handleUpdateLocation, handleGetNotices, handlePostNotice, handlePostGallery, handleGetGallery } = require("../controllers/homeController");
+const { handleGetHomeInfo, handleUpdateHomeInfo, handleAddUtility, handleUpdateLocation, handleGetNotices, handlePostNotice, handlePostGallery, handleGetGallery, handleDeleteNotice } = require("../controllers/homeController");
 const { isLoggedIn, isAdmin } = require("../middleware/auth");
 const homeRouter = express.Router();
 
@@ -23,6 +23,9 @@ homeRouter.get("/notice", handleGetNotices);
 
 //POST -> post notices
 homeRouter.post("/notice", isLoggedIn, isAdmin,handlePostNotice);
+
+//DELETE -> delete notice
+homeRouter.delete("/notice", isLoggedIn, isAdmin, handleDeleteNotice);
 
 //POST -> post gallery
 homeRouter.post("/event", isLoggedIn, isAdmin, handlePostGallery);
