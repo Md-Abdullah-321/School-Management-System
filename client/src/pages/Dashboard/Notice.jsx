@@ -76,7 +76,28 @@ function Notice() {
     }
   };
 
-  console.log(notices);
+  const handleDeleteNotice = async (id) => {
+    try {
+      const response = await fetch(
+        "https://creepy-duck-glasses.cyclic.app/api/site/notice",
+        {
+          method: "DELETE",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            id,
+          }),
+        }
+      );
+
+      const data = await response.json();
+      alert(data.messege);
+    } catch (error) {
+      console.error("Error deleting notice:", error);
+    }
+  };
   return (
     <div className="flex flex-col sm:flex-row w-full">
       <Sidebar />
@@ -131,7 +152,10 @@ function Notice() {
                 >
                   <div className="w-full flex justify-between items-center px-0.5">
                     <p className="text-xs uppercase text-gray-600">{`${notice.date} ${notice.month} ${notice.year}`}</p>
-                    <button className="text-xs uppercase bg-yellow-500 p-0.5 rounded-sm">
+                    <button
+                      className="text-xs uppercase bg-yellow-500 p-0.5 rounded-sm"
+                      onClick={() => handleDeleteNotice(notice._id)}
+                    >
                       delete
                     </button>
                   </div>
